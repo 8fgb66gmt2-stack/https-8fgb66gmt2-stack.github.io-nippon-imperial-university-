@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://8fgb66gmt2-stack.github.io/https-8fgb66gmt2-stack.github.io-nippon-imperial-university-/sitemap.xml
