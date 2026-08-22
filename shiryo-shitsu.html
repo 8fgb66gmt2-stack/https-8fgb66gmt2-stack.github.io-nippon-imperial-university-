@@ -7,7 +7,7 @@
 <style>
 :root{--paper:#f3ecde;--ink:#241c1b;--red:#781722;--gold:#a98545;--gold-light:#dbc48e;--dark:#241918;}
 *{box-sizing:border-box}body{margin:0;color:var(--ink);background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,.7),transparent 40%),repeating-linear-gradient(0deg,rgba(100,70,40,.025) 0,rgba(100,70,40,.025) 1px,transparent 1px,transparent 8px),var(--paper);font-family:"Noto Serif JP","Yu Mincho",serif;line-height:1.9}
-.wrap{max-width:1050px;margin:auto;padding:70px 24px}.seal{text-align:center;color:var(--gold);font-size:42px}.kicker{text-align:center;color:var(--red);letter-spacing:.35em;font-size:11px}.title{text-align:center;font-size:clamp(30px,6vw,58px);letter-spacing:.14em;margin:8px 0}.sub{text-align:center;color:#665854;font-size:11px;letter-spacing:.2em}.rule{width:110px;height:1px;margin:28px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent)}.notice{max-width:720px;margin:40px auto;padding:25px 28px;border:1px solid rgba(74,47,35,.25);background:rgba(255,255,255,.38);text-align:center}.notice strong{color:var(--red)}.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:35px}.links a{display:block;padding:18px;border:1px solid rgba(74,47,35,.25);background:rgba(255,255,255,.35);text-decoration:none;color:var(--ink);transition:.25s}.links a:hover{background:var(--dark);color:#f5ead8;border-color:var(--gold)}.links small{display:block;color:#8b746b;font-size:9px;letter-spacing:.15em}.ach{margin-top:55px;text-align:center}.ach-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:18px}.ach-grid span{padding:12px 4px;border:1px solid rgba(74,47,35,.2);font-size:10px;color:#8b746b}.back{display:block;text-align:center;margin-top:50px;color:var(--red);font-size:11px;letter-spacing:.15em}@media(max-width:600px){.ach-grid{grid-template-columns:repeat(2,1fr)}}
+.wrap{max-width:1050px;margin:auto;padding:70px 24px}.seal{text-align:center;color:var(--gold);font-size:42px}.kicker{text-align:center;color:var(--red);letter-spacing:.35em;font-size:11px}.title{text-align:center;font-size:clamp(30px,6vw,58px);letter-spacing:.14em;margin:8px 0}.sub{text-align:center;color:#665854;font-size:11px;letter-spacing:.2em}.rule{width:110px;height:1px;margin:28px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent)}.notice{max-width:720px;margin:40px auto;padding:25px 28px;border:1px solid rgba(74,47,35,.25);background:rgba(255,255,255,.38);text-align:center}.notice strong{color:var(--red)}.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:35px}.links a{display:block;padding:18px;border:1px solid rgba(74,47,35,.25);background:rgba(255,255,255,.35);text-decoration:none;color:var(--ink);transition:.25s}.links a:hover{background:var(--dark);color:#f5ead8;border-color:var(--gold)}.links small{display:block;color:#8b746b;font-size:9px;letter-spacing:.15em}.ach{margin-top:55px;text-align:center}.ach-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:18px}.ach-grid button{padding:12px 4px;border:1px solid rgba(74,47,35,.2);font:inherit;font-size:10px;color:#8b746b;background:rgba(255,255,255,.25);cursor:pointer}.ach-grid button.found{color:var(--red);border-color:var(--gold);background:rgba(169,133,69,.10)}.ach-grid button:disabled{cursor:default}.progress{font-size:11px;color:#665854;letter-spacing:.12em}.back{display:block;text-align:center;margin-top:50px;color:var(--red);font-size:11px;letter-spacing:.15em}@media(max-width:600px){.ach-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -31,8 +31,44 @@
 <a href="archive19.html">ARCHIVE 19</a>
 <a href="archive20.html">ARCHIVE 20　最終記録</a>
 </section>
-<section class="ach"><div class="kicker">ACHIEVEMENT</div><h2>拾得記録　00 / 20</h2><div class="ach-grid">${Array.from({length:20},(_,i)=>`<span>未取得　${String(i+1).padStart(2,'0')}</span>`).join('')}</div></section>
+<section class="ach">
+<div class="kicker">ACHIEVEMENT</div>
+<h2>拾得記録　<span id="ach-count">00</span> / 20</h2>
+<p class="progress">発見した記録は、この端末に保存されます。</p>
+<div class="ach-grid" id="achievement-grid" aria-live="polite"></div>
+</section>
 <a class="back" href="index.html">← 帝國大學公式首頁へ戻る</a>
 </main>
+<script>
+(function(){
+  const grid=document.getElementById('achievement-grid');
+  const count=document.getElementById('ach-count');
+  const key='nipponImperialUniversityAchievements';
+  const found=new Set(JSON.parse(localStorage.getItem(key)||'[]'));
+  const names=[
+    '第一章・號外','第二章・神代聖','第三章・紅城院眞紅','第四章・ミフネア','第五章・研究端末',
+    '第六章・夜間閲覧','反転頁','ARCHIVE 17','ARCHIVE 18','ARCHIVE 19',
+    'ARCHIVE 20','帝國大學資料室','夜間モード','研究記録','図書館記録',
+    '神代聖・肖像','紅城院・記録','ミフネア・記録','時の鏡室','最後の記録'
+  ];
+  function render(){
+    grid.innerHTML='';
+    for(let i=0;i<20;i++){
+      const n=i+1, id=String(n).padStart(2,'0'), done=found.has(n);
+      const b=document.createElement('button');
+      b.type='button'; b.disabled=true; b.className=done?'found':'';
+      b.textContent=(done?'取得済　':'未取得　')+id;
+      b.title=names[i];
+      grid.appendChild(b);
+    }
+    count.textContent=String(found.size).padStart(2,'0');
+  }
+  render();
+  window.markAchievement=function(n){
+    n=Number(n); if(n<1||n>20)return;
+    found.add(n); localStorage.setItem(key,JSON.stringify([...found].sort((a,b)=>a-b))); render();
+  };
+})();
+</script>
 </body>
 </html>
