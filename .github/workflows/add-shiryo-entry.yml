@@ -1,0 +1,47 @@
+name: Add Imperial University Archive Room entry
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-shiryo-entry.yml'
+      - '.github/trigger-shiryo-entry'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add-entry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add visible archive-room entry to index
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '<!-- ARCHIVE 16 entry -->'
+          entry = '''<!-- 帝國大學資料室 entry -->
+          <a href="shiryo-shitsu.html" style="position:fixed;left:18px;bottom:132px;z-index:9999;padding:10px 16px;border:1px solid #a98545;background:#241918;color:#dbc48e;font-family:serif;font-size:11px;letter-spacing:.12em;box-shadow:0 4px 15px rgba(36,25,24,.18);">帝國大學資料室</a>
+          <!-- /帝國大學資料室 entry -->
+          '''
+          if 'href="shiryo-shitsu.html"' not in s:
+              if marker not in s:
+                  raise SystemExit('ARCHIVE 16 marker not found; refusing to modify index.html')
+              s = s.replace(marker, entry + marker, 1)
+              p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit homepage entry
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo 'No homepage change needed.'
+          else
+            git commit -m "Add Imperial University Archive Room entry to homepage"
+            git push
+          fi
