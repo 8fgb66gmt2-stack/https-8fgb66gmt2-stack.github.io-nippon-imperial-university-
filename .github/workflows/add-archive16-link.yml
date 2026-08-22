@@ -1,0 +1,38 @@
+name: Add ARCHIVE 16 link
+
+on:
+  push:
+    branches:
+      - '日ノ本帝國國立帝國大學公式サイト'
+
+permissions:
+  contents: write
+
+jobs:
+  inject-link:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inject ARCHIVE 16 link
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = 'ARCHIVE 16・反転頁'
+          if marker not in s:
+              link = '''\n<!-- ARCHIVE 16 entry -->\n<a href="archive16.html" style="position:fixed;left:18px;bottom:80px;z-index:9999;padding:10px 16px;border:1px solid #a98545;background:#241918;color:#dbc48e;font-family:serif;font-size:11px;letter-spacing:.12em;">ARCHIVE 16・反転頁</a>\n<!-- /ARCHIVE 16 entry -->\n'''
+              pos = s.lower().rfind('</body>')
+              if pos == -1:
+                  raise SystemExit('index.html に </body> が見つかりません')
+              s = s[:pos] + link + s[pos:]
+              p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit injected link
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Add ARCHIVE 16 entry to top page'
+          git push
