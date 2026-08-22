@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>アチーブメント二十｜閲覧者</title><style>body{margin:0;background:#0b0b0b;color:#d7cdbd;font-family:serif;line-height:2}main{max-width:820px;margin:7vh auto;padding:44px;border:1px solid #806a43;background:#161412}h1{color:#c8aa6c;letter-spacing:.2em;font-weight:400}.terminal{background:#030303;border:6px solid #292522;padding:24px;font-family:monospace;color:#a9b99f}.red{color:#c9757d}.gold{color:#c7a963}.gate{margin-top:30px;padding:22px;border:1px solid #554832}input,button{padding:11px;font:inherit}input{background:#eee8dc}button{background:#b0925a;border:0;color:#17130f}.ok{display:none}.ok.show{display:block}</style></head><body><main><h1>アチーブメント二十　「閲覧者」</h1><div class="terminal">ARCHIVE ACCESS LOG
+-----------------
+ACHIEVEMENT 19 : COMPLETE
+ACHIEVEMENT 20 : PENDING
+
+<span class="red">WARNING:</span>
+閲覧者の身元確認を行います。
+
+NAME : <span class="gold">UNKNOWN</span>
+STATUS : OBSERVER
+
+「記録を読む者もまた、記録になる。」</div><div class="gate"><p>第十九記録で確認した数字を入力せよ。</p><input id="a" placeholder="数字"><button onclick="check()">認証</button><div id="msg"></div><div id="ok" class="ok"><p>認証成功。</p><p><strong>アチーブメント20　解除</strong></p><p>あなたは「閲覧者」ではなくなった。</p><p class="gold">研究対象として登録されました。</p><a href="sotsugyo.html">研究資料室へ進む</a></div></div><script>function check(){if(document.getElementById('a').value.trim()==='20'){localStorage.setItem('achievement20','true');document.getElementById('ok').classList.add('show');document.getElementById('msg').textContent='';}else document.getElementById('msg').textContent='認証失敗。';}</script></main></body></html>
