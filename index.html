@@ -1,0 +1,6503 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>日ノ本帝國國立帝國大學｜公式Webサイト</title>
+
+<meta name="description"
+content="日ノ本帝國國立帝國大學 公式Webサイト。帝國大學の沿革、學部、研究、帝都文藝、著名文化人、附属圖書館、學生生活などを紹介。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700;800;900&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   基本設定
+========================================================= */
+
+:root {
+    --ink: #241c1b;
+    --ink-soft: #665854;
+
+    --paper: #f3ecde;
+    --paper-light: #fcf8ef;
+    --paper-dark: #dfd1bc;
+
+    --red: #781722;
+    --red-dark: #4c0d14;
+
+    --gold: #a98545;
+    --gold-light: #dbc48e;
+
+    --black: #241918;
+
+    --line: rgba(74, 47, 35, .25);
+
+    --shadow:
+        0 15px 45px rgba(40, 25, 20, .16);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+
+    color: var(--ink);
+
+    background:
+        radial-gradient(
+            ellipse at 20% 10%,
+            rgba(255,255,255,.7),
+            transparent 40%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(100,70,40,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            rgba(100,70,40,.025) 1px,
+            transparent 1px
+        ),
+        var(--paper);
+
+    background-size:
+        auto,
+        8px 8px,
+        8px 8px,
+        auto;
+
+    font-family:
+        "Noto Serif JP",
+        "Yu Mincho",
+        serif;
+
+    line-height: 1.9;
+
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 9990;
+
+    opacity: .08;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 3px,
+            rgba(70,40,20,.18) 4px
+        );
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* =========================================================
+   入場演出
+========================================================= */
+
+#entrance {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle,
+            #382422 0%,
+            #201616 70%,
+            #140e0e 100%
+        );
+
+    color: #f2e7d3;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+#entrance.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.entrance-inner {
+    text-align: center;
+
+    animation:
+        entranceFade 1.5s ease forwards;
+}
+
+.entrance-mark {
+    font-size: 55px;
+
+    color: var(--gold-light);
+
+    margin-bottom: 18px;
+}
+
+.entrance-title {
+    font-family: "Shippori Mincho", serif;
+
+    font-size: 20px;
+
+    letter-spacing: .35em;
+}
+
+.entrance-sub {
+    margin-top: 12px;
+
+    font-size: 9px;
+
+    letter-spacing: .3em;
+
+    opacity: .65;
+}
+
+.entrance-line {
+    width: 150px;
+
+    height: 1px;
+
+    margin: 25px auto;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold),
+            transparent
+        );
+}
+
+.entrance-enter {
+    border: 1px solid var(--gold);
+
+    background: transparent;
+
+    color: #f5ead7;
+
+    padding: 10px 28px;
+
+    cursor: pointer;
+
+    letter-spacing: .2em;
+
+    font-size: 11px;
+
+    transition: .3s ease;
+}
+
+.entrance-enter:hover {
+    background: var(--gold);
+
+    color: var(--black);
+}
+
+@keyframes entranceFade {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header {
+    position: relative;
+
+    z-index: 500;
+
+    background:
+        linear-gradient(
+            135deg,
+            #271b1a,
+            #442422
+        );
+
+    color: #f5ead8;
+
+    border-bottom:
+        4px double var(--gold);
+
+    box-shadow:
+        0 8px 25px rgba(30,18,15,.25);
+}
+
+.header-top {
+    max-width: 1250px;
+
+    margin: auto;
+
+    padding:
+        30px 25px 24px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 30px;
+}
+
+.university-name {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.university-mark {
+    width: 64px;
+    height: 64px;
+
+    border:
+        1px solid var(--gold);
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--gold-light);
+
+    font-family: "Shippori Mincho", serif;
+
+    font-size: 27px;
+
+    box-shadow:
+        inset 0 0 0 4px rgba(215,188,130,.08);
+}
+
+.university-text h1 {
+    margin: 0;
+
+    font-family: "Shippori Mincho", serif;
+
+    font-size:
+        clamp(20px, 3vw, 31px);
+
+    letter-spacing: .15em;
+
+    font-weight: 700;
+}
+
+.university-text p {
+    margin: 5px 0 0;
+
+    font-size: 9px;
+
+    letter-spacing: .35em;
+
+    opacity: .65;
+}
+
+.header-meta {
+    text-align: right;
+
+    font-size: 10px;
+
+    color: #d7c8b3;
+}
+
+/* =========================================================
+   帝國暦時計
+========================================================= */
+
+.imperial-clock {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 8px;
+
+    color: var(--gold-light);
+}
+
+.clock-face {
+    font-family: "Shippori Mincho", serif;
+
+    letter-spacing: .12em;
+
+    font-size: 13px;
+}
+
+.clock-label {
+    font-size: 8px;
+
+    letter-spacing: .2em;
+
+    opacity: .7;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.main-nav {
+    border-top:
+        1px solid rgba(215,188,130,.22);
+}
+
+.main-nav-inner {
+    max-width: 1250px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+}
+
+.main-nav a {
+    position: relative;
+
+    padding:
+        12px 17px;
+
+    font-size: 11px;
+
+    letter-spacing: .12em;
+
+    transition: .25s ease;
+}
+
+.main-nav a::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 5px;
+
+    left: 50%;
+
+    width: 0;
+
+    height: 1px;
+
+    background: var(--gold-light);
+
+    transition: .25s ease;
+}
+
+.main-nav a:hover {
+    color: var(--gold-light);
+}
+
+.main-nav a:hover::after {
+    width: 60%;
+
+    left: 20%;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 650px;
+
+    display: flex;
+
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(32,20,19,.96),
+            rgba(48,28,26,.78),
+            rgba(48,28,26,.25)
+        ),
+        var(--hero-image, url("images/university-main.jpg"))
+        center / cover no-repeat;
+}
+
+.hero::before {
+    content: "帝";
+
+    position: absolute;
+
+    right: 3%;
+    top: -7%;
+
+    font-family: "Shippori Mincho", serif;
+
+    font-size:
+        min(38vw, 560px);
+
+    color:
+        rgba(255,255,255,.035);
+
+    pointer-events: none;
+}
+
+.hero-content {
+    width:
+        min(1100px, 90%);
+
+    margin: auto;
+
+    color: #f7eee1;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.hero-kicker {
+    color: var(--gold-light);
+
+    font-size: 11px;
+
+    letter-spacing: .38em;
+
+    margin-bottom: 15px;
+}
+
+.hero h2 {
+    font-family: "Shippori Mincho", serif;
+
+    font-size:
+        clamp(42px, 7vw, 82px);
+
+    line-height: 1.2;
+
+    margin: 0;
+
+    letter-spacing: .14em;
+
+    text-shadow:
+        2px 3px 15px rgba(0,0,0,.5);
+}
+
+.hero-subtitle {
+    margin-top: 20px;
+
+    font-size: 13px;
+
+    letter-spacing: .25em;
+
+    color: #d9cdbb;
+}
+
+.hero-description {
+    max-width: 650px;
+
+    margin-top: 28px;
+
+    font-size: 13px;
+
+    line-height: 2.4;
+
+    color: #e9dfd1;
+}
+
+.hero-button {
+    display: inline-block;
+
+    margin-top: 30px;
+
+    padding:
+        12px 30px;
+
+    border:
+        1px solid var(--gold);
+
+    color: #f5ead8;
+
+    letter-spacing: .15em;
+
+    font-size: 11px;
+
+    transition: .3s ease;
+}
+
+.hero-button:hover {
+    background: var(--gold);
+
+    color: #2a1c19;
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section {
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding:
+        100px 25px;
+}
+
+.section-heading {
+    text-align: center;
+
+    margin-bottom: 60px;
+}
+
+.section-kicker {
+    color: var(--red);
+
+    font-size: 10px;
+
+    letter-spacing: .38em;
+}
+
+.section-title {
+    font-family: "Shippori Mincho", serif;
+
+    font-size:
+        clamp(28px, 4vw, 43px);
+
+    margin: 8px 0;
+
+    letter-spacing: .13em;
+}
+
+.section-rule {
+    width: 90px;
+
+    height: 1px;
+
+    margin: 20px auto;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold),
+            transparent
+        );
+}
+
+.section-description {
+    max-width: 750px;
+
+    margin: auto;
+
+    font-size: 12px;
+
+    line-height: 2.3;
+
+    color: var(--ink-soft);
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 22px;
+}
+
+.intro-card {
+    position: relative;
+
+    padding: 38px 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.75),
+            rgba(226,215,197,.55)
+        );
+
+    border:
+        1px solid var(--line);
+
+    box-shadow:
+        0 8px 25px rgba(50,35,25,.07);
+}
+
+.intro-card::before {
+    content: "❦";
+
+    position: absolute;
+
+    top: 12px;
+    right: 18px;
+
+    color: var(--gold);
+
+    opacity: .55;
+}
+
+.intro-card h3 {
+    color: var(--red);
+
+    font-family: "Shippori Mincho", serif;
+
+    font-size: 18px;
+
+    letter-spacing: .12em;
+
+    margin-top: 0;
+}
+
+.intro-card p {
+    font-size: 12px;
+
+    line-height: 2.25;
+}
+
+/* =========================================================
+   蓄音機
+========================================================= */
+
+.gramophone-section {
+    background:
+        linear-gradient(
+            135deg,
+            #261b1a,
+            #422522
+        );
+
+    color: #eee3d1;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.gramophone-section::before {
+    content: "♬";
+
+    position: absolute;
+
+    right: 5%;
+
+    top: -40px;
+
+    font-size: 260px;
+
+    color:
+        rgba(215,188,130,.035);
+}
+
+.gramophone-wrap {
+    max-width: 900px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        330px 1fr;
+
+    gap: 60px;
+
+    align-items: center;
+}
+
+.gramophone {
+    position: relative;
+
+    width: 300px;
+
+    height: 290px;
+
+    margin: auto;
+
+    padding: 35px;
+
+    border:
+        1px solid var(--gold);
+
+    background:
+        radial-gradient(
+            circle,
+            #51352c,
+            #281b19
+        );
+
+    box-shadow:
+        inset 0 0 35px rgba(0,0,0,.6),
+        0 15px 45px rgba(0,0,0,.35);
+}
+
+.gramophone-horn {
+    position: absolute;
+
+    width: 145px;
+    height: 145px;
+
+    right: 28px;
+    top: 28px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 40% 40%,
+            #d3b36f,
+            #8b6337 50%,
+            #38231d 100%
+        );
+
+    border:
+        4px solid #a37a42;
+
+    box-shadow:
+        inset 0 0 25px rgba(0,0,0,.6);
+}
+
+.gramophone-arm {
+    position: absolute;
+
+    width: 110px;
+    height: 8px;
+
+    background: var(--gold);
+
+    top: 92px;
+    left: 65px;
+
+    transform:
+        rotate(-25deg);
+
+    transform-origin: left center;
+}
+
+.gramophone-record {
+    position: absolute;
+
+    left: 35px;
+    bottom: 32px;
+
+    width: 120px;
+    height: 120px;
+
+    border-radius: 50%;
+
+    background:
+        repeating-radial-gradient(
+            circle,
+            #151111 0 3px,
+            #211919 4px 5px
+        );
+
+    border:
+        3px solid #0d0b0b;
+
+    transition: transform .5s linear;
+}
+
+.gramophone-record.playing {
+    animation:
+        recordSpin 2.4s linear infinite;
+}
+
+.record-center {
+    position: absolute;
+
+    width: 25px;
+    height: 25px;
+
+    border-radius: 50%;
+
+    background: var(--gold);
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%,-50%);
+}
+
+@keyframes recordSpin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.gramophone-info h3 {
+    font-family: "Shippori Mincho", serif;
+
+    font-size: 30px;
+
+    color: var(--gold-light);
+
+    margin-top: 0;
+}
+
+.gramophone-info p {
+    font-size: 12px;
+
+    line-height: 2.3;
+
+    color: #d7c9b7;
+}
+
+.gramophone-controls {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+    flex-wrap: wrap;
+}
+
+.gramophone-btn {
+    border:
+        1px solid var(--gold);
+
+    background: transparent;
+
+    color: #f1e4d0;
+
+    padding:
+        10px 23px;
+
+    cursor: pointer;
+
+    letter-spacing: .15em;
+
+    font-size: 11px;
+
+    transition: .3s ease;
+}
+
+.gramophone-btn:hover {
+    background: var(--gold);
+
+    color: #261b1a;
+}
+
+.volume {
+    width: 110px;
+}
+
+/* =========================================================
+   プレイリスト
+========================================================= */
+
+.playlist-panel {
+    margin-top: 22px;
+
+    border:
+        1px solid rgba(215,188,130,.3);
+
+    background:
+        rgba(0,0,0,.18);
+
+    display: none;
+}
+
+.playlist-panel.open {
+    display: block;
+}
+
+.playlist-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 10px 14px;
+
+    font-size: 11px;
+
+    border-bottom:
+        1px solid rgba(215,188,130,.14);
+}
+
+.playlist-item:last-child {
+    border-bottom: none;
+}
+
+.playlist-item.active {
+    background:
+        rgba(215,188,130,.12);
+
+    color: var(--gold-light);
+}
+
+.playlist-item-name {
+    flex: 1;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.playlist-item-actions {
+    display: flex;
+
+    gap: 6px;
+}
+
+.playlist-item-actions button {
+    border: none;
+
+    background: transparent;
+
+    color: #d7c9b7;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    padding: 2px 5px;
+}
+
+.playlist-item-actions button:hover {
+    color: var(--gold-light);
+}
+
+.playlist-note {
+    padding: 10px 14px;
+
+    font-size: 9px;
+
+    color: #b6a691;
+
+    letter-spacing: .05em;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+.history {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(123,24,32,.04),
+            transparent
+        );
+}
+
+.timeline {
+    max-width: 850px;
+
+    margin: auto;
+
+    border-left:
+        1px solid var(--gold);
+
+    padding-left: 30px;
+}
+
+.timeline-item {
+    position: relative;
+
+    margin-bottom: 42px;
+}
+
+.timeline-item::before {
+    content: "";
+
+    position: absolute;
+
+    width: 9px;
+    height: 9px;
+
+    left: -35px;
+    top: 9px;
+
+    border:
+        1px solid var(--red);
+
+    background: var(--paper);
+
+    border-radius: 50%;
+}
+
+.timeline-year {
+    color: var(--red);
+
+    font-weight: 700;
+
+    letter-spacing: .12em;
+}
+
+.timeline-title {
+    font-family: "Shippori Mincho", serif;
+
+    font-size: 18px;
+
+    margin: 3px 0;
+}
+
+.timeline-text {
+    font-size: 12px;
+
+    color: var(--ink-soft);
+}
+
+/* =========================================================
+   FACULTIES
+========================================================= */
+
+.faculty-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 24px;
+}
+
+.faculty-card {
+    position: relative;
+
+    min-height: 250px;
+
+    padding: 38px 30px;
+
+    background: var(--paper-light);
+
+    border:
+        1px solid var(--line);
+
+    overflow: hidden;
+
+    transition: .35s ease;
+}
+
+.faculty-card:hover {
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        var(--shadow);
+}
+
+.faculty-number {
+    position: absolute;
+
+    right: 15px;
+    top: -5px;
+
+    font-size: 70px;
+
+    color:
+        rgba(123,24,32,.09);
+}
+
+.faculty-card h3 {
+    color: var(--red);
+
+    font-family: "Shippori Mincho", serif;
+
+    letter-spacing: .13em;
+}
+
+.faculty-card p {
+    font-size: 12px;
+
+    line-height: 2.2;
+}
+
+/* =========================================================
+   人物録
+========================================================= */
+
+.cultural-section {
+    background:
+        rgba(80,40,30,.035);
+}
+
+.category-tabs {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    margin-bottom: 45px;
+}
+
+.category-btn {
+    border:
+        1px solid var(--line);
+
+    background:
+        rgba(255,255,255,.45);
+
+    color: var(--ink);
+
+    padding:
+        10px 24px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    letter-spacing: .12em;
+
+    transition: .25s ease;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background: var(--red);
+
+    color: white;
+
+    border-color: var(--red);
+}
+
+.people-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 25px;
+}
+
+.person-card {
+    padding: 0;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.8),
+            rgba(229,218,201,.65)
+        );
+
+    border:
+        1px solid var(--line);
+
+    transition: .35s ease;
+}
+
+.person-photo {
+    position: relative;
+
+    height: 190px;
+
+    background-color: var(--paper-dark);
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-bottom:
+        1px solid var(--line);
+}
+
+.person-photo::before {
+    content: attr(data-initial);
+
+    font-family: "Shippori Mincho", serif;
+
+    font-size: 68px;
+
+    color:
+        rgba(120,23,34,.16);
+}
+
+.person-photo.has-photo::before {
+    content: none;
+}
+
+.person-photo-upload-btn {
+    position: absolute;
+
+    right: 10px;
+    bottom: 10px;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid var(--gold);
+
+    background:
+        rgba(36,25,24,.75);
+
+    color: var(--gold-light);
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.person-photo-upload-btn:hover {
+    background: var(--red);
+}
+
+.person-card-body {
+    padding: 35px;
+}
+
+.person-card:hover {
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        var(--shadow);
+}
+
+.person-category {
+    color: var(--red);
+
+    font-size: 9px;
+
+    letter-spacing: .2em;
+
+    border-bottom:
+        1px solid var(--gold);
+
+    display: inline-block;
+
+    margin-bottom: 12px;
+}
+
+.person-name {
+    font-family: "Shippori Mincho", serif;
+
+    font-size: 26px;
+
+    margin: 0;
+
+    letter-spacing: .12em;
+}
+
+.person-reading {
+    color: #746760;
+
+    font-size: 9px;
+}
+
+.person-status {
+    color: var(--red);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    margin-top: 15px;
+}
+
+.person-job {
+    font-size: 12px;
+
+    font-weight: 700;
+
+    margin: 8px 0 14px;
+}
+
+.person-description {
+    font-size: 11px;
+
+    line-height: 2.25;
+
+    color: var(--ink-soft);
+}
+
+.person-more {
+    margin-top: 20px;
+
+    border:
+        1px solid var(--gold);
+
+    background: transparent;
+
+    padding:
+        8px 17px;
+
+    cursor: pointer;
+
+    font-size: 10px;
+
+    letter-spacing: .12em;
+
+    color: var(--red);
+
+    transition: .25s ease;
+}
+
+.person-more:hover {
+    background: var(--red);
+
+    color: white;
+}
+
+
+/* =========================================================
+   個人研究室
+========================================================= */
+.person-card {
+    cursor: pointer;
+    transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.person-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(55,18,18,.14);
+    border-color: var(--gold);
+}
+.person-card::after {
+    content: "個人研究室";
+    position: absolute;
+    right: 12px;
+    bottom: 10px;
+    font-size: 8px;
+    letter-spacing: .14em;
+    color: var(--gold);
+    opacity: .0;
+    transition: opacity .25s ease;
+}
+.person-card:hover::after { opacity: 1; }
+
+/* 追加人物：神秘主義・竜棘文学の特別資料章 */
+.person-card[data-category="literature"] .person-photo[data-upload-key="person-seiko"],
+.person-card[data-category="literature"] .person-photo[data-upload-key="person-maku"] {
+    background:
+        radial-gradient(circle at 30% 25%, rgba(169,133,69,.22), transparent 34%),
+        linear-gradient(145deg, rgba(74,13,20,.22), rgba(36,25,24,.08));
+}
+.person-card[data-category="literature"]:has(.person-photo[data-upload-key="person-seiko"])::before,
+.person-card[data-category="literature"]:has(.person-photo[data-upload-key="person-maku"])::before {
+    content:"秘録";
+    position:absolute;
+    top:12px; right:12px;
+    z-index:3;
+    padding:3px 8px;
+    border:1px solid rgba(169,133,69,.7);
+    background:rgba(243,236,222,.86);
+    color:var(--red);
+    font-size:9px; letter-spacing:.16em;
+}
+
+
+.study-room-modal .modal-box {
+    width: min(920px, 96vw);
+    max-height: 90vh;
+    padding: 0;
+    overflow: hidden;
+}
+.study-room-head {
+    padding: 34px 42px 25px;
+    border-bottom: 1px solid var(--gold);
+    background: linear-gradient(135deg, rgba(128,0,0,.08), rgba(180,140,60,.08));
+}
+.study-room-kicker {
+    font-size: 9px;
+    letter-spacing: .28em;
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+.study-room-name {
+    font-family: "Shippori Mincho", serif;
+    font-size: clamp(27px, 5vw, 43px);
+    color: var(--red);
+    margin: 0 0 7px;
+}
+.study-room-model {
+    font-size: 11px;
+    color: var(--ink-soft);
+}
+.study-room-close {
+    position:absolute; top:12px; right:16px; z-index:2;
+    border:0; background:transparent; color:var(--red);
+    font-size:27px; cursor:pointer;
+}
+.study-room-nav {
+    display:flex; gap:0; overflow-x:auto;
+    border-bottom:1px solid var(--line);
+    background:rgba(255,255,255,.35);
+}
+.study-room-tab {
+    border:0; border-right:1px solid var(--line);
+    background:transparent; padding:13px 18px;
+    font-family:inherit; font-size:10px; letter-spacing:.12em;
+    cursor:pointer; color:var(--ink);
+    white-space:nowrap;
+}
+.study-room-tab.active { background:var(--red); color:#fff; }
+.study-room-content {
+    padding:30px 42px 38px;
+    overflow-y:auto;
+    max-height:60vh;
+}
+.study-room-grid {
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px;
+}
+.study-room-fact {
+    border:1px solid var(--line); padding:15px 17px; background:rgba(255,255,255,.3);
+}
+.study-room-fact-label {
+    font-size:8px; letter-spacing:.18em; color:var(--gold); margin-bottom:6px;
+}
+.study-room-fact-value { font-size:12px; line-height:1.8; }
+.study-room-section-title {
+    font-family:"Shippori Mincho",serif; color:var(--red);
+    font-size:20px; margin:0 0 14px;
+}
+.study-room-quote {
+    border-left:3px solid var(--gold); padding:12px 18px;
+    background:rgba(128,0,0,.045); font-family:"Shippori Mincho",serif;
+    line-height:2; margin:18px 0;
+}
+.study-room-links {
+    display:flex; flex-wrap:wrap; gap:8px; margin-top:18px;
+}
+.study-room-link {
+    border:1px solid var(--line); padding:7px 11px; font-size:9px;
+    background:transparent; cursor:pointer;
+}
+.study-room-link:hover { border-color:var(--gold); color:var(--red); }
+.study-room-foot {
+    padding:14px 42px; border-top:1px solid var(--line);
+    font-size:8px; color:var(--ink-soft); letter-spacing:.08em;
+}
+@media (max-width: 680px) {
+    .study-room-head { padding:28px 24px 20px; }
+    .study-room-content { padding:24px 22px 30px; }
+    .study-room-grid { grid-template-columns:1fr; }
+    .study-room-foot { padding:12px 22px; }
+}
+
+/* =========================================================
+   モーダル
+========================================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9000;
+
+    background:
+        rgba(20,12,12,.78);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: .35s ease;
+}
+
+.modal.open {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.modal-box {
+    width:
+        min(700px, 95vw);
+
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    background:
+        var(--paper-light);
+
+    border:
+        3px double var(--gold);
+
+    padding: 45px;
+
+    position: relative;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.4);
+}
+
+.modal-close {
+    position: absolute;
+
+    top: 12px;
+    right: 15px;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    color: var(--red);
+}
+
+.modal-title {
+    font-family: "Shippori Mincho", serif;
+
+    font-size: 30px;
+
+    color: var(--red);
+
+    margin-top: 0;
+}
+
+.modal-box p {
+    font-size: 12px;
+
+    line-height: 2.35;
+}
+
+/* =========================================================
+   畫像管理パネル (モーダル内)
+========================================================= */
+
+.image-manager-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    margin-top: 20px;
+}
+
+.image-slot {
+    display: grid;
+
+    grid-template-columns: 90px 1fr auto;
+
+    gap: 16px;
+
+    align-items: center;
+
+    border: 1px solid var(--line);
+
+    padding: 14px;
+
+    background:
+        rgba(255,255,255,.35);
+}
+
+.image-slot-preview {
+    width: 90px;
+    height: 65px;
+
+    background-size: cover;
+    background-position: center;
+
+    border: 1px solid var(--line);
+}
+
+.image-slot-label {
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.image-slot-hint {
+    font-size: 10px;
+
+    color: var(--ink-soft);
+
+    margin-top: 4px;
+}
+
+.image-slot-actions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.image-slot-actions button {
+    border: 1px solid var(--gold);
+
+    background: transparent;
+
+    color: var(--red);
+
+    padding: 6px 14px;
+
+    font-size: 10px;
+
+    letter-spacing: .1em;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+.image-slot-actions button:hover {
+    background: var(--red);
+
+    color: white;
+}
+
+.image-manager-note {
+    margin-top: 18px;
+
+    font-size: 10px;
+
+    color: var(--ink-soft);
+
+    line-height: 2;
+}
+
+/* =========================================================
+   圖書館
+========================================================= */
+
+.library {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(123,24,32,.06),
+            transparent
+        );
+}
+
+.library-card {
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 45px;
+
+    border:
+        1px solid var(--line);
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8f1e4,
+            #e4d5bf
+        );
+
+    box-shadow:
+        var(--shadow);
+}
+
+.library-card h3 {
+    font-family: "Shippori Mincho", serif;
+
+    font-size: 28px;
+
+    color: var(--red);
+
+    margin-top: 0;
+}
+
+.library-search {
+    display: flex;
+
+    margin-top: 25px;
+}
+
+.library-search input {
+    flex: 1;
+
+    padding: 13px;
+
+    border:
+        1px solid var(--line);
+
+    background:
+        rgba(255,255,255,.6);
+
+    font-family: inherit;
+}
+
+.library-search button {
+    padding:
+        0 25px;
+
+    border:
+        1px solid var(--red);
+
+    background: var(--red);
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.library-result {
+    margin-top: 25px;
+
+    padding: 18px;
+
+    border-left:
+        3px solid var(--gold);
+
+    background:
+        rgba(255,255,255,.4);
+
+    font-size: 11px;
+
+    min-height: 50px;
+}
+
+/* =========================================================
+   號外
+========================================================= */
+
+.extra {
+    background: var(--red-dark);
+
+    color: #f4eadb;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.extra::before {
+    content: "號外";
+
+    position: absolute;
+
+    font-family: "Shippori Mincho", serif;
+
+    font-size: 260px;
+
+    opacity: .035;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+}
+
+.extra h2 {
+    font-family: "Shippori Mincho", serif;
+
+    font-size: 35px;
+
+    color: var(--gold-light);
+}
+
+.extra-button {
+    border:
+        1px solid var(--gold);
+
+    background: transparent;
+
+    color: #f5ead8;
+
+    padding:
+        11px 28px;
+
+    cursor: pointer;
+
+    letter-spacing: .15em;
+}
+
+/* =========================================================
+   校園
+========================================================= */
+
+.campus-grid {
+    display: grid;
+
+    grid-template-columns:
+        1.3fr 1fr;
+
+    gap: 30px;
+}
+
+.campus-image {
+    min-height: 430px;
+
+    background:
+        linear-gradient(
+            rgba(50,30,25,.1),
+            rgba(50,30,25,.25)
+        ),
+        var(--campus-image, url("images/campus.jpg"))
+        center / cover no-repeat;
+
+    border:
+        1px solid var(--line);
+}
+
+.campus-text {
+    padding: 20px;
+}
+
+.campus-text h3 {
+    font-family: "Shippori Mincho", serif;
+
+    color: var(--red);
+
+    font-size: 26px;
+}
+
+.campus-text p {
+    font-size: 12px;
+
+    line-height: 2.35;
+}
+
+/* =========================================================
+   NEWS
+========================================================= */
+
+.news {
+    background:
+        rgba(70,30,25,.035);
+}
+
+.news-list {
+    max-width: 850px;
+
+    margin: auto;
+}
+
+.news-item {
+    display: grid;
+
+    grid-template-columns:
+        120px 1fr;
+
+    gap: 20px;
+
+    padding: 18px 0;
+
+    border-bottom:
+        1px solid var(--line);
+}
+
+.news-date {
+    color: var(--red);
+
+    font-size: 10px;
+}
+
+.news-title {
+    font-size: 12px;
+}
+
+.news-title::after {
+    content: " →";
+
+    color: var(--gold);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    background:
+        #281c1b;
+
+    color: #ded2c2;
+
+    border-top:
+        4px double var(--gold);
+}
+
+.footer-inner {
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding:
+        55px 25px 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr 1fr 1fr;
+
+    gap: 40px;
+}
+
+.footer-title {
+    font-family: "Shippori Mincho", serif;
+
+    font-size: 21px;
+
+    color: #f2e5cf;
+
+    letter-spacing: .12em;
+}
+
+.footer-block h4 {
+    color: var(--gold-light);
+
+    font-size: 11px;
+
+    letter-spacing: .18em;
+}
+
+.footer-block p,
+.footer-block li {
+    font-size: 10px;
+
+    line-height: 2;
+}
+
+.footer-block ul {
+    list-style: none;
+
+    padding: 0;
+}
+
+.footer-bottom {
+    border-top:
+        1px solid rgba(215,188,130,.2);
+
+    padding: 18px;
+
+    text-align: center;
+
+    font-size: 9px;
+
+    letter-spacing: .15em;
+
+    color: #a99b8b;
+}
+
+/* =========================================================
+   TOP BUTTON
+========================================================= */
+
+#topButton {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    width: 46px;
+    height: 46px;
+
+    border:
+        1px solid var(--gold);
+
+    background:
+        rgba(40,28,27,.93);
+
+    color: var(--gold-light);
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: .3s;
+
+    z-index: 800;
+}
+
+#topButton.show {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+/* =========================================================
+   畫像管理ボタン
+========================================================= */
+
+#imageManagerButton {
+    position: fixed;
+
+    right: 20px;
+    bottom: 76px;
+
+    width: 46px;
+    height: 46px;
+
+    border:
+        1px solid var(--gold);
+
+    background:
+        rgba(40,28,27,.93);
+
+    color: var(--gold-light);
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    z-index: 800;
+}
+
+/* =========================================================
+   夜間モード
+========================================================= */
+
+body.night {
+    --paper: #171314;
+    --paper-light: #211a1a;
+    --paper-dark: #2b2020;
+
+    --ink: #e6d9c7;
+    --ink-soft: #b7a99a;
+
+    --line: rgba(215,188,130,.22);
+}
+
+body.night .intro-card,
+body.night .faculty-card,
+body.night .person-card,
+body.night .library-card {
+    background:
+        linear-gradient(
+            145deg,
+            #241c1c,
+            #171313
+        );
+}
+
+.night-toggle {
+    position: fixed;
+
+    left: 20px;
+    bottom: 20px;
+
+    z-index: 800;
+
+    width: 46px;
+    height: 46px;
+
+    border:
+        1px solid var(--gold);
+
+    background:
+        rgba(40,28,27,.93);
+
+    color: var(--gold-light);
+
+    cursor: pointer;
+
+    font-size: 17px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .header-top {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .header-meta {
+        text-align: left;
+    }
+
+    .intro-grid,
+    .faculty-grid,
+    .people-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gramophone-wrap {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+    }
+
+    .campus-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .image-slot {
+        grid-template-columns: 70px 1fr;
+    }
+
+    .image-slot-actions {
+        grid-column: 1 / -1;
+
+        flex-direction: row;
+    }
+
+}
+
+@media (max-width: 560px) {
+
+    .main-nav-inner {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .main-nav a {
+        text-align: center;
+
+        padding: 10px 4px;
+    }
+
+    .hero {
+        min-height: 560px;
+    }
+
+    .hero h2 {
+        font-size: 40px;
+    }
+
+    .section {
+        padding:
+            70px 18px;
+    }
+
+    .modal-box {
+        padding: 30px 22px;
+    }
+
+    .library-card {
+        padding: 28px 20px;
+    }
+
+}
+
+
+/* =========================================================
+   拾参の文星
+========================================================= */
+
+.thirteen-stars-section {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(135deg, rgba(120,23,34,.045), rgba(169,133,69,.055)),
+        var(--paper-light);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.thirteen-stars-section::before {
+    content: "十三";
+    position: absolute;
+    right: -25px;
+    top: -85px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 300px;
+    line-height: 1;
+    color: rgba(120,23,34,.035);
+    pointer-events: none;
+}
+
+.stars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.star-card {
+    position: relative;
+    min-height: 235px;
+    padding: 28px 24px 25px;
+    background: rgba(255,255,255,.62);
+    border: 1px solid var(--line);
+    box-shadow: 0 8px 24px rgba(50,35,25,.06);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.star-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(169,133,69,.6);
+    box-shadow: 0 14px 30px rgba(50,35,25,.11);
+}
+
+.star-number {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    color: var(--gold);
+    font-family: "Shippori Mincho", serif;
+    font-size: 25px;
+    opacity: .72;
+}
+
+.star-name {
+    margin: 0 45px 10px 0;
+    color: var(--red);
+    font-family: "Shippori Mincho", serif;
+    font-size: 20px;
+    letter-spacing: .08em;
+}
+
+.star-model {
+    margin: 0 0 15px;
+    font-size: 11px;
+    color: var(--ink-soft);
+}
+
+.star-model strong {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.star-work {
+    margin: 0;
+    padding-top: 13px;
+    border-top: 1px solid rgba(74,47,35,.15);
+    font-size: 12px;
+    line-height: 2;
+}
+
+.star-work-label {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--gold);
+    font-size: 9px;
+    letter-spacing: .18em;
+}
+
+.stars-note {
+    margin: 0 auto 48px;
+    max-width: 850px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 2.25;
+    color: var(--ink-soft);
+}
+
+/* =========================================================
+   文星世代表
+========================================================= */
+
+.generation-timeline {
+    position: relative;
+    max-width: 980px;
+    margin: 65px auto 0;
+    padding-left: 35px;
+}
+
+.generation-timeline::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(var(--gold), rgba(169,133,69,.15));
+}
+
+.generation-block {
+    position: relative;
+    margin-bottom: 42px;
+}
+
+.generation-block:last-child {
+    margin-bottom: 0;
+}
+
+.generation-block::before {
+    content: "";
+    position: absolute;
+    left: -31px;
+    top: 7px;
+    width: 9px;
+    height: 9px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    background: var(--paper-light);
+    box-shadow: 0 0 0 4px rgba(169,133,69,.08);
+}
+
+.generation-gap {
+    display: inline-block;
+    margin-bottom: 11px;
+    padding: 3px 10px;
+    color: var(--red);
+    border: 1px solid rgba(120,23,34,.25);
+    font-size: 9px;
+    letter-spacing: .18em;
+}
+
+.generation-first .generation-gap {
+    color: var(--gold);
+    border-color: rgba(169,133,69,.35);
+}
+
+.generation-title {
+    margin: 0 0 13px;
+    font-family: "Shippori Mincho", serif;
+    font-size: 21px;
+    letter-spacing: .1em;
+}
+
+.generation-people {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 12px;
+}
+
+.generation-person {
+    padding: 16px 18px;
+    background: rgba(255,255,255,.52);
+    border: 1px solid rgba(74,47,35,.16);
+}
+
+.generation-person-name {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--red);
+    font-family: "Shippori Mincho", serif;
+    font-size: 15px;
+}
+
+.generation-person-info {
+    display: block;
+    font-size: 10px;
+    line-height: 1.9;
+    color: var(--ink-soft);
+}
+
+.generation-person-note {
+    display: block;
+    margin-top: 5px;
+    font-size: 9px;
+    color: var(--gold);
+}
+
+@media (max-width: 900px) {
+    .stars-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 620px) {
+    .stars-grid,
+    .generation-people {
+        grid-template-columns: 1fr;
+    }
+
+    .generation-timeline {
+        padding-left: 27px;
+    }
+
+    .generation-timeline::before {
+        left: 5px;
+    }
+
+    .generation-block::before {
+        left: -27px;
+    }
+}
+
+</style>
+
+<style id="imperial-command-center-style">
+#imperial-command-trigger{position:fixed;right:22px;bottom:22px;z-index:9000;border:1px solid rgba(199,163,82,.65);background:rgba(12,12,14,.92);color:#ead9a5;padding:12px 16px;border-radius:999px;box-shadow:0 8px 30px rgba(0,0,0,.35);font-family:inherit;cursor:pointer;backdrop-filter:blur(10px)}
+#imperial-command-trigger:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(0,0,0,.45)}
+#imperial-command-overlay{position:fixed;inset:0;z-index:8999;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(5px)}
+#imperial-command-overlay.open{display:flex}
+#imperial-command-center{width:min(1100px,96vw);max-height:90vh;overflow:auto;background:linear-gradient(145deg,#141416,#0b0b0d);border:1px solid rgba(199,163,82,.45);box-shadow:0 25px 80px rgba(0,0,0,.6);border-radius:18px;color:#eee}
+.ic-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid rgba(255,255,255,.09);position:sticky;top:0;background:rgba(15,15,17,.95);backdrop-filter:blur(10px);z-index:2}
+.ic-title{font-size:20px;color:#e7d19a;letter-spacing:.08em}.ic-kicker{font-size:11px;opacity:.55;letter-spacing:.18em;margin-bottom:4px}.ic-close{border:0;background:none;color:#aaa;font-size:28px;cursor:pointer}
+.ic-body{padding:20px 24px 28px}.ic-search{width:100%;box-sizing:border-box;padding:15px 17px;background:#09090b;color:#fff;border:1px solid #3b3528;border-radius:10px;font-size:16px;outline:none}.ic-search:focus{border-color:#b99a58;box-shadow:0 0 0 3px rgba(185,154,88,.12)}
+.ic-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-top:18px}.ic-card{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px}.ic-card h3{margin:0 0 12px;color:#d8c18b;font-size:14px;letter-spacing:.08em}.ic-results{display:grid;gap:8px;max-height:300px;overflow:auto}.ic-result{padding:11px 13px;border:1px solid rgba(255,255,255,.06);border-radius:9px;cursor:pointer;background:rgba(255,255,255,.02)}.ic-result:hover{background:rgba(199,163,82,.1);border-color:rgba(199,163,82,.35)}.ic-result b{color:#f1dfae}.ic-result small{display:block;opacity:.6;margin-top:3px}
+.ic-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.ic-action{padding:12px;border:1px solid rgba(199,163,82,.25);background:#171518;color:#e8d8af;border-radius:9px;cursor:pointer;text-align:left}.ic-action:hover{background:#211e18;border-color:rgba(199,163,82,.55)}
+.ic-timeline{margin-top:18px}.ic-line{position:relative;margin:12px 0 0;padding-left:22px;border-left:1px solid rgba(199,163,82,.45)}.ic-era{position:relative;padding:9px 0 9px 14px}.ic-era:before{content:"";position:absolute;left:-27px;top:17px;width:9px;height:9px;border-radius:50%;background:#c7a352;box-shadow:0 0 0 4px rgba(199,163,82,.12)}.ic-era b{color:#e5d19a}.ic-era span{opacity:.65;font-size:12px;margin-left:8px}.ic-note{font-size:12px;opacity:.55;margin-top:12px}.ic-stat{display:flex;gap:10px;flex-wrap:wrap}.ic-stat span{padding:7px 10px;border-radius:999px;background:rgba(199,163,82,.08);border:1px solid rgba(199,163,82,.18);font-size:12px}.ic-spotlight{font-size:22px;color:#eee;line-height:1.55}.ic-spotlight em{display:block;font-size:13px;color:#c7a352;font-style:normal}.ic-toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#111;color:#eee;border:1px solid rgba(199,163,82,.5);padding:11px 15px;border-radius:10px;z-index:9999;transition:.25s}.ic-toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.ic-grid{grid-template-columns:1fr}.ic-actions{grid-template-columns:1fr}.ic-head{padding:15px 17px}.ic-body{padding:15px 17px 22px}#imperial-command-trigger{right:12px;bottom:12px}}
+</style>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     入場画面
+===================================================== -->
+
+<div id="entrance">
+
+    <div class="entrance-inner">
+
+        <div class="entrance-mark">❦</div>
+
+        <div class="entrance-title">
+            日ノ本帝國國立帝國大學
+        </div>
+
+        <div class="entrance-sub">
+            NIH0N IMPERIAL UNIVERSITY
+        </div>
+
+        <div class="entrance-line"></div>
+
+        <button class="entrance-enter" id="enterButton">
+            帝國大學へ入場する
+        </button>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="site-header">
+
+    <div class="header-top">
+
+        <div class="university-name">
+
+            <div class="university-mark">
+                帝
+            </div>
+
+            <div class="university-text">
+
+                <h1>
+                    日ノ本帝國國立帝國大學
+                </h1>
+
+                <p>
+                    NIH0N IMPERIAL UNIVERSITY
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="header-meta">
+
+            帝國暦 二百三十七年<br>
+            帝都・中央學術區
+
+            <div class="imperial-clock">
+
+                <span class="clock-label">
+                    IMPERIAL TIME
+                </span>
+
+                <span
+                    class="clock-face"
+                    id="imperialClock">
+                    帝國暦237年08月20日 09:59:00
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <nav class="main-nav">
+
+        <div class="main-nav-inner">
+
+            <a href="#about">大學案内</a>
+            <a href="#history">沿革</a>
+            <a href="#faculties">學部・學科</a>
+            <a href="#stars">拾参の文星</a>
+            <a href="#cultural">人物録</a>
+            <a href="#library">附属圖書館</a>
+            <a href="#gramophone">蓄音機</a>
+            <a href="#news">最新情報</a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero" id="heroSection" data-upload-key="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-kicker">
+            IMPERIAL ACADEMIA · TEITO
+        </div>
+
+        <h2>
+            學問ノ府、<br>
+            文化ノ源流。
+        </h2>
+
+        <div class="hero-subtitle">
+            日ノ本帝國國立帝國大學
+        </div>
+
+        <p class="hero-description">
+
+            日ノ本帝國の最高學府の一つとして、
+            哲學・文學・歷史・藝術・音樂その他
+            諸學の研究を通じ、
+            帝國近代文化の形成を支へてきた學術機關。
+
+        </p>
+
+        <a
+            href="#about"
+            class="hero-button">
+            大學について知る
+        </a>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section class="section" id="about">
+
+    <div class="section-heading">
+
+        <div class="section-kicker">
+            ABOUT THE UNIVERSITY
+        </div>
+
+        <h2 class="section-title">
+            帝國大學について
+        </h2>
+
+        <div class="section-rule"></div>
+
+        <p class="section-description">
+
+            學問は知識を蓄へるためだけにあるのではない。
+            世界を觀察し、人間を理解し、
+            未だ存在しない明日を思索するためにある。
+
+        </p>
+
+    </div>
+
+    <div class="intro-grid">
+
+        <article class="intro-card">
+
+            <h3>
+                最高學府として
+            </h3>
+
+            <p>
+                日ノ本帝國國立帝國大學は、
+                帝國を代表する最高學府の一つとして
+                學術研究と高等教育の中心的役割を担ふ。
+            </p>
+
+        </article>
+
+        <article class="intro-card">
+
+            <h3>
+                知識と文化
+            </h3>
+
+            <p>
+                文學・哲學・歷史學・藝術學・音樂學等、
+                人文諸學の研究を通して、
+                帝國近代における知識人文化の形成に
+                大きな影響を與へた。
+            </p>
+
+        </article>
+
+        <article class="intro-card">
+
+            <h3>
+                帝都文化の源流
+            </h3>
+
+            <p>
+                帝都文壇、藝術界、音樂界などには
+                帝國大學出身者が多く、
+                その人的交流は後世
+                「帝都文化圏」と呼ばれることとなつた。
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     蓄音機
+===================================================== -->
+
+<section
+    class="section gramophone-section"
+    id="gramophone">
+
+    <div class="section-heading">
+
+        <div class="section-kicker">
+            IMPERIAL GRAMOPHONE
+        </div>
+
+        <h2 class="section-title">
+            帝國大學蓄音機室
+        </h2>
+
+        <div class="section-rule"></div>
+
+    </div>
+
+    <div class="gramophone-wrap">
+
+        <div class="gramophone">
+
+            <div
+                class="gramophone-horn">
+            </div>
+
+            <div
+                class="gramophone-arm">
+            </div>
+
+            <div
+                class="gramophone-record"
+                id="record">
+
+                <div
+                    class="record-center">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="gramophone-info">
+
+            <h3 id="trackTitle">
+                TaishoRoman Theme2
+            </h3>
+
+            <p>
+
+                帝國大學公式網站・蓄音機室。
+                帝都の夜會を思はせる旋律とともに、
+                文藝資料館を巡覽することができる。
+
+            </p>
+
+            <p>
+
+                曲名：
+                <strong id="trackTitleInline">
+                    TaishoRoman Theme2
+                </strong><br>
+
+                作曲：
+                <strong id="trackArtist">
+                    PeriTune
+                </strong>
+
+            </p>
+
+            <div class="gramophone-controls">
+
+                <button
+                    class="gramophone-btn"
+                    id="prevButton"
+                    title="前の曲">
+
+                    ⏮
+
+                </button>
+
+                <button
+                    class="gramophone-btn"
+                    id="playButton">
+
+                    ▶ 再生
+
+                </button>
+
+                <button
+                    class="gramophone-btn"
+                    id="pauseButton">
+
+                    ■ 停止
+
+                </button>
+
+                <button
+                    class="gramophone-btn"
+                    id="nextButton"
+                    title="次の曲">
+
+                    ⏭
+
+                </button>
+
+                <input
+                    class="volume"
+                    id="volume"
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value=".55">
+
+            </div>
+
+            <div class="gramophone-controls">
+
+                <button
+                    class="gramophone-btn"
+                    id="addTrackButton">
+
+                    ＋ 曲を追加
+
+                </button>
+
+                <button
+                    class="gramophone-btn"
+                    id="togglePlaylistButton">
+
+                    ♪ プレイリスト
+
+                </button>
+
+                <input
+                    type="file"
+                    id="audioUploadInput"
+                    accept="audio/*"
+                    multiple
+                    style="display:none">
+
+            </div>
+
+            <p
+                id="audioStatus"
+                style="
+                font-size:10px;
+                color:#dbc48e;
+                margin-top:12px;">
+                蓄音機は停止中です。
+            </p>
+
+            <div
+                class="playlist-panel"
+                id="playlistPanel">
+
+                <div id="playlistItems"></div>
+
+                <div class="playlist-note">
+                    ※ アップロードした曲のうち、容量の小さいものはこの端末のブラウザに保存され、
+                    次回訪問時にも引き續き再生できます。容量の大きいファイルはこのセッション中のみ再生可能です。
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     AUDIO
+===================================================== -->
+
+<audio
+    id="imperialAudio"
+    preload="metadata">
+
+    <source
+        src="https://peritune.com/music/PerituneMaterial_TaishoRoman_Theme2.mp3"
+        type="audio/mpeg">
+
+    お使ひのブラウザは音聲再生に対応してゐません。
+
+</audio>
+
+<!-- =====================================================
+     HISTORY
+===================================================== -->
+
+<section
+    class="section history"
+    id="history">
+
+    <div class="section-heading">
+
+        <div class="section-kicker">
+            HISTORY
+        </div>
+
+        <h2 class="section-title">
+            帝國大學沿革
+        </h2>
+
+        <div class="section-rule"></div>
+
+    </div>
+
+    <div class="timeline">
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                帝國暦初期
+            </div>
+
+            <div class="timeline-title">
+                帝國高等學術機關として創設
+            </div>
+
+            <div class="timeline-text">
+                日ノ本帝國における近代學術研究の
+                中心機關として設立される。
+            </div>
+
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                帝國近代期
+            </div>
+
+            <div class="timeline-title">
+                文科・藝術科・音樂科の整備
+            </div>
+
+            <div class="timeline-text">
+                人文諸學のみならず藝術・音樂研究を
+                本格的に導入し、帝都文化との結びつきを深める。
+            </div>
+
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                文壇隆盛期
+            </div>
+
+            <div class="timeline-title">
+                帝都文壇との交流
+            </div>
+
+            <div class="timeline-text">
+                有栖川劉ノ介、ト部川樒、
+                九條院朔臣らをはじめとする
+                文學者を輩出する。
+            </div>
+
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                現代
+            </div>
+
+            <div class="timeline-title">
+                傳統と現代文化の共存
+            </div>
+
+            <div class="timeline-text">
+                漫畫、現代音樂、映像文化等の
+                新たな藝術領域を含む総合的な
+                學術機關へと發展。
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     FACULTIES
+===================================================== -->
+
+<section
+    class="section"
+    id="faculties">
+
+    <div class="section-heading">
+
+        <div class="section-kicker">
+            FACULTIES & DEPARTMENTS
+        </div>
+
+        <h2 class="section-title">
+            學部・學科
+        </h2>
+
+        <div class="section-rule"></div>
+
+    </div>
+
+    <div class="faculty-grid">
+
+        <article class="faculty-card">
+
+            <div class="faculty-number">
+                一
+            </div>
+
+            <h3>
+                文科
+            </h3>
+
+            <p>
+                文學、哲學、歷史學、語言學等を
+                研究する帝國大學の中核學科。
+                帝都文壇を代表する小説家・詩人・
+                評論家を數多く輩出してゐる。
+            </p>
+
+        </article>
+
+        <article class="faculty-card">
+
+            <div class="faculty-number">
+                二
+            </div>
+
+            <h3>
+                藝術科
+            </h3>
+
+            <p>
+                絵畫、漫畫、演劇、美術史その他の
+                藝術研究を行ふ。
+                傳統藝術と近代藝術の融合を
+                特色とする。
+            </p>
+
+        </article>
+
+        <article class="faculty-card">
+
+            <div class="faculty-number">
+                三
+            </div>
+
+            <h3>
+                音樂科
+            </h3>
+
+            <p>
+                作曲、音樂學、聲樂、器樂等を研究。
+                傳統音樂から現代音樂まで、
+                廣範な音樂文化を対象とする。
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     日ノ本帝國・拾参の文星
+===================================================== -->
+
+<section
+    class="section thirteen-stars-section"
+    id="stars">
+
+    <div class="section-heading">
+
+        <div class="section-kicker">
+            THIRTEEN STARS OF LITERATURE &amp; CULTURE
+        </div>
+
+        <h2 class="section-title">
+            日ノ本帝國・拾参の文星
+        </h2>
+
+        <div class="section-rule"></div>
+
+        <p class="section-description">
+            日ノ本帝國國立帝國大學を卒業した、文學・藝術・音樂その他の文化を代表する十三人。
+            文學者を中心としつつ、漫畫家・作曲家を含む特殊枠を加へ、帝國文化史に名を刻む人物を紹介する。
+        </p>
+
+    </div>
+
+    <p class="stars-note">
+        帝國大學出身者のうち、とりわけ後世に「文星」と稱された文化人たちを収録する特別名鑑。
+        各人物には、その人物像・作風・活動における主要なモデル、本人の一人称、代表作または代表楽曲を併記する。
+    </p>
+
+    <div class="stars-grid">
+
+        <article class="star-card">
+            <div class="star-number">壹</div>
+            <h3 class="star-name">卜部川樒</h3>
+            <p class="star-model">モデル：<strong>太宰治（作風・人生）</strong></p>
+            <p class="star-work"><span class="star-work-label">一人称／代表作</span>「僕」／『愚人の興福』</p>
+        </article>
+
+        <article class="star-card">
+            <div class="star-number">弍</div>
+            <h3 class="star-name">有栖川劉ノ介</h3>
+            <p class="star-model">モデル：<strong>芥川龍之介</strong></p>
+            <p class="star-work"><span class="star-work-label">一人称／代表作</span>「私」／『蒐集箱』</p>
+        </article>
+
+        <article class="star-card">
+            <div class="star-number">参</div>
+            <h3 class="star-name">中原壱葉</h3>
+            <p class="star-model">モデル：<strong>中原中也</strong></p>
+            <p class="star-work"><span class="star-work-label">一人称／代表作</span>「俺」／『circus』</p>
+        </article>
+
+        <article class="star-card">
+            <div class="star-number">肆</div>
+            <h3 class="star-name">九条院朔臣</h3>
+            <p class="star-model">モデル：<strong>谷崎潤一郎</strong></p>
+            <p class="star-work"><span class="star-work-label">一人称／代表作</span>「濮」／『毒草と芳香』</p>
+        </article>
+
+        <article class="star-card">
+            <div class="star-number">伍</div>
+            <h3 class="star-name">森林太郎</h3>
+            <p class="star-model">モデル：<strong>森鴎外</strong></p>
+            <p class="star-work"><span class="star-work-label">一人称／代表作</span>「私」／『舞姫』</p>
+        </article>
+
+        <article class="star-card">
+            <div class="star-number">陸</div>
+            <h3 class="star-name">六條杠葉</h3>
+            <p class="star-model">モデル：<strong>与謝野晶子</strong></p>
+            <p class="star-work"><span class="star-work-label">一人称／代表作</span>「妾（アタシ）」／『春を待つ仁』</p>
+        </article>
+
+        <article class="star-card">
+            <div class="star-number">漆</div>
+            <h3 class="star-name">御影薔子</h3>
+            <p class="star-model">モデル：<strong>大倉輝子</strong></p>
+            <p class="star-work"><span class="star-work-label">一人称／代表作</span>「私（わたくし）」／『大學院』</p>
+        </article>
+
+        <article class="star-card">
+            <div class="star-number">捌</div>
+            <h3 class="star-name">九頭竜夢路</h3>
+            <p class="star-model">モデル：<strong>江戸川乱歩</strong></p>
+            <p class="star-work"><span class="star-work-label">一人称／代表作</span>「俺」／『鏡の中の密室』</p>
+        </article>
+
+        <article class="star-card">
+            <div class="star-number">玖</div>
+            <h3 class="star-name">卜部川修治</h3>
+            <p class="star-model">モデル：<strong>太宰治（名前・人生）</strong></p>
+            <p class="star-work"><span class="star-work-label">一人称／代表作</span>「私」／『人間落第』</p>
+        </article>
+
+        <article class="star-card">
+            <div class="star-number">拾</div>
+            <h3 class="star-name">紅城院眞紅</h3>
+            <p class="star-model">モデル：<strong>ブラム・ストーカー／レ・ファニュ</strong></p>
+            <p class="star-work"><span class="star-work-label">一人称／代表作</span>「妾（わらわ）」／『吸血鬼ミフネア』</p>
+        </article>
+
+        <article class="star-card">
+            <div class="star-number">拾壹</div>
+            <h3 class="star-name">花葉春月</h3>
+            <p class="star-model">モデル：<strong>大窪晶与</strong></p>
+            <p class="star-work"><span class="star-work-label">一人称／代表作</span>「私」／『ヴラド・ドラクラ』<br>※漫畫家・特殊枠</p>
+        </article>
+
+        <article class="star-card">
+            <div class="star-number">拾弍</div>
+            <h3 class="star-name">雪柳残雪</h3>
+            <p class="star-model">モデル：<strong>じょるじん（暗黒童話P）</strong></p>
+            <p class="star-work"><span class="star-work-label">一人称／代表楽曲</span>「僕」／『ドラキュラとなった男の物語』<br>※作曲家・特殊枠</p>
+        </article>
+
+        <article class="star-card">
+            <div class="star-number">拾参</div>
+            <h3 class="star-name">神代聖</h3>
+            <p class="star-model">モデル：<strong>フョードル・ドストエフスキー</strong></p>
+            <p class="star-work"><span class="star-work-label">一人称／代表作</span>「ワタクシ」／『辠人の失楽園』</p>
+        </article>
+
+    </div>
+
+    <!-- =================================================
+         世代表
+    ================================================== -->
+
+    <div class="section-heading" style="margin-top:110px;margin-bottom:35px;">
+
+        <div class="section-kicker">
+            GENERATIONAL TABLE
+        </div>
+
+        <h2 class="section-title">
+            文星世代表
+        </h2>
+
+        <div class="section-rule"></div>
+
+        <p class="section-description">
+            日ノ本帝國國立帝國大學文科・藝術科における、文星たちの入學・在學世代を時系列で示す。
+        </p>
+
+    </div>
+
+    <div class="generation-timeline">
+
+        <article class="generation-block generation-first">
+            <span class="generation-gap">初代</span>
+            <h3 class="generation-title">神代聖</h3>
+            <div class="generation-people">
+                <div class="generation-person">
+                    <span class="generation-person-name">神代聖</span>
+                    <span class="generation-person-info">日ノ本帝國國立帝國大學　文科　初代首席</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="generation-block">
+            <span class="generation-gap">↓　捌年後</span>
+            <h3 class="generation-title">第二世代</h3>
+            <div class="generation-people">
+                <div class="generation-person">
+                    <span class="generation-person-name">有栖川劉ノ介</span>
+                    <span class="generation-person-info">日ノ本帝國國立帝國大學　文科　首席</span>
+                </div>
+                <div class="generation-person">
+                    <span class="generation-person-name">六條杠葉</span>
+                    <span class="generation-person-info">日ノ本帝國國立帝國大學　文科</span>
+                    <span class="generation-person-note">日ノ本帝國國立帝國大學初の女學生</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="generation-block">
+            <span class="generation-gap">↓　伍年後</span>
+            <h3 class="generation-title">第三世代</h3>
+            <div class="generation-people">
+                <div class="generation-person">
+                    <span class="generation-person-name">卜部川樒</span>
+                    <span class="generation-person-info">日ノ本帝國國立帝國大學　文科　首席</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="generation-block">
+            <span class="generation-gap">↓　壱年後</span>
+            <h3 class="generation-title">第四世代</h3>
+            <div class="generation-people">
+                <div class="generation-person">
+                    <span class="generation-person-name">九条院朔臣</span>
+                    <span class="generation-person-info">日ノ本帝國國立帝國大學　文科</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="generation-block">
+            <span class="generation-gap">↓　弍年後</span>
+            <h3 class="generation-title">第五世代</h3>
+            <div class="generation-people">
+                <div class="generation-person">
+                    <span class="generation-person-name">森林太郎（薄氷宮幸仁皇太子）</span>
+                    <span class="generation-person-info">日ノ本帝國國立帝國大學　文科</span>
+                </div>
+                <div class="generation-person">
+                    <span class="generation-person-name">花葉春月</span>
+                    <span class="generation-person-info">日ノ本帝國國立帝國大學　藝術科　首席</span>
+                    <span class="generation-person-note">後の四季廳長官。漫畫家として大窪晶与を名乗る</span>
+                </div>
+                <div class="generation-person">
+                    <span class="generation-person-name">御影薔子</span>
+                    <span class="generation-person-info">日ノ本帝國國立帝國大學　文科</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="generation-block">
+            <span class="generation-gap">↓　壱年後</span>
+            <h3 class="generation-title">第六世代</h3>
+            <div class="generation-people">
+                <div class="generation-person">
+                    <span class="generation-person-name">中原壱葉</span>
+                    <span class="generation-person-info">日ノ本帝國國立帝國大學　文科</span>
+                </div>
+                <div class="generation-person">
+                    <span class="generation-person-name">九頭竜夢路</span>
+                    <span class="generation-person-info">日ノ本帝國國立帝國大學　文科</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="generation-block">
+            <span class="generation-gap">↓　参年後</span>
+            <h3 class="generation-title">第七世代</h3>
+            <div class="generation-people">
+                <div class="generation-person">
+                    <span class="generation-person-name">雪柳残雪</span>
+                    <span class="generation-person-info">日ノ本帝國國立帝國大學　藝術科　首席</span>
+                    <span class="generation-person-note">雪柳春月（花葉春月）の弟。のちのじょるじん（暗黒童話P）</span>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     人物録
+===================================================== -->
+
+<section
+    class="section cultural-section"
+    id="cultural">
+
+    <div class="section-heading">
+
+        <div class="section-kicker">
+            NOTABLE CULTURAL FIGURES
+        </div>
+
+        <h2 class="section-title">
+            帝國大學人物録
+        </h2>
+
+        <div class="section-rule"></div>
+
+        <p class="section-description">
+
+            日ノ本帝國國立帝國大學を卒業した
+            文學者、藝術家、音樂家、評論家、
+            教育者その他の文化人。
+
+        </p>
+
+    </div>
+
+    <div class="category-tabs">
+
+        <button
+            class="category-btn active"
+            data-category="all">
+            全て
+        </button>
+
+        <button
+            class="category-btn"
+            data-category="literature">
+            文科
+        </button>
+
+        <button
+            class="category-btn"
+            data-category="art">
+            藝術科
+        </button>
+
+        <button
+            class="category-btn"
+            data-category="music">
+            音樂科
+        </button>
+
+    </div>
+
+    <div class="people-grid">
+
+        <article
+            class="person-card"
+            data-category="literature">
+
+            <div
+                class="person-photo"
+                data-upload-key="person-arisugawa"
+                data-initial="有">
+
+                <button
+                    type="button"
+                    class="person-photo-upload-btn"
+                    data-photo-slot="person-arisugawa"
+                    title="肖像寫眞をアップロード">
+                    📷
+                </button>
+
+            </div>
+
+            <div class="person-card-body">
+
+                <div class="person-category">
+                    文科出身者
+                </div>
+
+                <h3 class="person-name">
+                    有栖川劉ノ介
+                </h3>
+
+                <div class="person-reading">
+                    ありすがわ・りゅうのすけ
+                </div>
+
+                <div class="person-status">
+                    帝國大學文科卒・首席
+                </div>
+
+                <div class="person-job">
+                    小説家・文筆家
+                </div>
+
+                <div class="person-description">
+
+                    『狐』『登竜門』『蒐集箱』等の
+                    短編小説によつて知られる。
+                    古典的説話と近代的人間心理を
+                    融合させた文學を確立した。
+
+                </div>
+
+                <button
+                    class="person-more"
+                    data-person="arisugawa">
+                    人物資料を開く
+                </button>
+
+            </div>
+
+        </article>
+
+        <article
+            class="person-card"
+            data-category="literature">
+
+            <div
+                class="person-photo"
+                data-upload-key="person-shikimi"
+                data-initial="樒">
+
+                <button
+                    type="button"
+                    class="person-photo-upload-btn"
+                    data-photo-slot="person-shikimi"
+                    title="肖像寫眞をアップロード">
+                    📷
+                </button>
+
+            </div>
+
+            <div class="person-card-body">
+
+                <div class="person-category">
+                    文科出身者
+                </div>
+
+                <h3 class="person-name">
+                    ト部川樒
+                </h3>
+
+                <div class="person-reading">
+                    うらべがわ・しきみ
+                </div>
+
+                <div class="person-status">
+                    帝國大學文科卒・首席
+                </div>
+
+                <div class="person-job">
+                    小説家・評論家
+                </div>
+
+                <div class="person-description">
+
+                    戀愛、執着、所有欲、嫉妬、依存、
+                    孤獨などを題材とする帝都文壇の
+                    代表的な小説家。
+
+                </div>
+
+                <button
+                    class="person-more"
+                    data-person="shikimi">
+                    人物資料を開く
+                </button>
+
+            </div>
+
+        </article>
+
+        <article
+            class="person-card"
+            data-category="literature">
+
+            <div
+                class="person-photo"
+                data-upload-key="person-yuzuriha"
+                data-initial="杠">
+
+                <button
+                    type="button"
+                    class="person-photo-upload-btn"
+                    data-photo-slot="person-yuzuriha"
+                    title="肖像寫眞をアップロード">
+                    📷
+                </button>
+
+            </div>
+
+            <div class="person-card-body">
+
+                <div class="person-category">
+                    文科出身者
+                </div>
+
+                <h3 class="person-name">
+                    六條杠葉
+                </h3>
+
+                <div class="person-reading">
+                    ろくじょう・ゆずりは
+                </div>
+
+                <div class="person-status">
+                    帝國大學文科卒
+                </div>
+
+                <div class="person-job">
+                    歌人・詩人・評論家・隨筆家
+                </div>
+
+                <div class="person-description">
+
+                    帝國近代女性文學を代表する文學者。
+                    短歌、婦人教育、戀愛論、
+                    家庭論など廣範な著作を殘した。
+
+                </div>
+
+                <button
+                    class="person-more"
+                    data-person="yuzuriha">
+                    人物資料を開く
+                </button>
+
+            </div>
+
+        </article>
+
+        <article
+            class="person-card"
+            data-category="art">
+
+            <div
+                class="person-photo"
+                data-upload-key="person-akiyo"
+                data-initial="晶">
+
+                <button
+                    type="button"
+                    class="person-photo-upload-btn"
+                    data-photo-slot="person-akiyo"
+                    title="肖像寫眞をアップロード">
+                    📷
+                </button>
+
+            </div>
+
+            <div class="person-card-body">
+
+                <div class="person-category">
+                    藝術科出身者
+                </div>
+
+                <h3 class="person-name">
+                    大窪晶与
+                </h3>
+
+                <div class="person-reading">
+                    おおくぼ・あきよ
+                </div>
+
+                <div class="person-status">
+                    帝國大學藝術科卒・首席
+                </div>
+
+                <div class="person-job">
+                    漫畫家・四季廳長官
+                </div>
+
+                <div class="person-description">
+
+                    歷史漫畫『ヴラド・ドラクラ』によつて
+                    世界的評価を得た漫畫家。
+                    藝術行政にも携はる。
+
+                </div>
+
+                <button
+                    class="person-more"
+                    data-person="akiyo">
+                    人物資料を開く
+                </button>
+
+            </div>
+
+        </article>
+
+        <article
+            class="person-card"
+            data-category="literature">
+
+            <div
+                class="person-photo"
+                data-upload-key="person-seiko"
+                data-initial="聖">
+
+                <button
+                    type="button"
+                    class="person-photo-upload-btn"
+                    data-photo-slot="person-seiko"
+                    title="肖像寫眞をアップロード">
+                    📷
+                </button>
+
+            </div>
+
+            <div class="person-card-body">
+                <div class="person-category">文科出身者</div>
+                <h3 class="person-name">神代聖</h3>
+                <div class="person-reading">かみしろ・ひじり</div>
+                <div class="person-status">帝國大學文科卒・初代首席</div>
+                <div class="person-job">小説家・思想家・宗教評論家</div>
+                <div class="person-description">
+                    罪、信仰、自由意志、救済、愛、死をめぐる
+                    神秘主義・宗教哲學的文學の代表者。
+                    「三十年前から歳を取らない文士」とも噂される。
+                </div>
+                <button class="person-more" data-person="seiko">人物資料を開く</button>
+            </div>
+
+        </article>
+
+        <article
+            class="person-card"
+            data-category="literature">
+
+            <div
+                class="person-photo"
+                data-upload-key="person-maku"
+                data-initial="眞">
+
+                <button
+                    type="button"
+                    class="person-photo-upload-btn"
+                    data-photo-slot="person-maku"
+                    title="肖像寫眞をアップロード">
+                    📷
+                </button>
+
+            </div>
+
+            <div class="person-card-body">
+                <div class="person-category">文科出身者</div>
+                <h3 class="person-name">紅城院眞紅</h3>
+                <div class="person-reading">こうじょういん・まく</div>
+                <div class="person-status">帝國文壇・怪奇幻想派</div>
+                <div class="person-job">小説家・劇作家・評論家</div>
+                <div class="person-description">
+                    竜棘国の伝承、吸血鬼、血統、歴史を題材に、
+                    怪物ではなく「歴史に取り残された人間」を描いた。
+                    神代聖の妻としても知られる。
+                </div>
+                <button class="person-more" data-person="maku">人物資料を開く</button>
+            </div>
+
+        </article>
+
+        <article
+            class="person-card"
+            data-category="music">
+
+            <div
+                class="person-photo"
+                data-upload-key="person-zansetsu"
+                data-initial="雪">
+
+                <button
+                    type="button"
+                    class="person-photo-upload-btn"
+                    data-photo-slot="person-zansetsu"
+                    title="肖像寫眞をアップロード">
+                    📷
+                </button>
+
+            </div>
+
+            <div class="person-card-body">
+
+                <div class="person-category">
+                    音樂科出身者
+                </div>
+
+                <h3 class="person-name">
+                    雪柳殘雪
+                </h3>
+
+                <div class="person-reading">
+                    ゆきやなぎ・ざんせつ
+                </div>
+
+                <div class="person-status">
+                    帝國大學音樂科卒・首席
+                </div>
+
+                <div class="person-job">
+                    音樂家・作詞家・作曲家
+                </div>
+
+                <div class="person-description">
+
+                    暗黑童話を題材とした音樂作品で
+                    知られる音樂家。
+                    別名義「暗黑童話P」で活動。
+
+                </div>
+
+                <button
+                    class="person-more"
+                    data-person="zansetsu">
+                    人物資料を開く
+                </button>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     人物モーダル / 汎用モーダル
+===================================================== -->
+
+<div
+    class="modal"
+    id="personModal">
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            id="modalClose">
+            ×
+        </button>
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     附属圖書館
+===================================================== -->
+
+<section
+    class="section library"
+    id="library">
+
+    <div class="section-heading">
+
+        <div class="section-kicker">
+            IMPERIAL UNIVERSITY LIBRARY
+        </div>
+
+        <h2 class="section-title">
+            附属圖書館
+        </h2>
+
+        <div class="section-rule"></div>
+
+        <p class="section-description">
+
+            帝國大學附属圖書館・帝都文藝資料室。
+            所蔵資料を検索することができます。
+
+        </p>
+
+    </div>
+
+    <div class="library-card">
+
+        <h3>
+            帝國圖書検索室
+        </h3>
+
+        <p>
+            文學、歷史、藝術、音樂その他の
+            帝國學術資料を検索できます。
+        </p>
+
+        <div class="library-search">
+
+            <input
+                id="libraryInput"
+                type="text"
+                placeholder="例：ト部川樒、帝都文壇、文學史">
+
+            <button
+                id="librarySearch">
+                検索
+            </button>
+
+        </div>
+
+        <div
+            class="library-result"
+            id="libraryResult">
+
+            検索語を入力して下さい。
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     號外
+===================================================== -->
+
+<section class="section extra">
+
+    <h2>
+        號外
+    </h2>
+
+    <p>
+        帝都文壇に関する特別報告を閲覧する。
+    </p>
+
+    <button
+        class="extra-button"
+        id="extraButton">
+
+        號外を開く
+
+    </button>
+
+</section>
+
+<!-- =====================================================
+     CAMPUS
+===================================================== -->
+
+<section
+    class="section"
+    id="campus">
+
+    <div class="section-heading">
+
+        <div class="section-kicker">
+            CAMPUS
+        </div>
+
+        <h2 class="section-title">
+            校園案内
+        </h2>
+
+        <div class="section-rule"></div>
+
+    </div>
+
+    <div class="campus-grid">
+
+        <div
+            class="campus-image"
+            id="campusImage"
+            data-upload-key="campus">
+        </div>
+
+        <div class="campus-text">
+
+            <h3>
+                帝都中央學術區
+            </h3>
+
+            <p>
+                帝國大學の校舍は帝都中央學術區に位置し、
+                文科棟、藝術科棟、音樂科棟、
+                帝國大學附属圖書館などから構成される。
+            </p>
+
+            <p>
+                煉瓦造・石造を基調とした校舍群には
+                西洋建築と日ノ本傳統建築の意匠が
+                混在してゐる。
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     NEWS
+===================================================== -->
+
+<section
+    class="section news"
+    id="news">
+
+    <div class="section-heading">
+
+        <div class="section-kicker">
+            NEWS & INFORMATION
+        </div>
+
+        <h2 class="section-title">
+            最新情報
+        </h2>
+
+        <div class="section-rule"></div>
+
+    </div>
+
+    <div class="news-list">
+
+        <div class="news-item">
+
+            <div class="news-date">
+                帝國暦237.08.19
+            </div>
+
+            <div class="news-title">
+                「帝國大學出身の著名文化人」
+                資料を公開しました
+            </div>
+
+        </div>
+
+        <div class="news-item">
+
+            <div class="news-date">
+                帝國暦237.08.12
+            </div>
+
+            <div class="news-title">
+                附属圖書館・夏季特別展示
+                「帝都文壇と帝國大學」
+            </div>
+
+        </div>
+
+        <div class="news-item">
+
+            <div class="news-date">
+                帝國暦237.07.30
+            </div>
+
+            <div class="news-title">
+                藝術科卒業制作展のお知らせ
+            </div>
+
+        </div>
+
+        <div class="news-item">
+
+            <div class="news-date">
+                帝國暦237.07.18
+            </div>
+
+            <div class="news-title">
+                音樂科定期演奏會のお知らせ
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div class="footer-block">
+
+            <div class="footer-title">
+                日ノ本帝國國立帝國大學
+            </div>
+
+            <p>
+                學問ノ府、文化ノ源流。<br>
+                日ノ本帝國の學術・文化・藝術を
+                支へる最高學府。
+            </p>
+
+        </div>
+
+        <div class="footer-block">
+
+            <h4>
+                UNIVERSITY
+            </h4>
+
+            <ul>
+
+                <li>
+                    <a href="#about">
+                        大學案内
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#history">
+                        沿革
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#faculties">
+                        學部・學科
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#campus">
+                        校園案内
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="footer-block">
+
+            <h4>
+                CULTURE
+            </h4>
+
+            <ul>
+
+                <li>
+                    <a href="#cultural">
+                        帝國大學人物録
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#library">
+                        附属圖書館
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#gramophone">
+                        蓄音機室
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#news">
+                        帝都文藝ニュース
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        © 日ノ本帝國國立帝國大學
+        — NIH0N IMPERIAL UNIVERSITY —
+
+        <br>
+
+        Music:
+        TaishoRoman Theme2 / PeriTune
+
+    </div>
+
+</footer>
+
+<!-- =====================================================
+     BUTTONS
+===================================================== -->
+
+<button
+    class="night-toggle"
+    id="nightToggle"
+    title="夜間モード">
+
+    ☾
+
+</button>
+
+<button
+    id="imageManagerButton"
+    title="畫像管理">
+
+    🖼
+
+</button>
+
+<button
+    id="topButton"
+    aria-label="ページ上部へ戻る">
+
+    ↑
+
+</button>
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+
+<button id="imperial-command-trigger" type="button" title="帝國大學統合研究端末">⌘ 帝國大學研究端末</button>
+<div id="imperial-command-overlay" aria-hidden="true">
+  <section id="imperial-command-center" role="dialog" aria-modal="true" aria-label="帝國大學統合研究端末">
+    <header class="ic-head"><div><div class="ic-kicker">NIPPON IMPERIAL UNIVERSITY</div><div class="ic-title">帝國大學・統合研究端末</div></div><button class="ic-close" id="ic-close" type="button">×</button></header>
+    <div class="ic-body">
+      <input id="ic-search" class="ic-search" autocomplete="off" placeholder="人物・代表作・モデル・一人称を検索……（Ctrl / ⌘ + K）">
+      <div class="ic-grid">
+        <div class="ic-card"><h3>人物・作品検索</h3><div id="ic-results" class="ic-results"><div class="ic-note">検索語を入力すると、拾参の文星を横断検索できます。</div></div></div>
+        <div class="ic-card"><h3>研究機能</h3><div class="ic-actions">
+          <button class="ic-action" id="ic-random">🎴 文星を一人選ぶ</button>
+          <button class="ic-action" id="ic-about-stars">✦ 拾参の文星へ</button>
+          <button class="ic-action" id="ic-timeline">⌛ 世代表を開く</button>
+          <button class="ic-action" id="ic-top">↑ 帝國大學の首頁へ</button>
+        </div><div id="ic-spotlight" class="ic-spotlight" style="margin-top:18px"><em>今日の研究対象</em>検索端末を起動しました。</div></div>
+      </div>
+      <div class="ic-card ic-timeline"><h3>帝國大學・文星世代表</h3><div class="ic-line" id="ic-era-line"></div></div>
+      <div class="ic-card" style="margin-top:18px"><h3>研究統計</h3><div class="ic-stat" id="ic-stats"></div><div class="ic-note">※この端末は現在のサイト内データをもとに動作します。外部通信は行いません。</div></div>
+    </div>
+  </section>
+</div>
+<div class="ic-toast" id="ic-toast"></div>
+
+<script>
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const entrance =
+    document.getElementById("entrance");
+
+const enterButton =
+    document.getElementById("enterButton");
+
+const audio =
+    document.getElementById("imperialAudio");
+
+const playButton =
+    document.getElementById("playButton");
+
+const pauseButton =
+    document.getElementById("pauseButton");
+
+const prevButton =
+    document.getElementById("prevButton");
+
+const nextButton =
+    document.getElementById("nextButton");
+
+const record =
+    document.getElementById("record");
+
+const volume =
+    document.getElementById("volume");
+
+const audioStatus =
+    document.getElementById("audioStatus");
+
+const trackTitleEl =
+    document.getElementById("trackTitle");
+
+const trackTitleInlineEl =
+    document.getElementById("trackTitleInline");
+
+const trackArtistEl =
+    document.getElementById("trackArtist");
+
+/* =========================================================
+   入場
+========================================================= */
+
+enterButton.addEventListener("click", () => {
+
+    entrance.classList.add("hide");
+
+});
+
+/* =========================================================
+   帝國暦時計
+========================================================= */
+
+function updateImperialClock() {
+
+    const now =
+        new Date();
+
+    const imperialYear =
+        now.getFullYear() - 1789;
+
+    const month =
+        String(now.getMonth() + 1)
+        .padStart(2,"0");
+
+    const day =
+        String(now.getDate())
+        .padStart(2,"0");
+
+    const hour =
+        String(now.getHours())
+        .padStart(2,"0");
+
+    const minute =
+        String(now.getMinutes())
+        .padStart(2,"0");
+
+    const second =
+        String(now.getSeconds())
+        .padStart(2,"0");
+
+    document
+        .getElementById("imperialClock")
+        .textContent =
+        `帝國暦${imperialYear}年${month}月${day}日 ${hour}:${minute}:${second}`;
+
+}
+
+updateImperialClock();
+
+setInterval(
+    updateImperialClock,
+    1000
+);
+
+/* =========================================================
+   人物分類
+========================================================= */
+
+const categoryButtons =
+    document.querySelectorAll(".category-btn");
+
+const personCards =
+    document.querySelectorAll(".person-card");
+
+categoryButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        categoryButtons.forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+        button.classList.add("active");
+
+        const category =
+            button.dataset.category;
+
+        personCards.forEach(card => {
+
+            if (
+                category === "all" ||
+                card.dataset.category === category
+            ) {
+
+                card.style.display = "";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+});
+
+/* =========================================================
+   人物資料
+========================================================= */
+
+const personData = {
+
+    arisugawa: {
+
+        title: "有栖川劉ノ介",
+
+        text:
+        `
+        <p>
+        帝國大學文科卒・首席。
+        帝都文壇を代表する小説家・文筆家。
+        </p>
+
+        <p>
+        『狐』『登竜門』『蒐集箱』等の短編作品で知られ、
+        古典的説話と近代的人間心理を融合した
+        獨自の文學を確立した。
+        </p>
+
+        <p>
+        後輩のト部川樒に強い影響を與へ、
+        樒からは生涯「先生」と呼ばれた。
+        </p>
+        `
+
+    },
+
+    shikimi: {
+
+        title: "ト部川樒",
+
+        text:
+        `
+        <p>
+        帝國大學文科卒・首席。
+        小説家・評論家。
+        </p>
+
+        <p>
+        戀愛、執着、所有欲、嫉妬、依存、
+        孤獨などを題材とする作品で知られる。
+        </p>
+
+        <p>
+        人間心理を鋭く觀察し、
+        美と醜、愛と所有の境界を
+        文學的に追究した。
+        </p>
+        `
+
+    },
+
+    yuzuriha: {
+
+        title: "六條杠葉",
+
+        text:
+        `
+        <p>
+        帝國大學文科卒。
+        歌人・詩人・評論家・隨筆家。
+        </p>
+
+        <p>
+        帝國近代女性文學を代表する人物。
+        短歌のみならず婦人教育、家庭論、
+        戀愛論など廣範な分野で活動した。
+        </p>
+        `
+
+    },
+
+    akiyo: {
+
+        title: "大窪晶与",
+
+        text:
+        `
+        <p>
+        帝國大學藝術科卒・首席。
+        漫畫家・四季廳長官。
+        </p>
+
+        <p>
+        歷史漫畫『ヴラド・ドラクラ』によつて
+        世界的評価を得た。
+        </p>
+
+        <p>
+        藝術家としてのみならず、
+        四季行政を担ふ官僚としても活動した。
+        </p>
+        `
+
+    },
+
+    zansetsu: {
+
+        title: "雪柳殘雪",
+
+        text:
+        `
+        <p>
+        帝國大學音樂科卒・首席。
+        音樂家・作詞家・作曲家。
+        </p>
+
+        <p>
+        「暗黑童話P」の別名義による
+        暗黑童話を題材とした作品で知られる。
+        </p>
+
+        <p>
+        童話的な旋律の中に人間の
+        欲望・恐怖・孤獨を描くことを
+        得意とする。
+        </p>
+        `
+
+    }
+
+};
+
+
+/* =========================================================
+   個人研究室：拾参の文星
+   人物カードをクリックすると、その人物専用の研究室が開く。
+========================================================= */
+const studyRoomData = {
+    arisugawa:{model:"芥川龍之介",category:"文學・小說",pronoun:"私",work:"蒐集箱",status:"帝國大學文科・首席",generation:"第2世代",
+      thesis:"古典的説話と近代的人間心理を接続し、人間の美醜を冷静に見つめる文學。",
+      keywords:["短編小說","古典説話","人間心理","文藝評論"]},
+    shikimi:{model:"太宰治（作風・人生）",category:"文學・小說",pronoun:"僕",work:"愚人の興福",status:"帝國大學文科・首席",generation:"第3世代",
+      thesis:"戀愛、執着、所有欲、嫉妬、依存、孤獨を通して人間の内面を描く文學。",
+      keywords:["戀愛","執着","孤獨","自己告白"]},
+    ichiyo:{model:"中原中也",category:"詩歌・文學",pronoun:"俺",work:"circus",status:"帝國大學文科",generation:"第6世代",
+      thesis:"詩的言語と音楽性によって、孤獨や生の感覚を鮮烈に表現する。",
+      keywords:["詩","音楽性","孤獨","言葉"]},
+    sakusai:{model:"谷崎潤一郎",category:"文學・小說",pronoun:"濮",work:"毒草と芳香",status:"帝國大學文科",generation:"第4世代",
+      thesis:"美、官能、倒錯、文化の対照を濃密な文体で描く。",
+      keywords:["美","官能","耽美","文化"]},
+    mori:{model:"森鴎外",category:"文學・小說",pronoun:"私",work:"舞姫",status:"帝國大學文科",generation:"第5世代",
+      thesis:"近代化と個人の選択、国家と個人の緊張を文学的に扱う。",
+      keywords:["近代","国家","個人","歴史"]},
+    yuzuriha:{model:"与謝野晶子",category:"短歌・評論",pronoun:"妾（アタシ）",work:"春を待つ仁",status:"帝國大學文科",generation:"第2世代",
+      thesis:"女性の自我、戀愛、教育、生命力を自由闊達な言葉で表現する。",
+      keywords:["短歌","女性文學","戀愛","教育"]},
+    barako:{model:"大倉輝子",category:"文學・評論",pronoun:"私（わたくし）",work:"大學院",status:"帝國大學文科",generation:"第5世代",
+      thesis:"學問と女性の知性、帝國大學文化を題材にした文學的表現を追究する。",
+      keywords:["女性知識人","大學","評論","知性"]},
+    yumemichi:{model:"江戸川乱歩",category:"推理・探偵小說",pronoun:"俺",work:"鏡の中の密室",status:"帝國大學文科",generation:"第6世代",
+      thesis:"怪奇と謎解きを融合し、視覚的な幻想と密室の論理を追究する。",
+      keywords:["探偵小說","密室","怪奇","幻想"]},
+    shuji:{model:"太宰治（名前・人生）",category:"文學・小說",pronoun:"私",work:"人間落第",status:"帝國大學文科",generation:"第7世代",
+      thesis:"人生そのものを作品化し、失敗、孤獨、自己認識を描く。",
+      keywords:["人生","失敗","孤獨","自己認識"]},
+    maku:{model:"ブラム・ストーカー／レ・ファニュ",category:"怪奇・幻想文學",pronoun:"妾（わらわ）",work:"吸血鬼ミフネア／夜侯／黒薔薇城",status:"帝國文壇・怪奇幻想派",generation:"神代聖と同時代",
+      thesis:"竜棘国の伝承、血統、吸血鬼、歴史を通して、「怪物とは何か」「忘れられるとは何か」を問い直す幻想文学。ヴラド三世を英雄・暴君・夫・父・人間という複数の相貌から描いた。",
+      keywords:["吸血鬼","竜棘国","血統","ヴラド三世","歴史と記憶","怪異と人間心理"],
+      relation:"神代聖の妻。神代にとって文学とは、愛する人間が世界をどう見るのかを知るための窓でもあった。",
+      quote:"英雄と怪物は、後世の人間がどちらの名前を与えるかによつて決まる。"},
+    akiyo:{model:"大窪晶与",category:"漫畫・藝術",pronoun:"私",work:"ヴラド・ドラクラ",status:"帝國大學藝術科・首席／特殊枠",generation:"第5世代",
+      thesis:"歴史人物を漫畫表現へ再構成し、藝術と史実の境界を描く。",
+      keywords:["漫畫","歴史","藝術","ヴラド"]},
+    zansetsu:{model:"じょるじん（暗黒童話P）",category:"音樂・作詞作曲",pronoun:"僕",work:"ドラキュラとなった男の物語",status:"帝國大學藝術科・首席／特殊枠",generation:"第8世代",
+      thesis:"暗黑童話と音楽を融合し、物語性のある楽曲世界を構築する。",
+      keywords:["暗黑童話","作曲","物語音楽","怪奇"]},
+    seiko:{model:"フョードル・ドストエフスキー",category:"宗教哲學・文學・小說",pronoun:"ワタクシ",work:"辠人の失楽園",status:"帝國大學文科・初代首席",generation:"第1世代",
+      thesis:"罪、信仰、自由意志、救済、愛、死、人間存在の矛盾を通じて、「人間を裁かず、人間自身に裁かせる文学」を追究する。",
+      keywords:["罪","救済","信仰","自由意志","宗教哲學","人間心理","吸血鬼伝説"],
+      relation:"紅城院眞紅の夫。ミフネア・ドラキュラと同一人物ではないかという不老不死伝説を帝都に残す。",
+      quote:"私は神様について書いているのではありません。神様を必要としてしまう人間について書いているのです。"}
+};
+
+const studyRoomNameMap = {
+    "有栖川劉ノ介":"arisugawa","卜部川樒":"shikimi","中原壱葉":"ichiyo","九条院朔臣":"sakusai",
+    "森林太郎":"mori","六條杠葉":"yuzuriha","御影薔子":"barako","九頭竜夢路":"yumemichi",
+    "卜部川修治":"shuji","紅城院眞紅":"maku","花葉春月":"akiyo","雪柳残雪":"zansetsu","神代聖":"seiko",
+    "ト部川樒":"shikimi","雪柳春月":"akiyo"
+};
+
+const studyRoomModal = document.createElement("div");
+studyRoomModal.className = "modal study-room-modal";
+studyRoomModal.id = "studyRoomModal";
+studyRoomModal.innerHTML = `
+  <div class="modal-box" role="dialog" aria-modal="true" aria-label="個人研究室">
+    <button class="study-room-close" id="studyRoomClose" aria-label="閉じる">×</button>
+    <div class="study-room-head" id="studyRoomHead"></div>
+    <div class="study-room-nav" id="studyRoomNav">
+      <button class="study-room-tab active" data-tab="profile">人物檔案</button>
+      <button class="study-room-tab" data-tab="research">研究テーマ</button>
+      <button class="study-room-tab" data-tab="works">代表作</button>
+      <button class="study-room-tab" data-tab="network">文星網</button>
+    </div>
+    <div class="study-room-content" id="studyRoomContent"></div>
+    <div class="study-room-foot">帝國大學文科・藝術科　個人研究室　｜　校内資料端末</div>
+  </div>`;
+document.body.appendChild(studyRoomModal);
+
+let activeStudyKey = null;
+
+function openStudyRoom(key){
+    const p = studyRoomData[key];
+    if(!p) return;
+    activeStudyKey = key;
+    document.getElementById("studyRoomHead").innerHTML = `
+      <div class="study-room-kicker">IMPERIAL UNIVERSITY / PERSONAL STUDY ROOM</div>
+      <h2 class="study-room-name">${studyRoomNameMapKey(key)}</h2>
+      <div class="study-room-model">モデル：${p.model}　｜　${p.category}</div>`;
+    renderStudyTab("profile");
+    studyRoomModal.classList.add("open");
+    document.body.style.overflow = "hidden";
+}
+function studyRoomNameMapKey(key){
+    for(const [name,k] of Object.entries(studyRoomNameMap)) if(k===key) return name;
+    return studyRoomData[key].work;
+}
+function renderStudyTab(tab){
+    const p=studyRoomData[activeStudyKey];
+    if(!p) return;
+    document.querySelectorAll(".study-room-tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+    const name=studyRoomNameMapKey(activeStudyKey);
+    const content=document.getElementById("studyRoomContent");
+    if(tab==="profile"){
+      content.innerHTML=`<div class="study-room-grid">
+        <div class="study-room-fact"><div class="study-room-fact-label">人物</div><div class="study-room-fact-value">${name}</div></div>
+        <div class="study-room-fact"><div class="study-room-fact-label">モデル</div><div class="study-room-fact-value">${p.model}</div></div>
+        <div class="study-room-fact"><div class="study-room-fact-label">一人称</div><div class="study-room-fact-value">${p.pronoun}</div></div>
+        <div class="study-room-fact"><div class="study-room-fact-label">帝國大學</div><div class="study-room-fact-value">${p.status}</div></div>
+        <div class="study-room-fact"><div class="study-room-fact-label">世代</div><div class="study-room-fact-value">${p.generation}</div></div>
+        <div class="study-room-fact"><div class="study-room-fact-label">代表作</div><div class="study-room-fact-value">${p.work}</div></div>
+      </div>
+      <div class="study-room-quote">「${p.quote || p.thesis}」</div>
+      ${p.relation ? `<div class="study-room-fact" style="margin-top:18px"><div class="study-room-fact-label">人物関係</div><div class="study-room-fact-value">${p.relation}</div></div>` : ""}`;
+    } else if(tab==="research"){
+      content.innerHTML=`<h3 class="study-room-section-title">研究主題</h3><p>${p.thesis}</p>
+        ${p.relation ? `<p class="study-room-quote">${p.relation}</p>` : ""}
+        <div class="study-room-links">${p.keywords.map(k=>`<span class="study-room-link">${k}</span>`).join("")}</div>`;
+    } else if(tab==="works"){
+      content.innerHTML=`<h3 class="study-room-section-title">代表作・代表楽曲</h3>
+        <div class="study-room-fact"><div class="study-room-fact-label">主要作品</div><div class="study-room-fact-value">${p.work}</div></div>
+        <p>帝國大學文藝資料室における人物研究の入口として、この作品を中心に関連資料を辿ることができます。</p>
+        ${activeStudyKey==='seiko' ? `<div class="study-room-links"><span class="study-room-link">辠人の失楽園</span><span class="study-room-link">宗教評論</span><span class="study-room-link">神代文庫</span></div>` : ""}
+        ${activeStudyKey==='maku' ? `<div class="study-room-links"><span class="study-room-link">夜侯</span><span class="study-room-link">黒薔薇城</span><span class="study-room-link">血族</span><span class="study-room-link">竜棘夜話</span><span class="study-room-link">不死者の婚礼</span></div>` : ""}`;
+    } else {
+      const peers=Object.keys(studyRoomData).filter(k=>k!==activeStudyKey).slice(0,5);
+      content.innerHTML=`<h3 class="study-room-section-title">文星網</h3><p>この人物と同時代・近接世代の研究対象。</p>
+        <div class="study-room-links">${peers.map(k=>`<button class="study-room-link" data-study-jump="${k}">${studyRoomNameMapKey(k)}</button>`).join("")}</div>`;
+      content.querySelectorAll("[data-study-jump]").forEach(b=>b.addEventListener("click",()=>{openStudyRoom(b.dataset.studyJump);}));
+    }
+}
+document.getElementById("studyRoomNav").addEventListener("click",e=>{
+    const b=e.target.closest(".study-room-tab"); if(b) renderStudyTab(b.dataset.tab);
+});
+document.getElementById("studyRoomClose").addEventListener("click",closeStudyRoom);
+studyRoomModal.addEventListener("click",e=>{if(e.target===studyRoomModal) closeStudyRoom();});
+function closeStudyRoom(){studyRoomModal.classList.remove("open");document.body.style.overflow="";}
+
+document.addEventListener("click", e=>{
+    const card=e.target.closest(".person-card");
+    if(!card || e.target.closest("button,a,input,label")) return;
+    const title=card.querySelector(".person-name")?.textContent.trim();
+    const key=studyRoomNameMap[title];
+    if(key) openStudyRoom(key);
+});
+document.addEventListener("keydown",e=>{
+    if(e.key==="Escape" && studyRoomModal.classList.contains("open")) closeStudyRoom();
+});
+
+
+const modal =
+    document.getElementById("personModal");
+
+const modalContent =
+    document.getElementById("modalContent");
+
+const modalClose =
+    document.getElementById("modalClose");
+
+document
+    .querySelectorAll(".person-more")
+    .forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const person =
+                personData[
+                    button.dataset.person
+                ];
+
+            if (!person) return;
+
+            modalContent.innerHTML = `
+
+                <h2 class="modal-title">
+                    ${person.title}
+                </h2>
+
+                ${person.text}
+
+            `;
+
+            modal.classList.add("open");
+
+        });
+
+    });
+
+modalClose.addEventListener(
+    "click",
+    () => {
+
+        modal.classList.remove("open");
+
+    }
+);
+
+modal.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target === modal
+        ) {
+
+            modal.classList.remove("open");
+
+        }
+
+    }
+);
+
+/* =========================================================
+   圖書館検索
+========================================================= */
+
+const libraryInput =
+    document.getElementById("libraryInput");
+
+const librarySearch =
+    document.getElementById("librarySearch");
+
+const libraryResult =
+    document.getElementById("libraryResult");
+
+librarySearch.addEventListener(
+    "click",
+    () => {
+
+        const keyword =
+            libraryInput.value.trim();
+
+        if (!keyword) {
+
+            libraryResult.textContent =
+                "検索語を入力して下さい。";
+
+            return;
+
+        }
+
+        libraryResult.innerHTML = `
+
+            <strong>
+                「${keyword}」
+            </strong>
+            に關する資料を検索しました。
+
+            <br><br>
+
+            帝國大學附属圖書館
+            文藝資料室・史料目録によれば、
+            関連資料が複數件確認されてゐます。
+
+            <br><br>
+
+            ※これは帝國大學公式サイトの
+            世界觀演出用検索機能です。
+
+        `;
+
+    }
+);
+
+/* =========================================================
+   號外
+========================================================= */
+
+document
+    .getElementById("extraButton")
+    .addEventListener("click", () => {
+
+        modalContent.innerHTML = `
+
+            <h2 class="modal-title">
+                號外
+            </h2>
+
+            <p>
+                帝都文壇・特別報告
+            </p>
+
+            <p>
+                帝國大學文科資料室より、
+                帝都文壇における新たな史料の
+                整理が完了したとの報が入つた。
+            </p>
+
+            <p>
+                今回公開された資料には、
+                帝國大學文科出身者たちの
+                書簡、日記、講義ノートなどが
+                含まれるといふ。
+            </p>
+
+            <p>
+                詳細は附属圖書館特別展示室にて
+                閲覧されたし。
+            </p>
+
+        `;
+
+        modal.classList.add("open");
+
+    });
+
+/* =========================================================
+   夜間モード
+========================================================= */
+
+const nightToggle =
+    document.getElementById("nightToggle");
+
+nightToggle.addEventListener(
+    "click",
+    () => {
+
+        document.body.classList.toggle("night");
+
+        if (
+            document.body.classList.contains("night")
+        ) {
+
+            nightToggle.textContent = "☀";
+
+            localStorage.setItem(
+                "imperialNight",
+                "on"
+            );
+
+        } else {
+
+            nightToggle.textContent = "☾";
+
+            localStorage.setItem(
+                "imperialNight",
+                "off"
+            );
+
+        }
+
+    }
+);
+
+if (
+    localStorage.getItem("imperialNight")
+    === "on"
+) {
+
+    document.body.classList.add("night");
+
+    nightToggle.textContent = "☀";
+
+}
+
+/* =========================================================
+   TOP BUTTON
+========================================================= */
+
+const topButton =
+    document.getElementById("topButton");
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if (
+            window.scrollY > 500
+        ) {
+
+            topButton.classList.add("show");
+
+        } else {
+
+            topButton.classList.remove("show");
+
+        }
+
+    }
+);
+
+topButton.addEventListener(
+    "click",
+    () => {
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+);
+
+/* =========================================================
+   キーボード ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            modal.classList.remove("open");
+
+        }
+
+    }
+);
+
+/* =========================================================
+   スクロール演出
+========================================================= */
+
+const revealItems =
+    document.querySelectorAll(
+        ".intro-card, .faculty-card, .person-card, .timeline-item"
+    );
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (
+                    entry.isIntersecting
+                ) {
+
+                    entry.target.animate(
+                        [
+                            {
+                                opacity: 0,
+                                transform:
+                                    "translateY(20px)"
+                            },
+                            {
+                                opacity: 1,
+                                transform:
+                                    "translateY(0)"
+                            }
+                        ],
+                        {
+                            duration: 700,
+                            easing:
+                                "cubic-bezier(.2,.7,.2,1)",
+                            fill: "forwards"
+                        }
+                    );
+
+                    observer.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            });
+
+        },
+        {
+            threshold: .12
+        }
+    );
+
+revealItems.forEach(
+    item => observer.observe(item)
+);
+
+/* =========================================================
+   畫像管理（汎用アップロード機能）
+========================================================= */
+
+const imageSlots = [
+
+    {
+        key: "hero",
+        label: "ヒーロー背景畫像",
+        hint: "トップページ最上部の背景畫像です。",
+        selector: '[data-upload-key="hero"]',
+        mode: "var",
+        cssVar: "--hero-image"
+    },
+
+    {
+        key: "campus",
+        label: "校園案内・キャンパス風景畫像",
+        hint: "「校園案内」セクションの寫真です。",
+        selector: '[data-upload-key="campus"]',
+        mode: "var",
+        cssVar: "--campus-image"
+    }
+
+    /* 新しい「背景畫像」箇所を追加する場合は、對象要素に
+       data-upload-key="任意のキー" を付け、
+       CSS側で background: var(--任意のCSS變數, url(...)) を設定した上で、
+       この配列に { key, label, hint, selector, mode: "var", cssVar } を追記すればよい。
+       單純な肖像寫眞などは下記のように mode: "direct" で自動生成できる。 */
+
+];
+
+/* 帝國大學人物録：personData に登録されてゐる人物ぶんの
+   肖像アップロード枠を自動生成する（人物を追加すれば自動的に對象になる） */
+
+Object.keys(personData).forEach(personKey => {
+
+    const person = personData[personKey];
+
+    imageSlots.push({
+        key: `person-${personKey}`,
+        label: `${person.title}　肖像寫眞`,
+        hint: "帝國大學人物録カードに表示される肖像です。",
+        selector: `[data-upload-key="person-${personKey}"]`,
+        mode: "direct"
+    });
+
+});
+
+const IMAGE_STORAGE_PREFIX = "imperialImage_";
+const IMAGE_MAX_DIMENSION = 1600;
+const IMAGE_QUALITY = .82;
+
+function compressImageFile(file) {
+
+    return new Promise((resolve, reject) => {
+
+        const reader = new FileReader();
+
+        reader.onerror = () => reject(reader.error);
+
+        reader.onload = () => {
+
+            const img = new Image();
+
+            img.onerror = () => reject(new Error("画像の讀込に失敗しました"));
+
+            img.onload = () => {
+
+                let width = img.width;
+                let height = img.height;
+
+                if (
+                    width > IMAGE_MAX_DIMENSION ||
+                    height > IMAGE_MAX_DIMENSION
+                ) {
+
+                    const scale =
+                        IMAGE_MAX_DIMENSION / Math.max(width, height);
+
+                    width = Math.round(width * scale);
+                    height = Math.round(height * scale);
+
+                }
+
+                const canvas = document.createElement("canvas");
+
+                canvas.width = width;
+                canvas.height = height;
+
+                canvas
+                    .getContext("2d")
+                    .drawImage(img, 0, 0, width, height);
+
+                resolve(
+                    canvas.toDataURL("image/jpeg", IMAGE_QUALITY)
+                );
+
+            };
+
+            img.src = reader.result;
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+function applySlotImage(slot, dataURL) {
+
+    document
+        .querySelectorAll(slot.selector)
+        .forEach(el => {
+
+            if (slot.mode === "var") {
+
+                el.style.setProperty(
+                    slot.cssVar,
+                    `url("${dataURL}")`
+                );
+
+            } else {
+
+                el.style.backgroundImage =
+                    `url("${dataURL}")`;
+
+                el.classList.add("has-photo");
+
+            }
+
+        });
+
+}
+
+function clearSlotImage(slot) {
+
+    document
+        .querySelectorAll(slot.selector)
+        .forEach(el => {
+
+            if (slot.mode === "var") {
+
+                el.style.removeProperty(slot.cssVar);
+
+            } else {
+
+                el.style.backgroundImage = "";
+
+                el.classList.remove("has-photo");
+
+            }
+
+        });
+
+}
+
+function loadPersistedImages() {
+
+    imageSlots.forEach(slot => {
+
+        try {
+
+            const stored =
+                localStorage.getItem(
+                    IMAGE_STORAGE_PREFIX + slot.key
+                );
+
+            if (stored) {
+
+                applySlotImage(slot, stored);
+
+            }
+
+        } catch (error) {
+
+            console.warn("画像の讀込に失敗しました", error);
+
+        }
+
+    });
+
+}
+
+loadPersistedImages();
+
+const imageManagerButton =
+    document.getElementById("imageManagerButton");
+
+function renderImageManager() {
+
+    const rows = imageSlots.map(slot => {
+
+        const stored =
+            localStorage.getItem(
+                IMAGE_STORAGE_PREFIX + slot.key
+            );
+
+        const hasCustom = Boolean(stored);
+
+        const previewStyle = stored
+            ? `background-image:url('${stored}')`
+            : "";
+
+        return `
+            <div class="image-slot">
+
+                <div
+                    class="image-slot-preview"
+                    style="${previewStyle}">
+                </div>
+
+                <div>
+                    <div class="image-slot-label">
+                        ${slot.label}
+                    </div>
+                    <div class="image-slot-hint">
+                        ${slot.hint}
+                        ${hasCustom
+                            ? "（現在：アップロード畫像を使用中）"
+                            : "（現在：既定畫像を使用中）"}
+                    </div>
+                </div>
+
+                <div class="image-slot-actions">
+                    <button
+                        type="button"
+                        class="image-slot-upload-btn"
+                        data-slot="${slot.key}">
+                        畫像を選ぶ
+                    </button>
+                    <button
+                        type="button"
+                        class="image-slot-reset-btn"
+                        data-slot="${slot.key}"
+                        ${hasCustom ? "" : "disabled"}>
+                        既定に戻す
+                    </button>
+                </div>
+
+            </div>
+        `;
+
+    }).join("");
+
+    modalContent.innerHTML = `
+
+        <h2 class="modal-title">畫像管理</h2>
+
+        <p>
+            スマートフォンのカメラまたは寫真フォルダから畫像を選び、
+            サイト内の各畫像を差し替へることができます。
+        </p>
+
+        <div class="image-manager-list">
+            ${rows}
+        </div>
+
+        <input
+            type="file"
+            id="imageManagerFileInput"
+            accept="image/*"
+            style="display:none">
+
+        <p class="image-manager-note">
+            ※ 選択した畫像は自動的に縮小・壓縮のうへ、
+            この端末のブラウザ内に保存されます。
+            サーバーへは送信されず、他の端末やブラウザには反映されません。
+        </p>
+
+    `;
+
+    modal.classList.add("open");
+
+    const fileInput =
+        document.getElementById("imageManagerFileInput");
+
+    let activeSlotKey = null;
+
+    modalContent
+        .querySelectorAll(".image-slot-upload-btn")
+        .forEach(btn => {
+
+            btn.addEventListener("click", () => {
+
+                activeSlotKey = btn.dataset.slot;
+
+                fileInput.click();
+
+            });
+
+        });
+
+    modalContent
+        .querySelectorAll(".image-slot-reset-btn")
+        .forEach(btn => {
+
+            btn.addEventListener("click", () => {
+
+                const slot =
+                    imageSlots.find(
+                        s => s.key === btn.dataset.slot
+                    );
+
+                if (!slot) return;
+
+                clearSlotImage(slot);
+
+                try {
+
+                    localStorage.removeItem(
+                        IMAGE_STORAGE_PREFIX + slot.key
+                    );
+
+                } catch (error) {
+
+                    console.warn(error);
+
+                }
+
+                renderImageManager();
+
+            });
+
+        });
+
+    fileInput.addEventListener("change", async () => {
+
+        const file = fileInput.files[0];
+
+        if (!file || !activeSlotKey) return;
+
+        const slot =
+            imageSlots.find(
+                s => s.key === activeSlotKey
+            );
+
+        if (!slot) return;
+
+        try {
+
+            const dataURL =
+                await compressImageFile(file);
+
+            applySlotImage(slot, dataURL);
+
+            try {
+
+                localStorage.setItem(
+                    IMAGE_STORAGE_PREFIX + slot.key,
+                    dataURL
+                );
+
+            } catch (error) {
+
+                console.warn(
+                    "容量制限のため保存できませんでした。今回の表示のみ反映されます。",
+                    error
+                );
+
+            }
+
+            renderImageManager();
+
+        } catch (error) {
+
+            alert(
+                "畫像の讀込に失敗しました。別の畫像でお試し下さい。"
+            );
+
+            console.error(error);
+
+        }
+
+    });
+
+}
+
+imageManagerButton.addEventListener(
+    "click",
+    renderImageManager
+);
+
+/* =========================================================
+   人物録カードからの肖像クイックアップロード
+========================================================= */
+
+const personPhotoInput =
+    document.createElement("input");
+
+personPhotoInput.type = "file";
+personPhotoInput.accept = "image/*";
+personPhotoInput.style.display = "none";
+
+document.body.appendChild(personPhotoInput);
+
+let activePersonPhotoKey = null;
+
+document
+    .querySelectorAll(".person-photo-upload-btn")
+    .forEach(btn => {
+
+        btn.addEventListener("click", event => {
+
+            event.stopPropagation();
+
+            activePersonPhotoKey = btn.dataset.photoSlot;
+
+            personPhotoInput.click();
+
+        });
+
+    });
+
+personPhotoInput.addEventListener("change", async () => {
+
+    const file = personPhotoInput.files[0];
+
+    if (!file || !activePersonPhotoKey) return;
+
+    const slot =
+        imageSlots.find(
+            s => s.key === activePersonPhotoKey
+        );
+
+    if (!slot) return;
+
+    try {
+
+        const dataURL =
+            await compressImageFile(file);
+
+        applySlotImage(slot, dataURL);
+
+        try {
+
+            localStorage.setItem(
+                IMAGE_STORAGE_PREFIX + slot.key,
+                dataURL
+            );
+
+        } catch (error) {
+
+            console.warn(
+                "容量制限のため保存できませんでした。今回の表示のみ反映されます。",
+                error
+            );
+
+        }
+
+    } catch (error) {
+
+        alert(
+            "肖像寫眞の讀込に失敗しました。別の畫像でお試し下さい。"
+        );
+
+        console.error(error);
+
+    }
+
+    personPhotoInput.value = "";
+
+});
+
+/* =========================================================
+   蓄音機プレイリスト（樂曲アップロード）
+========================================================= */
+
+const PLAYLIST_STORAGE_KEY = "imperialPlaylistTracks";
+const PLAYLIST_MAX_PERSIST_BYTES = 3 * 1024 * 1024;
+
+const defaultTrack = {
+    id: "default",
+    name: "TaishoRoman Theme2",
+    artist: "PeriTune",
+    src: "https://peritune.com/music/PerituneMaterial_TaishoRoman_Theme2.mp3",
+    removable: false
+};
+
+let playlist = [defaultTrack];
+let currentIndex = 0;
+
+function loadPersistedTracks() {
+
+    try {
+
+        const raw =
+            localStorage.getItem(PLAYLIST_STORAGE_KEY);
+
+        if (!raw) return;
+
+        const stored = JSON.parse(raw);
+
+        stored.forEach(track => {
+
+            playlist.push({
+                id:
+                    `stored-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
+                name: track.name,
+                artist: "アップロード曲",
+                src: track.dataURL,
+                removable: true,
+                persistent: true
+            });
+
+        });
+
+    } catch (error) {
+
+        console.warn("プレイリストの讀込に失敗しました", error);
+
+    }
+
+}
+
+loadPersistedTracks();
+
+function savePersistedTracks() {
+
+    try {
+
+        const persistable = playlist
+            .filter(t => t.persistent)
+            .map(t => ({ name: t.name, dataURL: t.src }));
+
+        localStorage.setItem(
+            PLAYLIST_STORAGE_KEY,
+            JSON.stringify(persistable)
+        );
+
+    } catch (error) {
+
+        console.warn(
+            "プレイリストの保存に失敗しました（容量制限の可能性があります）",
+            error
+        );
+
+    }
+
+}
+
+function loadTrack(index, autoplay) {
+
+    if (playlist.length === 0) return;
+
+    currentIndex =
+        ((index % playlist.length) + playlist.length)
+        % playlist.length;
+
+    const track = playlist[currentIndex];
+
+    const wasPlaying = !audio.paused;
+
+    audio.src = track.src;
+
+    trackTitleEl.textContent = track.name;
+    trackTitleInlineEl.textContent = track.name;
+    trackArtistEl.textContent = track.artist;
+
+    renderPlaylistPanel();
+
+    if (autoplay || wasPlaying) {
+
+        audio.play().catch(() => {});
+
+    }
+
+}
+
+function nextTrack(autoplay) {
+
+    loadTrack(currentIndex + 1, autoplay);
+
+}
+
+function prevTrack(autoplay) {
+
+    loadTrack(currentIndex - 1, autoplay);
+
+}
+
+prevButton.addEventListener(
+    "click",
+    () => prevTrack(false)
+);
+
+nextButton.addEventListener(
+    "click",
+    () => nextTrack(false)
+);
+
+audio.addEventListener("play", () => {
+
+    record.classList.add("playing");
+
+    audioStatus.textContent =
+        `蓄音機が静かに廻り始めました（${playlist[currentIndex].name}）。`;
+
+});
+
+audio.addEventListener("pause", () => {
+
+    record.classList.remove("playing");
+
+    audioStatus.textContent =
+        "蓄音機は停止中です。";
+
+});
+
+audio.addEventListener("ended", () => {
+
+    nextTrack(true);
+
+});
+
+playButton.addEventListener("click", async () => {
+
+    try {
+
+        await audio.play();
+
+    } catch (error) {
+
+        audioStatus.textContent =
+            "音聲を再生できませんでした。もう一度お試し下さい。";
+
+        console.error(error);
+
+    }
+
+});
+
+pauseButton.addEventListener("click", () => {
+
+    audio.pause();
+
+});
+
+audio.volume = Number(volume.value);
+
+volume.addEventListener("input", () => {
+
+    audio.volume = Number(volume.value);
+
+});
+
+const playlistPanel =
+    document.getElementById("playlistPanel");
+
+const playlistItems =
+    document.getElementById("playlistItems");
+
+const togglePlaylistButton =
+    document.getElementById("togglePlaylistButton");
+
+const addTrackButton =
+    document.getElementById("addTrackButton");
+
+const audioUploadInput =
+    document.getElementById("audioUploadInput");
+
+togglePlaylistButton.addEventListener("click", () => {
+
+    playlistPanel.classList.toggle("open");
+
+    if (playlistPanel.classList.contains("open")) {
+
+        renderPlaylistPanel();
+
+    }
+
+});
+
+addTrackButton.addEventListener("click", () => {
+
+    audioUploadInput.click();
+
+});
+
+function readFileAsDataURL(file) {
+
+    return new Promise((resolve, reject) => {
+
+        const reader = new FileReader();
+
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error);
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+audioUploadInput.addEventListener("change", async () => {
+
+    const files = Array.from(audioUploadInput.files || []);
+
+    for (const file of files) {
+
+        const name =
+            file.name.replace(/\.[^/.]+$/, "");
+
+        const objectUrl =
+            URL.createObjectURL(file);
+
+        const track = {
+            id:
+                `local-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
+            name,
+            artist: "アップロード曲",
+            src: objectUrl,
+            removable: true,
+            persistent: false
+        };
+
+        playlist.push(track);
+
+        if (file.size <= PLAYLIST_MAX_PERSIST_BYTES) {
+
+            try {
+
+                const dataURL =
+                    await readFileAsDataURL(file);
+
+                track.src = dataURL;
+                track.persistent = true;
+
+                URL.revokeObjectURL(objectUrl);
+
+            } catch (error) {
+
+                console.warn(
+                    "樂曲の保存用讀込に失敗しました",
+                    error
+                );
+
+            }
+
+        }
+
+    }
+
+    savePersistedTracks();
+
+    renderPlaylistPanel();
+
+    audioUploadInput.value = "";
+
+});
+
+function removeTrack(id) {
+
+    const index =
+        playlist.findIndex(t => t.id === id);
+
+    if (index === -1) return;
+
+    const track = playlist[index];
+
+    if (!track.removable) return;
+
+    if (index === currentIndex) {
+
+        audio.pause();
+        audio.src = "";
+
+    }
+
+    if (
+        track.src &&
+        track.src.startsWith("blob:")
+    ) {
+
+        URL.revokeObjectURL(track.src);
+
+    }
+
+    playlist.splice(index, 1);
+
+    if (currentIndex >= playlist.length) {
+
+        currentIndex = 0;
+
+    }
+
+    savePersistedTracks();
+
+    renderPlaylistPanel();
+
+    if (index <= currentIndex) {
+
+        loadTrack(currentIndex, false);
+
+    }
+
+}
+
+function renderPlaylistPanel() {
+
+    playlistItems.innerHTML = playlist.map(
+        (track, i) => `
+
+        <div class="playlist-item ${i === currentIndex ? "active" : ""}">
+
+            <div
+                class="playlist-item-name"
+                data-index="${i}">
+                ${i + 1}. ${track.name}${track.persistent === false ? "（未保存）" : ""}
+            </div>
+
+            <div class="playlist-item-actions">
+                ${track.removable
+                    ? `<button type="button" data-remove="${track.id}" title="削除">×</button>`
+                    : ""}
+            </div>
+
+        </div>
+
+    `).join("");
+
+    playlistItems
+        .querySelectorAll(".playlist-item-name")
+        .forEach(el => {
+
+            el.addEventListener("click", () => {
+
+                loadTrack(Number(el.dataset.index), true);
+
+            });
+
+        });
+
+    playlistItems
+        .querySelectorAll("[data-remove]")
+        .forEach(btn => {
+
+            btn.addEventListener("click", event => {
+
+                event.stopPropagation();
+
+                removeTrack(btn.dataset.remove);
+
+            });
+
+        });
+
+}
+
+renderPlaylistPanel();
+
+</script>
+
+
+<script id="imperial-command-center-script">
+(function(){
+  const overlay=document.getElementById('imperial-command-overlay');
+  const openBtn=document.getElementById('imperial-command-trigger');
+  const closeBtn=document.getElementById('ic-close');
+  const search=document.getElementById('ic-search');
+  const results=document.getElementById('ic-results');
+  const spotlight=document.getElementById('ic-spotlight');
+  const toast=document.getElementById('ic-toast');
+  const stars=[
+    ['卜部川樒','太宰治（作風・人生）','僕','愚人の興福'],['有栖川劉ノ介','芥川龍之介','私','蒐集箱'],['中原壱葉','中原中也','俺','circus'],['九条院朔臣','谷崎潤一郎','濮','毒草と芳香'],['森林太郎','森鴎外','私','舞姫'],['六條杠葉','与謝野晶子','妾（アタシ）','春を待つ仁'],['御影薔子','大倉輝子','私（わたくし）','大學院'],['九頭竜夢路','江戸川乱歩','俺','鏡の中の密室'],['卜部川修治','太宰治（名前・人生）','私','人間落第'],['紅城院眞紅','ブラム・ストーカー／レ・ファニュ','妾（わらわ）','吸血鬼ミフネア'],['花葉春月','大窪晶与','私','ヴラド・ドラクラ'],['雪柳残雪','じょるじん（暗黒童話P）','僕','ドラキュラとなった男の物語'],['神代聖','フョードル・ドストエフスキー','ワタクシ','辠人の失楽園']
+  ];
+  const eras=[['神代聖','初代首席','文科'],['有栖川劉ノ介','8年後・首席','文科'],['六條杠葉','8年後・初の女學生','文科'],['卜部川樒','13年後・首席','文科'],['九条院朔臣','14年後','文科'],['森林太郎','16年後','文科'],['花葉春月','16年後・藝術科首席','藝術科'],['御影薔子','16年後','文科'],['中原壱葉','17年後','文科'],['九頭竜夢路','17年後','文科'],['雪柳残雪','20年後・藝術科首席','藝術科']];
+  function toast(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>toast.classList.remove('show'),1800)}
+  function open(){overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');setTimeout(()=>search.focus(),50)}
+  function close(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true')}
+  openBtn.addEventListener('click',open);closeBtn.addEventListener('click',close);overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
+  document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();open()}if(e.key==='Escape')close()});
+  function render(q=''){
+    const n=q.trim().toLowerCase();
+    const found=stars.filter(s=>s.join(' ').toLowerCase().includes(n)).slice(0,20);
+    results.innerHTML=found.length?found.map(s=>`<div class="ic-result" data-name="${s[0]}"><b>${s[0]}</b><small>モデル：${s[1]}　／　一人称：${s[2]}　／　代表作：${s[3]}</small></div>`).join(''):'<div class="ic-note">該当する文星は見つかりませんでした。</div>';
+    results.querySelectorAll('.ic-result').forEach(el=>el.addEventListener('click',()=>{
+      const name=el.dataset.name;close();const target=[...document.querySelectorAll('*')].find(x=>x.children.length===0&&x.textContent.trim()===name);if(target)target.scrollIntoView({behavior:'smooth',block:'center'});toast(name+'を表示しました');
+    }));
+  }
+  search.addEventListener('input',()=>render(search.value));
+  document.getElementById('ic-random').addEventListener('click',()=>{const s=stars[Math.floor(Math.random()*stars.length)];spotlight.innerHTML=`<em>本日の研究対象</em><strong>${s[0]}</strong><br><small>モデル：${s[1]}　／　代表作：${s[3]}</small>`});
+  document.getElementById('ic-about-stars').addEventListener('click',()=>{close();document.getElementById('stars')?.scrollIntoView({behavior:'smooth'})});
+  document.getElementById('ic-timeline').addEventListener('click',()=>{document.getElementById('ic-era-line').scrollIntoView({behavior:'smooth',block:'center'})});
+  document.getElementById('ic-top').addEventListener('click',()=>{close();window.scrollTo({top:0,behavior:'smooth'})});
+  document.getElementById('ic-era-line').innerHTML=eras.map((e,i)=>`<div class="ic-era"><b>${e[0]}</b><span>${e[1]}・${e[2]}</span></div>`).join('');
+  document.getElementById('ic-stats').innerHTML=[['文星','拾参名'],['特殊枠','漫畫家・作曲家'],['世代','初代首席→藝術科首席'],['検索','人物・モデル・作品']].map(x=>`<span>${x[0]}：${x[1]}</span>`).join('');
+  render();
+})();
+</script>
+
+
+<!-- =========================================================
+     帝國大學・遊學機關 / CAMPUS TOYS
+========================================================= -->
+<style>
+#fun-launcher{
+ position:fixed;right:22px;bottom:22px;z-index:9998;
+ width:58px;height:58px;border:1px solid var(--gold);
+ border-radius:50%;background:var(--red);color:#fff8e9;
+ box-shadow:0 8px 25px rgba(40,20,15,.25);cursor:pointer;
+ font-family:inherit;font-size:25px;transition:.25s;
+}
+#fun-launcher:hover{transform:rotate(-8deg) scale(1.08)}
+#fun-drawer{
+ position:fixed;right:22px;bottom:92px;z-index:9997;width:min(390px,calc(100vw - 30px));
+ max-height:78vh;overflow:auto;background:rgba(252,248,239,.98);
+ border:1px solid var(--gold);box-shadow:0 18px 60px rgba(35,20,15,.28);
+ transform:translateY(20px) scale(.96);opacity:0;pointer-events:none;
+ transition:.25s;padding:20px;border-radius:12px;
+}
+#fun-drawer.open{transform:none;opacity:1;pointer-events:auto}
+.fun-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--paper-dark);padding-bottom:10px;margin-bottom:14px}
+.fun-head h3{margin:0;color:var(--red)}
+.fun-close{border:0;background:none;font-size:20px;cursor:pointer}
+.fun-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.fun-btn{
+ border:1px solid rgba(120,23,34,.3);background:#fffaf0;color:var(--ink);
+ padding:11px 8px;cursor:pointer;border-radius:7px;font-family:inherit;
+ transition:.18s;
+}
+.fun-btn:hover{background:#f1e3ce;transform:translateY(-2px)}
+#fun-output{
+ margin-top:13px;min-height:92px;padding:15px;border:1px dashed var(--gold);
+ background:linear-gradient(135deg,#fffaf0,#f3e8d6);line-height:1.8;
+}
+#fun-output .big{display:block;font-size:1.35rem;color:var(--red);font-weight:800;margin:4px 0}
+#campus-bell{
+ position:fixed;inset:0;z-index:10001;background:rgba(20,10,10,.45);
+ display:none;align-items:center;justify-content:center;pointer-events:none;
+}
+#campus-bell.show{display:flex}
+.bell-card{background:#fffaf0;border:2px solid var(--gold);padding:28px 35px;text-align:center;
+ box-shadow:0 20px 80px rgba(0,0,0,.35);animation:bellpop .35s ease}
+.bell-card .gong{font-size:55px;display:block}
+@keyframes bellpop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+#imperial-confetti{position:fixed;inset:0;pointer-events:none;z-index:10002;overflow:hidden}
+.confetti-piece{position:absolute;top:-20px;width:8px;height:18px;animation:fall 1.8s linear forwards}
+@keyframes fall{to{transform:translate3d(var(--dx),110vh,0) rotate(720deg);opacity:0}}
+.fun-foot{font-size:.75rem;color:var(--ink-soft);margin-top:12px;text-align:center}
+</style>
+
+<button id="fun-launcher" aria-label="帝國大學遊學機關">🎓</button>
+
+<section id="fun-drawer" aria-hidden="true">
+  <div class="fun-head">
+    <h3>帝國大學・遊學機關</h3>
+    <button class="fun-close" id="fun-close">×</button>
+  </div>
+  <div class="fun-grid">
+    <button class="fun-btn" id="fun-gacha">🎴 文星を引く</button>
+    <button class="fun-btn" id="fun-fortune">📜 本日の學問籤</button>
+    <button class="fun-btn" id="fun-bell">🔔 帝國大學の鐘</button>
+    <button class="fun-btn" id="fun-broadcast">📻 校内放送</button>
+    <button class="fun-btn" id="fun-night">🌙 夜間開館</button>
+    <button class="fun-btn" id="fun-confetti">🎊 合格祝賀</button>
+  </div>
+  <div id="fun-output">
+    <small>遊學機關へようこそ。<br>気になる扉をお選びください。</small>
+  </div>
+  <div class="fun-foot">※ 一部の機能には隠し遊戯がございます。</div>
+</section>
+
+<div id="campus-bell"><div class="bell-card"><span class="gong">🔔</span><strong>帝國大學の鐘が鳴りました。</strong><br><small>講義開始――あるいは、放課です。</small></div></div>
+<div id="imperial-confetti"></div>
+
+<script>
+(()=>{
+ const launcher=document.getElementById('fun-launcher');
+ const drawer=document.getElementById('fun-drawer');
+ const close=document.getElementById('fun-close');
+ const out=document.getElementById('fun-output');
+ const bell=document.getElementById('campus-bell');
+
+ const stars=[
+  ['神代聖','フョードル・ドストエフスキー','ワタクシ','辠人の失楽園'],
+  ['有栖川劉ノ介','芥川龍之介','私','蒐集箱'],
+  ['中原壱葉','中原中也','俺','circus'],
+  ['九条院朔臣','谷崎潤一郎','濮','毒草と芳香'],
+  ['森林太郎','森鴎外','私','舞姫'],
+  ['六條杠葉','与謝野晶子','妾（アタシ）','春を待つ仁'],
+  ['御影薔子','大倉輝子','私（わたくし）','大學院'],
+  ['九頭竜夢路','江戸川乱歩','俺','鏡の中の密室'],
+  ['卜部川樒','太宰治（作風・人生）','僕','愚人の興福'],
+  ['卜部川修治','太宰治（名前・人生）','私','人間落第'],
+  ['紅城院眞紅','ブラム・ストーカー／レ・ファニュ','妾（わらわ）','吸血鬼ミフネア'],
+  ['花葉春月','大窪晶与','私','ヴラド・ドラクラ'],
+  ['雪柳残雪','じょるじん（暗黒童話P）','僕','ドラキュラとなった男の物語']
+ ];
+ const fortunes=[
+  ['大吉','本日の研究は大いに進展するでしょう。偶然開いた頁に宝あり。'],
+  ['吉','先人の言葉を一つ拾いなさい。そこから新しい物語が始まります。'],
+  ['中吉','図書館へ赴くべし。返却期限にはくれぐれも注意。'],
+  ['小吉','今日は無理に結論を出さず、余白を愛しましょう。'],
+  ['凶','教授に見つからぬよう居眠り……ではなく、十分な休息を。'],
+  ['大凶','本日の学問籤は破り捨て、好きなものを食べて寝なさい。']
+ ];
+ const broadcasts=[
+  '「学生諸君、廊下を走らないこと。教授陣は意外と見ております」',
+  '「附属圖書館よりお知らせです。本を返してください。本当に返してください」',
+  '「本日の講義終了。なお、樒教授はまだ研究室におります」',
+  '「花葉春月教授より連絡。芸術科の学生は、己の美学を忘れぬように」',
+  '「雪柳残雪氏より楽曲の試聴会のお知らせ。なお夜更かしは禁止です」'
+ ];
+ function pick(a){return a[Math.floor(Math.random()*a.length)]}
+ launcher.onclick=()=>{drawer.classList.toggle('open');drawer.setAttribute('aria-hidden',drawer.classList.contains('open')?'false':'true')}
+ close.onclick=()=>drawer.classList.remove('open');
+
+ document.getElementById('fun-gacha').onclick=()=>{
+   const s=pick(stars);
+   out.innerHTML='<small>本日の文星召喚</small><span class="big">★ '+s[0]+'</span>モデル：'+s[1]+'<br>一人称：'+s[2]+' ／ 代表作：'+s[3];
+   const target=[...document.querySelectorAll('*')].find(x=>x.children.length===0&&x.textContent.trim()===s[0]);
+   if(target) target.scrollIntoView({behavior:'smooth',block:'center'});
+ };
+ document.getElementById('fun-fortune').onclick=()=>{
+   const f=pick(fortunes);
+   out.innerHTML='<small>帝國大學・學問籤</small><span class="big">'+f[0]+'</span>'+f[1];
+ };
+ document.getElementById('fun-broadcast').onclick=()=>{
+   out.innerHTML='<small>帝國大學・校内放送</small><span class="big">📻 放送中</span>'+pick(broadcasts);
+ };
+ document.getElementById('fun-bell').onclick=()=>{
+   bell.classList.add('show');
+   setTimeout(()=>bell.classList.remove('show'),1500);
+ };
+ bell.onclick=()=>bell.classList.remove('show');
+
+ document.getElementById('fun-night').onclick=()=>{
+   document.body.classList.toggle('imperial-night');
+   const on=document.body.classList.contains('imperial-night');
+   out.innerHTML='<small>夜間開館</small><span class="big">'+(on?'🌙 夜間開館中':'☀ 通常開館')+'</span>'+(on?'帝國大學は夜の顔を見せています。':'夜が明けました。');
+ };
+ document.getElementById('fun-confetti').onclick=()=>{
+   const box=document.getElementById('imperial-confetti');
+   box.innerHTML='';
+   for(let i=0;i<55;i++){
+     const el=document.createElement('i');
+     el.className='confetti-piece';
+     el.style.left=Math.random()*100+'vw';
+     el.style.setProperty('--dx',(Math.random()*240-120)+'px');
+     el.style.animationDelay=(Math.random()*.45)+'s';
+     el.style.transform='rotate('+Math.random()*360+'deg)';
+     el.style.background=['#781722','#a98545','#241918','#dbc48e'][i%4];
+     box.appendChild(el);
+   }
+   out.innerHTML='<small>祝賀行事</small><span class="big">🎊 合格！</span>諸君の健闘を称えます。';
+   setTimeout(()=>box.innerHTML='',2300);
+ };
+ document.addEventListener('keydown',e=>{
+   if(e.key==='Escape') drawer.classList.remove('open');
+   if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.key.toLowerCase()==='i'){
+     e.preventDefault(); launcher.click();
+   }
+ });
+})();
+</script>
+<style>
+body.imperial-night{
+ background:#17131a !important;color:#eee5d7 !important;
+}
+body.imperial-night .section,body.imperial-night .card,body.imperial-night .panel,
+body.imperial-night .person-card,body.imperial-night article{
+ background:#241d24 !important;color:#eee5d7 !important;
+}
+body.imperial-night h1,body.imperial-night h2,body.imperial-night h3,
+body.imperial-night h4{color:#e0bf7c !important}
+body.imperial-night p,body.imperial-night li,body.imperial-night small{color:#d5c8ba !important}
+body.imperial-night #fun-drawer{background:#241d24;color:#eee5d7}
+</style>
+
+
+<!-- =========================================================
+     大正浪漫・遊戲層 ULTRA / 帝都夜會仕様
+========================================================= -->
+<style>
+/* --- 帝都号テロップ --- */
+.taisho-telegram{position:fixed;left:18px;right:18px;bottom:16px;z-index:8990;display:flex;align-items:center;gap:0;border:1px solid #a98545;background:rgba(35,25,24,.96);color:#f4e8d3;box-shadow:0 10px 35px rgba(0,0,0,.25);font-size:11px;letter-spacing:.12em;overflow:hidden}
+.taisho-telegram .label{padding:10px 13px;background:#781722;color:#fff3df;white-space:nowrap;font-family:"Shippori Mincho",serif}
+.taisho-telegram .track{overflow:hidden;flex:1;white-space:nowrap}
+.taisho-telegram .ticker{display:inline-block;padding-left:100%;animation:telegram 24s linear infinite}
+@keyframes telegram{to{transform:translateX(-100%)}}
+/* --- 活字印刷風ポップアップ --- */
+.taisho-paper{position:fixed;z-index:9500;inset:auto 28px 82px auto;width:min(380px,calc(100vw - 56px));padding:24px 24px 28px;background:#f8f0df;color:#2a201d;border:1px solid #a98545;box-shadow:12px 15px 45px rgba(20,12,10,.28);transform:rotate(-1deg) scale(.94);opacity:0;pointer-events:none;transition:.35s cubic-bezier(.2,.8,.2,1)}
+.taisho-paper.open{opacity:1;transform:rotate(-1deg) scale(1);pointer-events:auto}
+.taisho-paper:before{content:"帝國大學・極秘回覧";display:block;color:#781722;font-size:9px;letter-spacing:.3em;margin-bottom:12px;border-bottom:1px double #a98545;padding-bottom:8px}
+.taisho-paper h3{font-family:"Shippori Mincho",serif;margin:0 0 10px;font-size:23px}
+.taisho-paper p{font-size:11px;line-height:2.1;margin:8px 0}
+.taisho-paper .paper-close{float:right;border:0;background:none;color:#781722;cursor:pointer;font-size:18px}
+/* --- 朱印 --- */
+.imperial-stamp{position:fixed;right:24px;top:145px;z-index:8900;width:62px;height:62px;border:3px double #781722;border-radius:50%;color:#781722;background:rgba(243,236,222,.72);display:grid;place-items:center;font-family:"Shippori Mincho",serif;font-weight:800;line-height:1.05;text-align:center;cursor:pointer;transform:rotate(8deg);box-shadow:0 5px 15px rgba(60,20,20,.12);transition:.25s}
+.imperial-stamp:hover{transform:rotate(-5deg) scale(1.08)}
+/* --- 文星盤 --- */
+.star-wheel{position:fixed;inset:0;z-index:9400;background:rgba(18,12,14,.72);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:20px}
+.star-wheel.open{display:flex}
+.star-wheel-card{width:min(720px,94vw);max-height:88vh;overflow:auto;background:#f6eddd;color:#2b211e;border:1px solid #a98545;box-shadow:0 25px 70px rgba(0,0,0,.45);padding:28px;position:relative}
+.star-wheel-card h2{font-family:"Shippori Mincho",serif;text-align:center;margin:0 0 8px;color:#781722;letter-spacing:.14em}
+.star-wheel-card .lead{text-align:center;font-size:11px;color:#665854;margin-bottom:22px}
+.star-orbit{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.star-orbit button{min-height:72px;border:1px solid rgba(120,23,34,.25);background:rgba(255,255,255,.45);color:#2b211e;cursor:pointer;font-family:inherit;padding:8px}
+.star-orbit button:hover{background:#eee0c7;border-color:#a98545;transform:translateY(-2px)}
+.star-orbit strong{display:block;color:#781722;font-family:"Shippori Mincho",serif}
+.star-orbit small{font-size:8px;color:#665854}
+.star-wheel-close{position:absolute;right:12px;top:8px;border:0;background:none;font-size:24px;color:#781722;cursor:pointer}
+/* --- 花吹雪 --- */
+.taisho-petal{position:fixed;top:-30px;z-index:8800;pointer-events:none;width:12px;height:7px;background:#d9a9a9;border-radius:70% 30% 70% 30%;animation:petalFall linear forwards}
+@keyframes petalFall{to{transform:translate3d(var(--x),110vh,0) rotate(620deg);opacity:.15}}
+/* --- 古写真フラッシュ --- */
+.taisho-flash{position:fixed;inset:0;z-index:9800;background:#fff6e5;opacity:0;pointer-events:none}
+.taisho-flash.fire{animation:flash .65s ease}
+@keyframes flash{0%{opacity:0}15%{opacity:.95}100%{opacity:0}}
+/* --- 大正夜會テーマ --- */
+body.taisho-nocturne{filter:saturate(.82) sepia(.08)}
+body.taisho-nocturne:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:8790;background:radial-gradient(circle at 50% 20%,transparent 0 35%,rgba(25,15,25,.18) 100%)}
+@media(max-width:700px){.imperial-stamp{top:auto;bottom:70px;right:14px}.star-orbit{grid-template-columns:repeat(2,1fr)}.taisho-telegram{left:8px;right:8px;bottom:8px}}
+</style>
+
+<div class="taisho-telegram" aria-label="帝國大學臨時電報">
+  <div class="label">帝都號・臨時電報</div>
+  <div class="track"><span class="ticker" id="taishoTicker">本日も學問は眠らない　◇　附属圖書館は夜九時まで　◇　文星研究室にて随時閲覧可　◇　「廊下を走るべからず」――學生課　◇　</span></div>
+</div>
+
+<button class="imperial-stamp" id="imperialStamp" title="帝國大學の印章を押す">帝<br>國</button>
+
+<div class="taisho-paper" id="taishoPaper" role="dialog" aria-modal="false">
+  <button class="paper-close" id="paperClose" aria-label="閉じる">×</button>
+  <h3 id="paperTitle">帝都文藝欄外記事</h3>
+  <p id="paperBody">紙面の余白には、公式記録には残らない小さな物語が眠っています。</p>
+  <p id="paperNote">―― 帝國大學附属・夜間閲覧係</p>
+</div>
+
+<div class="star-wheel" id="starWheel">
+  <div class="star-wheel-card">
+    <button class="star-wheel-close" id="starWheelClose">×</button>
+    <h2>拾参の文星・夜空之圖</h2>
+    <div class="lead">名をクリックすると、帝國文藝の星座がひとつ瞬きます。</div>
+    <div class="star-orbit" id="starOrbit"></div>
+  </div>
+</div>
+<div class="taisho-flash" id="taishoFlash"></div>
+
+<script>
+(()=>{
+  const $=s=>document.querySelector(s);
+  const paper=$('#taishoPaper'), title=$('#paperTitle'), body=$('#paperBody'), note=$('#paperNote');
+  const stories=[
+    ['神代聖・深夜の欄外','教会の鐘が十二を打つころ、文科旧棟の窓にだけ灯りが残っている。机上には聖書と原稿。頁の端には「まだ眠ってはいけません」とだけ。','記録：夜間巡回学生の証言'],
+    ['紅城院眞紅・黒薔薇の頁','附属圖書館の古書『竜棘夜話』を開くと、黒薔薇の押し花が一枚。司書曰く、昨日までは無かったという。','分類：怪奇幻想・閲覧注意'],
+    ['卜部川樒・研究室の灯','消灯時刻を過ぎても研究室に灯りがある。「帰宅なさい」と書いた札を置くと、翌朝その裏に「君もね」と返事が書かれていた。','出典：学生課・未整理書簡'],
+    ['花葉春月・芸術科掲示板','誰かが貼った「美しいものは、美しいだけで十分か？」という紙片。その横に赤鉛筆で「否」とだけ書かれていた。','分類：芸術論・余白資料'],
+    ['雪柳残雪・蓄音機室','深夜、誰も触れていない蓄音機が一度だけ鳴ったという。曲名欄には「ドラキュラとなった男の物語」。','分類：音樂科・怪異記録'],
+    ['九頭竜夢路・未解決案件','鏡の前に置いた大学徽章が、翌朝には机の引き出しの中に移動していた。鍵は昨夜から閉じたまま。','分類：探偵科・調査中']
+  ];
+  function openPaper(i=Math.floor(Math.random()*stories.length)){
+    const s=stories[i%stories.length];title.textContent=s[0];body.textContent=s[1];note.textContent='―― '+s[2];paper.classList.add('open');
+  }
+  $('#imperialStamp').addEventListener('click',()=>{
+    openPaper(); document.body.classList.toggle('taisho-nocturne');
+    const flash=$('#taishoFlash'); flash.classList.remove('fire'); void flash.offsetWidth; flash.classList.add('fire');
+    for(let i=0;i<16;i++){
+      const p=document.createElement('i');p.className='taisho-petal';p.style.left=Math.random()*100+'vw';p.style.setProperty('--x',(Math.random()*240-120)+'px');p.style.animationDuration=(3+Math.random()*3)+'s';document.body.appendChild(p);setTimeout(()=>p.remove(),6500);
+    }
+  });
+  $('#paperClose').onclick=()=>paper.classList.remove('open');
+
+  const names=[
+    ['卜部川樒','太宰治','僕','『愚人の興福』'],['有栖川劉ノ介','芥川龍之介','私','『蒐集箱』'],['中原壱葉','中原中也','俺','『circus』'],['九条院朔臣','谷崎潤一郎','濮','『毒草と芳香』'],['森林太郎','森鴎外','私','『舞姫』'],['六條杠葉','与謝野晶子','妾(アタシ)','『春を待つ仁』'],['御影薔子','大倉輝子','私(わたくし)','『大學院』'],['九頭竜夢路','江戸川乱歩','俺','『鏡の中の密室』'],['卜部川修治','太宰治','私','『人間落第』'],['紅城院眞紅','ブラム・ストーカー／レ・ファニュ','妾(わらわ)','『吸血鬼ミフネア』'],['花葉春月','大窪晶与','私','『ヴラド・ドラクラ』'],['雪柳残雪','じょるじん（暗黒童話P）','僕','『ドラキュラとなった男の物語』'],['神代聖','フョードル・ドストエフスキー','ワタクシ','『辠人の失楽園』']
+  ];
+  const orbit=$('#starOrbit');
+  names.forEach((n,i)=>{const b=document.createElement('button');b.innerHTML='<strong>拾'+(i+1)+'・'+n[0]+'</strong><small>'+n[1]+' ／ '+n[2]+' ／ '+n[3]+'</small>';b.onclick=()=>{openPaper(i%stories.length);b.animate([{transform:'scale(1)'},{transform:'scale(1.08)'},{transform:'scale(1)'}],{duration:380})};orbit.appendChild(b)});
+
+  /* 既存ページに「夜空之圖」入口を差し込む */
+  const nav=[...document.querySelectorAll('nav a')];
+  if(nav.length){const a=document.createElement('a');a.href='#';a.textContent='夜空之圖';a.onclick=e=>{e.preventDefault();$('#starWheel').classList.add('open')};nav[0].parentElement.appendChild(a)}
+  $('#starWheelClose').onclick=()=>$('#starWheel').classList.remove('open');
+  $('#starWheel').addEventListener('click',e=>{if(e.target.id==='starWheel')$('#starWheel').classList.remove('open')});
+
+  /* キーボード隠し文句：HINOMOTO */
+  let seq='';const secret='hinomoto';
+  document.addEventListener('keydown',e=>{seq=(seq+e.key.toLowerCase()).slice(-secret.length);if(seq===secret){openPaper(4);document.body.classList.toggle('taisho-nocturne');seq='';}});
+
+  /* 右クリック時のささやかな帝國流儀 */
+  document.addEventListener('contextmenu',e=>{
+    if(Math.random()<.35){e.preventDefault();openPaper(Math.floor(Math.random()*stories.length));}
+  });
+
+  /* スクロールで電報文面が変わる */
+  const ticker=$('#taishoTicker');
+  window.addEventListener('scroll',()=>{
+    const y=scrollY; ticker.textContent=y>3500?'帝國大學・夜間閲覧時間帯　◇　静粛に願います　◇　':'本日も學問は眠らない　◇　附属圖書館は夜九時まで　◇　文星研究室にて随時閲覧可　◇　';
+  },{passive:true});
+})();
+</script>
+
+
+<style>
+/* ---------- 基本パネル：古紙・活字風 ---------- */
+#arg2-trigger{
+  position:fixed;left:18px;bottom:120px;z-index:9997;
+  font-family:"Shippori Mincho",serif;font-size:10px;letter-spacing:.22em;
+  color:#e9d9b6;background:rgba(28,18,17,.9);border:1px solid rgba(199,163,103,.55);
+  padding:9px 13px;cursor:pointer;backdrop-filter:blur(4px);opacity:.78;
+  transition:.25s;display:flex;align-items:center;gap:7px;
+}
+#arg2-trigger:hover{opacity:1;transform:translateY(-2px)}
+#arg2-trigger .arg2-dot{width:6px;height:6px;border-radius:50%;background:#8a1824;box-shadow:0 0 8px #8a1824}
+#arg2-trigger.complete .arg2-dot{background:#d2ae62;box-shadow:0 0 10px #d2ae62}
+
+#arg2-layer{
+  position:fixed;inset:0;z-index:20000;display:none;
+  align-items:center;justify-content:center;padding:20px;
+  background:rgba(15,9,9,.86);backdrop-filter:blur(6px);
+}
+#arg2-layer.open{display:flex}
+
+#arg2-window{
+  position:relative;width:min(960px,96vw);max-height:90vh;overflow:auto;
+  padding:44px 46px 36px;font-family:"Noto Serif JP",serif;color:#251b19;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(120,23,34,.05), transparent 30%),
+    radial-gradient(circle at 85% 75%, rgba(169,133,69,.08), transparent 35%),
+    repeating-linear-gradient(0deg, rgba(90,60,30,.025) 0 2px, transparent 2px 4px),
+    #f1e6cd;
+  border:1px solid #a98545;
+  box-shadow:0 0 0 8px #f1e6cd, 0 0 0 9px #6d171f, 0 30px 90px rgba(0,0,0,.55);
+  clip-path:polygon(0 0,99% 0,100% 2%,100% 98%,99% 100%,1% 100%,0 98%,0 2%);
+}
+#arg2-window::before{
+  content:"極秘・帝國大學文科附属資料室";
+  position:absolute;top:14px;right:20px;font-size:9px;letter-spacing:.3em;
+  color:#781722;opacity:.6;
+}
+#arg2-close{position:absolute;left:16px;top:12px;border:0;background:none;font-size:24px;color:#781722;cursor:pointer}
+
+.arg2-kicker{font-size:10px;letter-spacing:.32em;color:#781722}
+.arg2-title{font-family:"Shippori Mincho",serif;font-size:clamp(24px,4.5vw,42px);margin:8px 0 6px;letter-spacing:.1em}
+.arg2-lead{font-size:11.5px;line-height:2.15;color:#5a4c47}
+.arg2-rule{height:1px;margin:20px 0;background:linear-gradient(90deg,#781722,#b99855,transparent)}
+
+/* ---------- 資料カード：古写真風 ---------- */
+.arg2-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.arg2-card{
+  position:relative;min-height:132px;padding:14px 13px 12px;cursor:pointer;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(0,0,0,.05), transparent 55%),
+    linear-gradient(160deg,#efe3c4,#e2d2ab);
+  border:1px solid #b39a68;transition:.25s;
+}
+.arg2-card::before{
+  content:"";position:absolute;inset:5px;border:1px dashed rgba(120,23,34,.25);pointer-events:none;
+}
+.arg2-card:hover{transform:translateY(-3px) rotate(-.4deg);box-shadow:0 10px 22px rgba(50,30,20,.18)}
+.arg2-card.found{border-color:#781722;background:linear-gradient(160deg,#fbf3dd,#efe0bd)}
+.arg2-card .arg2-num{font-size:9px;letter-spacing:.2em;color:#a98545}
+.arg2-card h4{margin:8px 0 5px;font-size:14px;font-family:"Shippori Mincho",serif;color:#2a1e1c}
+.arg2-card p{margin:0;font-size:9.5px;line-height:1.75;color:#6b5b52}
+.arg2-card.locked{filter:sepia(.15) grayscale(.5);opacity:.5}
+
+/* ---------- 活字タイプライター出力 ---------- */
+#arg2-output{
+  margin-top:24px;min-height:120px;padding:20px 22px;
+  background:#231715;color:#e9d9b6;border:1px solid #8a6a3c;
+  font-family:"Shippori Mincho",serif;font-size:14px;line-height:2.1;
+  white-space:pre-wrap;position:relative;
+}
+#arg2-output::before{content:"帝國大學旧式閲覧網";position:absolute;top:-9px;left:14px;background:#231715;padding:0 8px;font-size:8px;letter-spacing:.3em;color:#c7a352}
+.arg2-cursor{display:inline-block;width:8px;background:#c7a352;animation:arg2blink 1s steps(1) infinite}
+@keyframes arg2blink{50%{opacity:0}}
+
+/* ---------- 進捗 ---------- */
+#arg2-progress{margin-top:16px;height:6px;background:#d9c59e;overflow:hidden;border:1px solid #a98545}
+#arg2-bar{height:100%;width:0;background:linear-gradient(90deg,#781722,#a98545);transition:.4s}
+#arg2-status{margin-top:8px;font-size:10px;letter-spacing:.14em;color:#6b5b52}
+
+/* ---------- 認証端末 ---------- */
+.arg2-terminal{margin-top:26px;padding:18px;background:#1a1211;color:#e6d5b0;border:1px solid #8a6a3c;font-family:ui-monospace,SFMono-Regular,monospace;font-size:12px;line-height:2}
+.arg2-terminal input{background:transparent;border:0;border-bottom:1px solid #b99855;color:#f3dfb2;outline:none;font:inherit;width:200px}
+.arg2-terminal button{border:1px solid #b99855;background:transparent;color:#ead9b6;padding:5px 13px;margin-left:8px;cursor:pointer}
+.arg2-terminal button:hover{background:#3a2a20}
+.arg2-hint{margin-top:10px;font-size:11px;color:#a98545}
+
+.arg2-final{display:none;margin-top:26px;border-top:1px dashed #9f7a45;padding-top:22px;text-align:center}
+.arg2-final.show{display:block}
+.arg2-seal{font-size:50px;color:#781722}
+.arg2-secret{font-family:"Shippori Mincho",serif;font-size:22px;letter-spacing:.2em;color:#781722;margin-top:6px}
+.argBlink{animation:arg2Blink 1.4s infinite}
+@keyframes arg2Blink{50%{opacity:.25}}
+#arg2FinalStage3{border-top:1px dashed #9f7a45;margin-top:18px;padding-top:18px;text-align:left}
+
+@media(max-width:760px){
+  #arg2-window{padding:34px 20px 26px}
+  .arg2-grid{grid-template-columns:repeat(2,1fr)}
+  #arg2-trigger{left:10px;bottom:150px}
+}
+</style>
+
+<button id="arg2-trigger" title="秘匿資料層を開く">
+  <span class="arg2-dot"></span><span id="arg2TriggerText">閲覧監査：正常</span>
+</button>
+
+<div id="arg2-layer" aria-hidden="true">
+  <div id="arg2-window" role="dialog" aria-modal="true" aria-label="秘匿資料層">
+    <button id="arg2-close" aria-label="閉じる">×</button>
+    <div class="arg2-kicker">N.I.U. / CONFIDENTIAL ARCHIVE / DOCUMENT 13</div>
+    <h2 class="arg2-title">第十三號文藝調査記録</h2>
+    <p class="arg2-lead">
+      これは公開頁ではない。帝國大學文科附属資料室・旧式閲覧網に、
+      なぜか今も残されている調査記録である。十三の文星、それぞれの余白に
+      触れよ。集めた記録片は、古い合言葉を思い出す鍵となる。
+    </p>
+    <div class="arg2-rule"></div>
+
+    <div class="arg2-grid" id="arg2Cards"></div>
+
+    <div id="arg2-output">閲覧網、接続中……<span class="arg2-cursor">&nbsp;</span></div>
+
+    <div id="arg2-progress"><div id="arg2-bar"></div></div>
+    <div id="arg2-status">記録片　0 / 13</div>
+
+    <div class="arg2-terminal">
+      &gt; 帝國大學旧式認証端末<br>
+      &gt; password: <input id="arg2Pass" autocomplete="off" spellcheck="false" aria-label="合言葉入力">
+      <button id="arg2Submit">認証</button>
+      <div class="arg2-hint" id="arg2Hint">十三片すべてを閲覧した後、記録の中に散らばる言葉を思い出せ。</div>
+    </div>
+
+    <div class="arg2-final" id="arg2Final">
+      <div class="arg2-seal">印</div>
+      <div class="arg2-secret">「學問は、忘れられた頁から始まる。」</div>
+      <p class="arg2-lead" id="arg2FinalStage1">
+        認証成功。旧式閲覧網、再接続。<br>
+        ……しかし記録は十三頁ではない。十四頁ある。<br>
+        <strong>次の手掛かり：『神代聖』の個人研究室を、実際に開け。</strong>
+      </p>
+      <p class="arg2-lead" id="arg2FinalStage2" style="display:none">
+        【ARCHIVE 14】<br>
+        存在しないはずの文士について、あなたは既に十三人分の証言を読んでゐる。
+        ならば十四人目とは、おそらく――この記録を読んでゐる、あなた自身のことだ。
+        <br><br>
+        <em style="color:#781722">帝國大學文科附属資料室・夜間閲覧係　記す</em>
+        <br><br>
+        ……そしてもう一つ。藝術科首席にして四季廳長官たる者――その公務資料の寄託室にも、
+        <span class="argBlink" style="color:#781722">開かれざる頁がある。</span>
+      </p>
+      <p class="arg2-lead" id="arg2FinalStage3" style="display:none">
+        【ARCHIVE 15・封緘頁】<br><br>
+        大窪晶与が大學へ寄託した四季廳關係資料の中に、分類票のない一封筒が紛れてゐた。
+        表には「保留・非公開」とのみ、朱で捺されてゐる。
+        <br><br>
+        中の一枚、罫の外に書き込みがある。筆跡は大窪のものではない。
+        <br><br>
+        <em>「雛菊、また眠っているのですね。<br>
+        春が十年戻らなかった年、あなたはまだ、ここにゐなかつた筈なのに。」</em>
+        <br><br>
+        もう一枚、色褪せた写真の裏にも、短い書き込みが。
+        <br><br>
+        <em>「薫子――何度目の名だつたか、もう數へてゐない。<br>
+        眞紅も、私も、それを知りながら黙つてゐる。」</em>
+        <br><br>
+        大學側はこの封筒について「寄託時より原形のまま、開封せず保管」とのみ回答してゐる。
+        両者の名は、卒業生名簿にも、拾参の文星の記録にも、四季廳の公開名簿にも見当たらない。
+        <br><br>
+        ――閲覧者へ。<br>
+        それでも、この頁は確かにここにある。<br>
+        君が読んでしまつた以上、この記録もまた、"読まれた"側の記録として残るだろう。
+        <br><br>
+        <em style="color:#781722">帝國大學文科附属資料室・夜間閲覧係　記す（花押あり、判読不能）</em>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=s=>document.querySelector(s);
+
+  /* ---------- 鐘の音（Web Audio APIで生成、外部音源不要） ---------- */
+  let actx=null;
+  function ringBell(){
+    try{
+      actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+      const now=actx.currentTime;
+      const osc=actx.createOscillator();
+      const gain=actx.createGain();
+      osc.type="sine";
+      osc.frequency.setValueAtTime(660,now);
+      osc.frequency.exponentialRampToValueAtTime(440,now+1.1);
+      gain.gain.setValueAtTime(.0001,now);
+      gain.gain.exponentialRampToValueAtTime(.22,now+.02);
+      gain.gain.exponentialRampToValueAtTime(.0001,now+1.4);
+      osc.connect(gain).connect(actx.destination);
+      osc.start(now); osc.stop(now+1.5);
+    }catch(e){/* 音聲非對應環境では無視 */}
+  }
+
+  /* ---------- 活字タイプライター出力 ---------- */
+  const outEl=$('#arg2-output');
+  let typeTimer=null;
+  function typeOut(text){
+    clearTimeout(typeTimer);
+    outEl.textContent="";
+    let i=0;
+    (function step(){
+      outEl.textContent=text.slice(0,i)+"▌";
+      if(i<text.length){ i++; typeTimer=setTimeout(step,18); }
+      else{ outEl.textContent=text; }
+    })();
+  }
+
+  /* ---------- 記録データ（旧二系統を統合） ---------- */
+  const records=[
+    ["01","卜部川樒","愚人の興福","『僕は死が嫌ひなのではない。死ぬまでが嫌なんだ。』研究室の余白に、福ではなく“問ひ”が残る。"],
+    ["02","有栖川劉ノ介","蒐集箱","『箱に入れられないものほど、蒐集したくなる。』拾はれたものは、誰のものか。"],
+    ["03","中原壱葉","circus","『人生なんて、綱渡りの途中で笑ふものだ。』拍手が止んだあと、何が残る。"],
+    ["04","九条院朔臣","毒草と芳香","『美しいものほど、毒を隠してゐる。』美しいものほど、注意書きが小さい。"],
+    ["05","森林太郎","舞姫","『過去は舞台裏に置いてゆくものです。』古い記録には、帰國後の余白がある。"],
+    ["06","六條杠葉","春を待つ仁","『春を待つことも、ひとつの戦ひよ。』春は來る。だが頁は待たない。"],
+    ["07","御影薔子","大學院","『學問は人間を賢くするとは限りません。』卒業とは、終はりの名前ではない。"],
+    ["08","九頭竜夢路","鏡の中の密室","『鏡の中に犯人がゐるとは限らない。』鍵が掛かつてゐるのは、扉か記憶か。"],
+    ["09","卜部川修治","人間落第","『私は、私に落第した。』答案用紙の最後に、一文字だけ欠けてゐる。"],
+    ["10","紅城院眞紅","吸血鬼ミフネア","『怪物とは、歴史が人間につけた名前です。』夜侯の頁に、黒薔薇が一輪。"],
+    ["11","花葉春月","ヴラド・ドラクラ","『物語は絵の中にも生きる。』絵の外側に、作者の署名がある。"],
+    ["12","雪柳残雪","ドラキュラとなった男の物語","『今宵、文壇の執行人。』蓄音機は一度だけ、逆に廻る。"],
+    ["13","神代聖","辠人の失楽園","『夜は、人間が自分自身に出會ふ時間です。』聖書の余白に、誰かの問ひがある。"]
+  ];
+
+  const KEY_FOUND="niu_arg2_found";
+  const KEY_STAGE1="niu_arg2_stage1";
+  const KEY_STAGE2="niu_arg2_stage2";
+  const KEY_STAGE3="niu_arg2_stage3";
+
+  let found = JSON.parse(localStorage.getItem(KEY_FOUND) || "[]");
+  let stage1 = localStorage.getItem(KEY_STAGE1) === "1";
+  let stage2 = localStorage.getItem(KEY_STAGE2) === "1";
+  let stage3 = localStorage.getItem(KEY_STAGE3) === "1";
+
+  const layer=$('#arg2-layer'), trigger=$('#arg2-trigger'), triggerText=$('#arg2TriggerText');
+  const grid=$('#arg2Cards');
+
+  function renderCards(){
+    grid.innerHTML="";
+    records.forEach((r,i)=>{
+      const el=document.createElement('article');
+      el.className='arg2-card'+(found.includes(i)?' found':'');
+      el.innerHTML=`<div class="arg2-num">DOCUMENT ${r[0]}</div><h4>${r[1]}</h4><p>『${r[2]}』</p>`;
+      el.addEventListener('click',()=>inspect(i));
+      grid.appendChild(el);
+    });
+  }
+
+  function inspect(i){
+    const r=records[i];
+    if(!found.includes(i)){
+      found.push(i); found.sort((a,b)=>a-b);
+      localStorage.setItem(KEY_FOUND, JSON.stringify(found));
+      ringBell();
+    }
+    typeOut(`【文科極秘記録・第${r[0]}號】\n${r[1]} ／ ${r[2]}\n\n${r[3]}`);
+    renderCards();
+    updateStatus();
+  }
+
+  function updateStatus(){
+    $('#arg2-bar').style.width=(found.length/records.length*100)+'%';
+    $('#arg2-status').textContent=`記録片　${found.length} / ${records.length}`;
+    if(found.length>=records.length){
+      triggerText.textContent='閲覧監査：異常';
+      trigger.classList.add('complete');
+    }
+  }
+
+  function openLayer(){
+    layer.classList.add('open'); layer.setAttribute('aria-hidden','false');
+    renderCards(); updateStatus();
+    if(stage1) revealFinal(false);
+    if(stage2) revealStage2();
+    if(stage3) revealStage3();
+  }
+  function closeLayer(){ layer.classList.remove('open'); layer.setAttribute('aria-hidden','true'); }
+
+  trigger.addEventListener('click', openLayer);
+  $('#arg2-close').addEventListener('click', closeLayer);
+  layer.addEventListener('click', e=>{ if(e.target===layer) closeLayer(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && layer.classList.contains('open')) closeLayer(); });
+
+  function revealFinal(ring){
+    $('#arg2Final').classList.add('show');
+    if(ring) ringBell();
+    stage1=true; localStorage.setItem(KEY_STAGE1,"1");
+    $('#arg2Hint').textContent='合言葉は受理された。次の手掛かりに従へ。';
+  }
+  function revealStage2(){
+    $('#arg2FinalStage1').style.display='none';
+    $('#arg2FinalStage2').style.display='block';
+    stage2=true; localStorage.setItem(KEY_STAGE2,"1");
+    triggerText.textContent='閲覧監査：第十四頁開放';
+  }
+  function revealStage3(ring){
+    $('#arg2FinalStage3').style.display='block';
+    if(ring) ringBell();
+    stage3=true; localStorage.setItem(KEY_STAGE3,"1");
+    triggerText.textContent='閲覧監査：封緘頁開放';
+  }
+
+  $('#arg2Submit').addEventListener('click', ()=>{
+    const v=$('#arg2Pass').value.trim().toLowerCase().replace(/\s+/g,'');
+    if(found.length < records.length){
+      typeOut('認証拒否。十三片すべてを閲覧してから、再度お試しください。');
+      return;
+    }
+    if(v==='hinomoto' || v==='ひのもと' || v==='十三の文星' || v==='juusannoseiboshi'){
+      typeOut('認証成功。旧式閲覧網、再接続いたしました。');
+      revealFinal(true);
+    } else {
+      typeOut('認証拒否。だが、十三片は既に揃つてゐる。古い合言葉を思ひ出せ。');
+    }
+  });
+  $('#arg2Pass').addEventListener('keydown', e=>{ if(e.key==='Enter') $('#arg2Submit').click(); });
+
+  /* ---------- 第十四頁：神代聖の個人研究室を開くと真の最終頁 ---------- */
+  /* ---------- 第十五頁：続けて大窪晶与（四季廳長官）の資料を開くと封緘頁 ---------- */
+  document.addEventListener('click', e=>{
+    const card=e.target.closest('.person-card');
+    if(!card) return;
+    const name=card.querySelector('.person-name')?.textContent.trim();
+    if(name==='神代聖' && stage1 && !stage2){
+      revealStage2();
+    } else if(name==='大窪晶与' && stage2 && !stage3){
+      revealStage3(true);
+    }
+  });
+
+  /* ---------- 電報を素早く3回クリック → 隠し電文 ---------- */
+  let tickerClicks=[];
+  const ticker=document.querySelector('.taisho-telegram');
+  if(ticker){
+    ticker.style.cursor='pointer';
+    ticker.addEventListener('click', ()=>{
+      const t=Date.now();
+      tickerClicks=tickerClicks.filter(x=>t-x<1800);
+      tickerClicks.push(t);
+      if(tickerClicks.length>=3){
+        tickerClicks=[];
+        openLayer();
+        typeOut('隠し電文を受信：ー・・ー　ひのもと　ー・・ー\n（合言葉の欠片かもしれない）');
+      }
+    });
+  }
+
+  /* ---------- 鐘を3回鳴らす → ヒント ---------- */
+  let bellClicks=0;
+  const bellBtn=document.getElementById('fun-bell');
+  if(bellBtn){
+    bellBtn.addEventListener('click', ()=>{
+      bellClicks++;
+      if(bellClicks===3){
+        bellClicks=0;
+        ringBell();
+        setTimeout(()=>{
+          openLayer();
+          typeOut('鐘が三度鳴つたとき、資料室の扉がわづかに開いた……\n合言葉のヒント：帝國大學の、もう一つの呼び名。');
+        },300);
+      }
+    });
+  }
+
+  updateStatus();
+})();
+</script>
+  </div>
+</div>
+</body>
+</html>
