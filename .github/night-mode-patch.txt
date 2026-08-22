@@ -1,0 +1,1 @@
+trigger rewrite of index.html night mode
