@@ -1,0 +1,152 @@
+name: Rewrite night mode
+
+on:
+  push:
+    paths:
+      - .github/night-mode-patch.txt
+      - .github/workflows/rewrite-night-mode.yml
+
+permissions:
+  contents: write
+
+jobs:
+  rewrite:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Rewrite night mode in index.html
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          start = s.find('/* =========================================================\n   夜間モード\n========================================================= */')
+          end = s.find('/* =========================================================\n   RESPONSIVE\n========================================================= */', start)
+          if start < 0 or end < 0:
+              raise SystemExit('night mode block not found')
+          replacement = r'''/* =========================================================
+   第六章｜夜間モード・真相
+   昼間の公式サイトでは隠されている記録を開示するARG層。
+========================================================= */
+body.night {
+    --paper:#111014;
+    --paper-light:#19171b;
+    --paper-dark:#252027;
+    --ink:#e9dfd0;
+    --ink-soft:#b9ad9f;
+    --line:rgba(215,188,130,.24);
+    background:
+        radial-gradient(circle at 50% 18%,rgba(120,23,34,.16),transparent 35%),
+        linear-gradient(180deg,#0b090c,#171219 55%,#0c090b);
+    color:var(--ink);
+}
+body.night .site-header{
+    background:linear-gradient(135deg,#0b090c,#241117);
+    border-bottom-color:#a98545;
+}
+body.night .section,
+body.night .intro-card,
+body.night .faculty-card,
+body.night .person-card,
+body.night .library-card,
+body.night .generation-person,
+body.night .star-card{
+    background:linear-gradient(145deg,#211a20,#141116);
+    color:var(--ink);
+}
+body.night .section-title,
+body.night .intro-card h3,
+body.night .faculty-card h3,
+body.night .person-name,
+body.night .library-card h3,
+body.night .star-name,
+body.night .generation-title{
+    color:#d8b56e;
+}
+body.night .section-description,
+body.night .person-description,
+body.night .timeline-text,
+body.night .star-model,
+body.night .generation-person-info,
+body.night .library-card p{
+    color:#bdb0a3;
+}
+body.night .person-photo{background-color:#21191e}
+body.night .news{background:#120e12}
+body.night .extra{background:#090609}
+body.night footer{background:#080609}
+
+#nightTruthLayer{
+    position:fixed;
+    inset:0;
+    z-index:15000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(4,3,5,.88);
+    backdrop-filter:blur(7px);
+}
+#nightTruthLayer.open{display:flex}
+#nightTruthWindow{
+    width:min(960px,96vw);
+    max-height:90vh;
+    overflow:auto;
+    padding:42px;
+    position:relative;
+    color:#e9dfd0;
+    background:
+      radial-gradient(circle at 20% 10%,rgba(169,133,69,.09),transparent 32%),
+      linear-gradient(145deg,#171217,#0c090d);
+    border:1px solid rgba(169,133,69,.65);
+    box-shadow:0 0 0 5px rgba(120,23,34,.15),0 30px 100px rgba(0,0,0,.65);
+}
+#nightTruthClose{
+    position:absolute;right:15px;top:9px;border:0;background:none;
+    color:#d8b56e;font-size:28px;cursor:pointer;
+}
+.nt-kicker{font-size:9px;letter-spacing:.34em;color:#c8a766}
+.nt-title{font-family:"Shippori Mincho",serif;font-size:clamp(28px,5vw,50px);margin:7px 0 18px;color:#e2c27b;letter-spacing:.12em}
+.nt-lead{font-size:12px;line-height:2.35;color:#c8bbae}
+.nt-rule{height:1px;background:linear-gradient(90deg,#781722,#a98545,transparent);margin:22px 0}
+.nt-records{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
+.nt-record{padding:17px;border:1px solid rgba(169,133,69,.25);background:rgba(255,255,255,.025)}
+.nt-record small{display:block;color:#a98545;letter-spacing:.16em;font-size:8px;margin-bottom:7px}
+.nt-record strong{font-family:"Shippori Mincho",serif;color:#e2c27b;font-size:16px}
+.nt-record p{font-size:10px;line-height:2;color:#bfb2a5;margin:8px 0 0}
+.nt-terminal{margin-top:22px;padding:18px;background:#09080b;border:1px solid #4b3a25;font-family:ui-monospace,SFMono-Regular,monospace;color:#d9c38f;font-size:11px;line-height:2}
+.nt-terminal input{width:180px;background:transparent;border:0;border-bottom:1px solid #a98545;color:#f1dfb0;outline:none;font:inherit}
+.nt-terminal button{border:1px solid #a98545;background:transparent;color:#e6d3a5;padding:5px 13px;cursor:pointer;font-family:inherit}
+.nt-terminal button:hover{background:#2a2118}
+#nightTruthMessage{margin-top:16px;min-height:72px;padding:15px;border-left:3px solid #a98545;background:rgba(120,23,34,.08);font-family:"Shippori Mincho",serif;font-size:13px;line-height:2.15;color:#e3d5c6;white-space:pre-wrap}
+.nt-final{display:none;margin-top:22px;padding:20px;border:1px double #a98545;background:rgba(120,23,34,.08)}
+.nt-final.show{display:block}
+.nt-final strong{color:#e2c27b}
+.nt-final .truth-line{font-family:"Shippori Mincho",serif;font-size:18px;color:#e2c27b;margin:10px 0}
+#nightToggle.truth-unlocked{box-shadow:0 0 0 3px rgba(169,133,69,.18),0 0 25px rgba(169,133,69,.28)}
+@media(max-width:650px){#nightTruthWindow{padding:30px 20px}.nt-records{grid-template-columns:1fr}.nt-terminal input{width:130px}}
+'''
+          s = s[:start] + replacement + s[end:]
+          marker = r'''\n\n<!-- =========================================================\n     第六章｜夜間モード真相層\n========================================================= -->\n<div id="nightTruthLayer" aria-hidden="true">\n  <div id="nightTruthWindow" role="dialog" aria-modal="true" aria-label="夜間モード真相記録">\n    <button id="nightTruthClose" type="button" aria-label="閉じる">×</button>\n    <div class="nt-kicker">N.I.U. / NIGHT ACCESS / ARCHIVE 06</div>\n    <h2 class="nt-title">夜間モード</h2>\n    <p class="nt-lead">\n      夜間モードは配色変更ではない。昼間の公式記録から削除された資料を閲覧するための、旧式の夜間閲覧層である。\n      ここでは、神代聖、紅城院眞紅、ミフネア、そして卜部川樒に関する断片が同一の記録として接続される。\n    </p>\n    <div class="nt-rule"></div>\n    <div class="nt-records">\n      <article class="nt-record"><small>ARCHIVE 01</small><strong>神代文庫</strong><p>旧目録「M. D.」と神代聖の署名が同じ資料群に現れる。大学は両者を別人として整理していた。</p></article>\n      <article class="nt-record"><small>ARCHIVE 02</small><strong>紅城院眞紅</strong><p>『吸血鬼ミフネア』初稿の余白には「彼はまだ、生きてゐる」とだけ記されている。</p></article>\n      <article class="nt-record"><small>ARCHIVE 03</small><strong>ミフネア</strong><p>夜間閲覧記録では「怪物」ではなく、過去を忘れることのできない存在として記録される。</p></article>\n      <article class="nt-record"><small>ARCHIVE 04</small><strong>卜部川樒</strong><p>死を恐れながら死を文学にした文士。神代聖の過去について、大学の記録より先に何かを知っていた形跡がある。</p></article>\n    </div>\n    <div class="nt-terminal">\n      &gt; NIGHT ARCHIVE AUTHENTICATION<br>\n      &gt; password: <input id="nightTruthPass" autocomplete="off" spellcheck="false" aria-label="夜間モード認証語">\n      <button id="nightTruthSubmit" type="button">認証</button>\n      <div style="margin-top:8px;color:#806d50">ヒント：第二章で「M. D.」に対応するとされた、古い呼び名。</div>\n    </div>\n    <div id="nightTruthMessage">夜間閲覧層、待機中……</div>\n    <div class="nt-final" id="nightTruthFinal">\n      <strong>認証一致。</strong>　旧式閲覧網が開きました。\n      <div class="truth-line">「彼が大学へ来るより前から、彼の本はここにあった。」</div>\n      <p class="nt-lead">\n        ここで「神代聖」と「ミフネア」を別々の人物として読むことはできなくなる。\n        大学が隠したのは人物の正体だけではない。<strong>一人の人間が、複数の名前で歴史を生きていたという記録そのもの</strong>だった。\n        <br><br>\n        そして、最後の赤字――\n        <br><br>\n        <strong>『彼を探すな。彼が残した記録を読め。』</strong>\n        <br><br>\n        これが第六章の終端であり、次の真相への入口となる。\n      </p>\n    </div>\n  </div>\n</div>\n\n<script id="night-truth-script">\n(()=>{\n const body=document.body,btn=document.getElementById('nightToggle'),layer=document.getElementById('nightTruthLayer');\n const close=document.getElementById('nightTruthClose'),pass=document.getElementById('nightTruthPass'),submit=document.getElementById('nightTruthSubmit'),msg=document.getElementById('nightTruthMessage'),final=document.getElementById('nightTruthFinal');\n const key='imperialNightTruth';\n function open(){layer.classList.add('open');layer.setAttribute('aria-hidden','false');}\n function closeLayer(){layer.classList.remove('open');layer.setAttribute('aria-hidden','true');}\n function unlock(){final.classList.add('show');msg.textContent='認証成功。夜間閲覧網が真相資料を解錠しました。';localStorage.setItem(key,'1');btn.classList.add('truth-unlocked');}\n btn.addEventListener('click',()=>{body.classList.toggle('night');btn.textContent=body.classList.contains('night')?'☀':'☾';localStorage.setItem('imperialNight',body.classList.contains('night')?'on':'off');if(body.classList.contains('night')){open();msg.textContent='夜間モード起動。これは配色変更ではありません。認証端末を確認してください。';}});\n close.addEventListener('click',closeLayer);layer.addEventListener('click',e=>{if(e.target===layer)closeLayer();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLayer();});\n submit.addEventListener('click',()=>{const v=pass.value.trim().replace(/\\s/g,'');if(v==='ミフネア'||v.toUpperCase()==='MIFUNEA'){unlock();}else{msg.textContent='認証拒否。旧目録「M. D.」に記された古い呼び名を入力してください。';}});\n pass.addEventListener('keydown',e=>{if(e.key==='Enter')submit.click();});\n if(localStorage.getItem('imperialNight')==='on'){body.classList.add('night');btn.textContent='☀';}\n if(localStorage.getItem(key)==='1'){final.classList.add('show');btn.classList.add('truth-unlocked');}\n})();\n</script>'''
+          # Insert just before the first existing NIGHT/other button markup, so the new layer is part of index.html.
+          anchor = '<button\\n    class="night-toggle"'
+          pos = s.find(anchor)
+          if pos < 0:
+              raise SystemExit('night toggle anchor not found')
+          marker = marker.replace('\\n','\n')
+          s = s[:pos] + marker + '\n\n' + s[pos:]
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit patched index
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Rewrite homepage night mode as ARG truth layer"
+          git push
