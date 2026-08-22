@@ -1,5 +1,5 @@
 第六章｜夜間モード真相層
 
-このファイルの更新を合図として、現行 index.html の夜間モードを直接再構成する。
+現行 index.html の夜間モードを真相閲覧層へ直接接続する。
 
-2026-08-22 / NIGHT-TRUTH / FORCE-REWRITE
+2026-08-22 / NIGHT-TRUTH / DIRECT-INJECT-02
