@@ -13,7 +13,7 @@
 <section class="section"><h2>第二部　ARCHIVE 16 ― 20</h2><div class="archive-grid">
 <a class="card" href="archive16.html"><div class="num">ARCHIVE 16</div><div class="title">反転頁</div><div class="desc">余白記録</div></a>
 <a class="card" href="archive17.html"><div class="num">ARCHIVE 17</div><div class="title">封印記録</div><div class="desc">次頁指定</div></a>
-<a class="card" href="archive18.html"><div class="num">ARCHIVE 18</div><div class="title">四季局</div><div class="desc">機密記録</div></a>
+<a class="card" href="achievement18.html"><div class="num">ACHIEVEMENT 18</div><div class="title">四季廳極秘資料</div><div class="desc">雪柳春月／春の帰還／機密記録</div></a>
 <a class="card" href="archive19.html"><div class="num">ARCHIVE 19</div><div class="title">数字列</div><div class="desc">年代照合前記録</div></a>
 <a class="card" href="archive20.html"><div class="num">ARCHIVE 20</div><div class="title">年代照合室</div><div class="desc">03 → 02 → 07 → 16</div></a>
 </div></section>
@@ -21,7 +21,7 @@
 <a class="back" href="index.html">帝國大學公式首頁へ戻る</a></main>
 <script>
 const data=[
-['01','第一章・資料室入室','chapter1.html'],['02','神代聖・旧目録照合','chapter1.html'],['03','神代文庫・閲覧開始','chapter2.html'],['04','M. D. の名を発見','chapter2.html'],['05','紅城院眞紅の記録','chapter3.html'],['06','紅い私信を発見','chapter3.html'],['07','竜棘國資料室','chapter4.html'],['08','ミフネア・ドラキュラ','chapter4.html'],['09','古い肖像の照合','chapter4.html'],['10','研究端末起動','chapter5.html'],['11','端末検索記録','chapter5.html'],['12','暗号照合成功','chapter5.html'],['13','夜間モード','chapter6.html'],['14','夜間閲覧記録','chapter6.html'],['15','第六章到達','chapter6.html'],['16','反転頁','archive16.html'],['17','封印記録','archive17.html'],['18','四季局機密記録','archive18.html'],['19','数字列 1532','archive19.html'],['20','年代照合室・時の鏡室','archive20.html']];
+['01','第一章・資料室入室','chapter1.html'],['02','神代聖・旧目録照合','chapter1.html'],['03','神代文庫・閲覧開始','chapter2.html'],['04','M. D. の名を発見','chapter2.html'],['05','紅城院眞紅の記録','chapter3.html'],['06','紅い私信を発見','chapter3.html'],['07','竜棘國資料室','chapter4.html'],['08','ミフネア・ドラキュラ','chapter4.html'],['09','古い肖像の照合','chapter4.html'],['10','研究端末起動','chapter5.html'],['11','端末検索記録','chapter5.html'],['12','暗号照合成功','chapter5.html'],['13','夜間モード','chapter6.html'],['14','夜間閲覧記録','chapter6.html'],['15','第六章到達','chapter6.html'],['16','反転頁','archive16.html'],['17','封印記録','archive17.html'],['18','四季廳極秘資料','achievement18.html'],['19','数字列 1532','archive19.html'],['20','年代照合室・時の鏡室','archive20.html']];
 const keys=['kamishiro_chapter1','kamishiro_chapter2','chapter3_unlocked','chapter4_unlocked','chapter4_portrait','chapter5_unlocked','chapter5_terminal','chapter6_unlocked','chapter6_night','archive16_unlocked','archive17_unlocked','archive18_unlocked','archive19_unlocked','archive20_unlocked'];
 const root=document.getElementById('achievements');data.forEach((x,i)=>{const n=i+1;const unlocked=localStorage.getItem(keys[Math.min(i,keys.length-1)])==='unlocked'||localStorage.getItem('achievement_'+String(n).padStart(2,'0'))==='unlocked';const d=document.createElement('div');d.className='achievement '+(unlocked?'unlocked':'locked');d.innerHTML='<div class="badge">'+(unlocked?'✦':'◇')+'</div><h3>'+x[0]+'　'+x[1]+'</h3><p>関連記録：'+x[2]+'</p>';root.appendChild(d)});
 </script></body></html>
