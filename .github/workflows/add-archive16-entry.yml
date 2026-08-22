@@ -1,0 +1,52 @@
+name: Expose ARCHIVE 16
+
+on:
+  push:
+    branches:
+      - '日ノ本帝國國立帝國大學公式サイト'
+
+permissions:
+  contents: write
+
+jobs:
+  add-entry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: '日ノ本帝國國立帝國大學公式サイト'
+          fetch-depth: 1
+
+      - name: Add ARCHIVE 16 link without replacing the existing site
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = 'id="archive16-direct-entry"'
+          if marker in s:
+              raise SystemExit(0)
+          block = r'''
+<!-- ARCHIVE 16 DIRECT ENTRY -->
+<div id="archive16-direct-entry" style="position:fixed;right:18px;bottom:18px;z-index:9998;background:#241918;color:#f3ecde;border:1px solid #a98545;box-shadow:0 8px 24px rgba(0,0,0,.28);padding:10px 14px;font-family:serif;font-size:11px;letter-spacing:.08em">
+  <a href="archive16.html" style="color:#dbc48e;text-decoration:none">封緘資料｜ARCHIVE 16・反転頁</a>
+</div>
+'''
+          if '</body>' in s:
+              s = s.replace('</body>', block + '\n</body>', 1)
+          else:
+              s += '\n' + block
+          p.write_text(s, encoding='utf-8')
+
+      - name: Commit change
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git diff --quiet; then
+            echo 'ARCHIVE 16 entry already present.'
+            exit 0
+          fi
+          git add index.html
+          git commit -m 'Add ARCHIVE 16 entry to top page'
+          git push
