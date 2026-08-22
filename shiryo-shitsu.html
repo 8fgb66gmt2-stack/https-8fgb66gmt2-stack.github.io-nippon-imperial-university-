@@ -25,7 +25,20 @@
 <a class="back" href="index.html">← 帝國大學公式首頁へ戻る</a>
 </main>
 <script>
-(function(){const key='nipponImperialUniversityAchievements';let found=[];try{found=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){found=[]}document.querySelectorAll('.ach-item').forEach((el,i)=>{if(found.includes(i+1)){el.textContent='取得済　'+String(i+1).padStart(2,'0');el.classList.add('found')}});document.getElementById('ach-count').textContent=String(found.length).padStart(2,'0');window.markAchievement=function(n){n=Number(n);if(n<1||n>20)return;if(!found.includes(n)){found.push(n);found.sort((a,b)=>a-b);localStorage.setItem(key,JSON.stringify(found))}location.reload()}})();
+(function(){
+ const key='nipponImperialUniversityAchievements';
+ let found=[];
+ try{found=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){found=[]}
+ document.querySelectorAll('.ach-item').forEach((el,i)=>{
+   if(found.includes(i+1)){el.textContent='取得済　'+String(i+1).padStart(2,'0');el.classList.add('found')}
+ });
+ document.getElementById('ach-count').textContent=String(found.length).padStart(2,'0');
+ window.markAchievement=function(n){
+   n=Number(n);if(n<1||n>20)return;
+   if(!found.includes(n)){found.push(n);found.sort((a,b)=>a-b);localStorage.setItem(key,JSON.stringify(found))}
+   location.reload()
+ };
+})();
 </script>
 </body>
 </html>
