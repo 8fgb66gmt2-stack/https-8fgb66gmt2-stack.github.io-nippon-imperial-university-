@@ -1,0 +1,83 @@
+name: Night Mode Chapter 6 Gateway
+
+on:
+  push:
+    branches:
+      - '日ノ本帝國國立帝國大學公式サイト'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Patch index.html
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '<!-- CHAPTER6-GATE-DIRECT-V1 -->'
+          if marker in s:
+              print('Chapter 6 gate already installed')
+              raise SystemExit(0)
+
+          patch = r'''<!-- CHAPTER6-GATE-DIRECT-V1 -->
+<style>
+#chapter6Gate{position:fixed;inset:0;z-index:2147483647;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(5,4,4,.94);color:#eee5d7}
+#chapter6Gate.open{display:flex}
+#chapter6Gate .gate-box{width:min(680px,94vw);padding:34px 26px;background:#111010;border:1px solid #b69a61;box-shadow:0 30px 100px #000;text-align:center}
+#chapter6Gate .gate-kicker{font-size:9px;letter-spacing:.32em;color:#b69a61}
+#chapter6Gate h2{font-family:"Shippori Mincho",serif;letter-spacing:.13em;margin:12px 0 18px}
+#chapter6Gate p{font-size:12px;line-height:2.1;color:#d3c8bb}
+#chapter6Gate .gate-open,#chapter6Gate .gate-close{padding:12px 24px;margin:8px;border:1px solid #b69a61;background:#171311;color:#d9c38f;font-family:inherit;cursor:pointer}
+#chapter6Gate .gate-open{background:#5e151d;color:#fff0df}
+</style>
+<div id="chapter6Gate" aria-hidden="true">
+  <div class="gate-box">
+    <div class="gate-kicker">NIPPON IMPERIAL UNIVERSITY / NIGHT ARCHIVE</div>
+    <h2>第六章　夜間モード</h2>
+    <p>夜間記録への接続を確認しました。</p>
+    <p>通常公開画面には存在しない秘匿記録です。</p>
+    <button class="gate-open" id="chapter6Open">秘匿記録を開く</button>
+    <button class="gate-close" id="chapter6Close">戻る</button>
+  </div>
+</div>
+<script>
+(function(){
+  function ready(){
+    var toggle=document.getElementById('nightToggle');
+    var gate=document.getElementById('chapter6Gate');
+    if(!toggle||!gate)return;
+    toggle.addEventListener('click',function(e){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      document.body.classList.add('night');
+      toggle.textContent='☀';
+      localStorage.setItem('imperialNight','on');
+      gate.classList.add('open');
+      gate.setAttribute('aria-hidden','false');
+    },true);
+    document.getElementById('chapter6Open').onclick=function(){window.location.href='./chapter6.html';};
+    document.getElementById('chapter6Close').onclick=function(){gate.classList.remove('open');gate.setAttribute('aria-hidden','true');};
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready);else ready();
+})();
+</script>
+'''
+          if '</body>' not in s:
+              raise SystemExit('index.html has no closing body tag')
+          p.write_text(s.replace('</body>', patch + '\n</body>', 1), encoding='utf-8')
+      - name: Commit patched index
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Add direct Chapter 6 night mode gateway'
+          git push
