@@ -3,7 +3,7 @@ name: Fix Night Mode Chapter 6
 on:
   push:
     branches:
-      - '日ノ本帝國國立帝國大學公式サイト'
+      - '*'
   workflow_dispatch:
 
 permissions:
@@ -16,188 +16,63 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Rewrite night mode as Chapter 6 gateway
+      - name: Inject Chapter 6 gateway
         shell: python
         run: |
           from pathlib import Path
-          import re
-
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
 
-          old_css = '''.night-toggle {
-    position: fixed;
+          marker = '<!-- CHAPTER6-NIGHT-GATE-V2 -->'
+          if marker not in s:
+              patch = r'''<!-- CHAPTER6-NIGHT-GATE-V2 -->
+<style>
+#chapter6Gate{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(5,4,5,.9);backdrop-filter:blur(8px)}
+#chapter6Gate .box{width:min(620px,94vw);padding:34px 28px;background:#100d0d;border:1px solid #b69a61;box-shadow:0 25px 90px #000;color:#e9dfd1;text-align:center;font-family:"Noto Serif JP",serif}
+#chapter6Gate .kicker{font-size:9px;letter-spacing:.3em;color:#b69a61}
+#chapter6Gate h2{font-family:"Shippori Mincho",serif;color:#eee5d7;letter-spacing:.12em;margin:12px 0 20px}
+#chapter6Gate p{font-size:12px;line-height:2.1}
+#chapter6Gate button{margin:6px;padding:12px 24px;border:1px solid #b69a61;background:#171311;color:#d9c38f;font-family:inherit;cursor:pointer}
+#chapter6Gate button:hover{background:#781722;color:#fff3df}
+</style>
+<script>
+(function(){
+  function install(){
+    var b=document.getElementById('nightToggle');
+    if(!b || b.dataset.chapter6GateInstalled==='1') return;
+    b.dataset.chapter6GateInstalled='1';
+    b.addEventListener('click',function(e){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      document.body.classList.add('night');
+      localStorage.setItem('imperialNight','on');
+      var old=document.getElementById('chapter6Gate');
+      if(old) old.remove();
+      var g=document.createElement('div');
+      g.id='chapter6Gate';
+      g.innerHTML='<div class="box"><div class="kicker">N.I.U. / NIGHT ARCHIVE N-00</div><h2>第六章　夜間モード</h2><p>夜間記録への接続を確認しました。</p><p>通常公開記録では秘匿された資料が存在します。</p><button id="chapter6Open">秘匿記録を開く</button><button id="chapter6Close">閉じる</button></div>';
+      document.body.appendChild(g);
+      document.getElementById('chapter6Open').onclick=function(){location.href='./chapter6.html';};
+      document.getElementById('chapter6Close').onclick=function(){g.remove();};
+    },true);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',install); else install();
+})();
+</script>
+'''
+              s = s.replace('</body>', patch + '</body>', 1) if '</body>' in s else s + patch
+              p.write_text(s, encoding='utf-8')
+          PY
 
-    left: 20px;
-    bottom: 20px;
-
-    z-index: 800;
-
-    width: 46px;
-    height: 46px;
-
-    border:
-        1px solid var(--gold);
-
-    background:
-        rgba(40,28,27,.93);
-
-    color: var(--gold-light);
-
-    cursor: pointer;
-
-    font-size: 17px;
-}'''
-
-          new_css = '''.night-toggle {
-    position: fixed;
-    left: 20px;
-    bottom: 90px;
-    z-index: 10020;
-    width: 54px;
-    height: 54px;
-    border: 1px solid var(--gold);
-    background: rgba(20,14,14,.96);
-    color: var(--gold-light);
-    cursor: pointer;
-    font-size: 19px;
-    box-shadow: 0 8px 25px rgba(20,10,10,.35);
-    transition: .25s ease;
-}
-
-.night-toggle:hover {
-    transform: translateY(-2px);
-    background: var(--red-dark);
-}
-
-/* 第六章への導線。既存の遊學機關・研究端末・頁面下部UIと重ならない独立配置。 */
-@media (max-width: 560px) {
-    .night-toggle {
-        left: 12px;
-        bottom: 88px;
-        width: 50px;
-        height: 50px;
-    }
-}'''
-
-          if old_css in s:
-              s = s.replace(old_css, new_css, 1)
-          elif '.night-toggle {' not in s:
-              marker = '/* =========================================================\n   RESPONSIVE\n========================================================= */'
-              s = s.replace(marker, new_css + '\n\n' + marker, 1)
-
-          old_js = '''const nightToggle =
-    document.getElementById("nightToggle");
-
-nightToggle.addEventListener(
-    "click",
-    () => {
-
-        document.body.classList.toggle("night");
-
-        if (
-            document.body.classList.contains("night")
-        ) {
-
-            nightToggle.textContent = "☀";
-
-            localStorage.setItem(
-                "imperialNight",
-                "on"
-            );
-
-        } else {
-
-            nightToggle.textContent = "☾";
-
-            localStorage.setItem(
-                "imperialNight",
-                "off"
-            );
-
-        }
-
-    }
-);
-
-if (
-    localStorage.getItem("imperialNight")
-    === "on"
-) {
-
-    document.body.classList.add("night");
-
-    nightToggle.textContent = "☀";
-
-}'''
-
-          new_js = '''const nightToggle =
-    document.getElementById("nightToggle");
-
-/* =========================================================
-   第六章ゲート：夜間モード
-   夜間モードは単なる配色切替ではなく、真相頁への入口とする。
-========================================================= */
-function openChapter6FromNightMode() {
-    document.body.classList.add("night");
-    nightToggle.textContent = "☀";
-    localStorage.setItem("imperialNight", "on");
-
-    const gate = document.createElement("div");
-    gate.id = "chapter6-gate";
-    gate.innerHTML = `
-      <div class="chapter6-gate-box">
-        <div class="chapter6-gate-kicker">N.I.U. / NIGHT ARCHIVE N-00</div>
-        <h2>第六章　夜間モード</h2>
-        <p>昼間の記録では、ここから先へ進めない。</p>
-        <p>夜間記録への接続を確認しました。</p>
-        <div class="chapter6-gate-line"></div>
-        <button id="chapter6-enter">秘匿記録を開く</button>
-        <button id="chapter6-cancel">閉じる</button>
-      </div>`;
-    document.body.appendChild(gate);
-
-    document.getElementById("chapter6-enter").onclick = () => {
-        window.location.href = "chapter6.html";
-    };
-    document.getElementById("chapter6-cancel").onclick = () => gate.remove();
-    gate.addEventListener("click", e => {
-        if (e.target === gate) gate.remove();
-    });
-}
-
-nightToggle.addEventListener("click", openChapter6FromNightMode);
-
-if (
-    localStorage.getItem("imperialNight")
-    === "on"
-) {
-    document.body.classList.add("night");
-    nightToggle.textContent = "☀";
-}'''
-
-          if old_js in s:
-              s = s.replace(old_js, new_js, 1)
-          else:
-              # Fallback: remove any existing night-toggle click handler and append a single gateway handler.
-              s += '''\n<script>\n(function(){\n const b=document.getElementById("nightToggle");\n if(!b) return;\n b.onclick=function(){\n   document.body.classList.add("night");\n   localStorage.setItem("imperialNight","on");\n   const g=document.createElement("div");\n   g.id="chapter6-gate";\n   g.innerHTML='<div class="chapter6-gate-box"><div class="chapter6-gate-kicker">N.I.U. / NIGHT ARCHIVE N-00</div><h2>第六章　夜間モード</h2><p>夜間記録への接続を確認しました。</p><button id="chapter6-enter">秘匿記録を開く</button><button id="chapter6-cancel">閉じる</button></div>';
-   document.body.appendChild(g);\n   document.getElementById("chapter6-enter").onclick=()=>location.href="chapter6.html";\n   document.getElementById("chapter6-cancel").onclick=()=>g.remove();\n };\n})();\n</script>\n'''
-
-          gate_css = '''\n<style id="chapter6-gate-style">\n#chapter6-gate{position:fixed;inset:0;z-index:11000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(5,4,5,.82);backdrop-filter:blur(7px)}\n.chapter6-gate-box{width:min(620px,94vw);padding:34px 30px;background:linear-gradient(145deg,#171313,#0b0b0b);border:1px solid #b69a61;box-shadow:0 25px 80px rgba(0,0,0,.7);color:#e7ddd0;text-align:center}\n.chapter6-gate-kicker{font-size:9px;letter-spacing:.28em;color:#b69a61}\n.chapter6-gate-box h2{font-family:"Shippori Mincho",serif;color:#e7ddd0;letter-spacing:.12em;margin:10px 0 20px}\n.chapter6-gate-box p{font-size:12px;line-height:2}\n.chapter6-gate-line{height:1px;background:linear-gradient(90deg,transparent,#b69a61,transparent);margin:24px 0}\n.chapter6-gate-box button{margin:5px;padding:11px 22px;border:1px solid #b69a61;background:#171311;color:#d9c38f;font-family:inherit;cursor:pointer}\n.chapter6-gate-box button:hover{background:#781722;color:#fff3df}\n</style>\n'''
-          if 'id="chapter6-gate-style"' not in s:
-              s = s.replace('</head>', gate_css + '\n</head>', 1)
-
-          p.write_text(s, encoding='utf-8')
-      
-      - name: Commit rewrite
+      - name: Commit patched index
         shell: bash
         run: |
-          if git diff --quiet; then
-            echo 'No changes needed.'
-            exit 0
-          fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
-          git commit -m 'Fix night mode gateway to Chapter 6'
-          git push
+          if git diff --cached --quiet; then
+            echo 'No index changes required.'
+          else
+            git commit -m 'Add reliable Chapter 6 night mode gateway'
+            git push
+          fi
