@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'hyakki.html'
+      - 'hyakki-archive.html'
       - '.github/workflows/add-hyakki-entry.yml'
   workflow_dispatch:
 
@@ -19,7 +20,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Add entry to index.html
+      - name: Add 『彼岸奇譚』 to the main navigation
         shell: python
         run: |
           from pathlib import Path
