@@ -1,0 +1,51 @@
+name: Publish 『彼岸奇譚』 entry
+
+on:
+  push:
+    branches:
+      - '日ノ本帝國國立帝國大學公式サイト'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout site branch
+        uses: actions/checkout@v4
+        with:
+          ref: '日ノ本帝國國立帝國大學公式サイト'
+          fetch-depth: 0
+
+      - name: Insert visible 『彼岸奇譚』 entrance
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          href = 'hyakki.html'
+          link = '<a href="hyakki.html" class="hyakki-entry">『彼岸奇譚』帝國大百科</a>'
+          if href not in s:
+              marker = '</body>'
+              block = '''\n<!-- 『彼岸奇譚』帝國大百科：ARG入口 -->\n<div id="hyakki-entry-fixed" style="position:fixed;right:18px;bottom:18px;z-index:9998;background:#2b211e;border:1px solid #a98545;box-shadow:0 8px 25px rgba(0,0,0,.25);padding:10px 14px;font-family:serif">''' + link + '''</div>\n<style>.hyakki-entry{color:#f3dfb2;text-decoration:none;letter-spacing:.12em;font-size:12px}.hyakki-entry:hover{color:#fff}</style>\n'''
+              if marker in s:
+                  s = s.replace(marker, block + marker, 1)
+              else:
+                  s += block
+              p.write_text(s, encoding='utf-8')
+          else:
+              print('hyakki.html reference already present; no insertion needed')
+
+      - name: Commit generated site change
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          if git diff --cached --quiet; then
+            echo 'No site change required.'
+          else
+            git commit -m 'Publish visible 『彼岸奇譚』 entry on main site'
+            git push origin 'HEAD:日ノ本帝國國立帝國大學公式サイト'
+          fi
