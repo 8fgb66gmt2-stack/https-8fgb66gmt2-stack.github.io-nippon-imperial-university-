@@ -26,6 +26,9 @@ h1{color:#d8bd7c;letter-spacing:.14em;font-weight:normal}
 .final{display:none;margin-top:28px;padding:28px;background:#eee3cb;color:#2a211e;border:1px solid #9a7840}
 .final.show{display:block}
 .seal{font-size:2em;text-align:center;color:#67151d;letter-spacing:.2em}
+.next{display:none;margin-top:22px;padding:20px;background:#171212;border:1px dashed #9a7840;text-align:center}
+.next.show{display:block}
+.next a{display:inline-block;margin-top:8px;padding:12px 22px;border:1px solid #9a7840;color:#dcc27f;text-decoration:none}
 @media(max-width:650px){main{padding:25px}.choices{grid-template-columns:1fr 1fr}.clock{font-size:1.7em}}
 </style>
 </head>
@@ -80,8 +83,14 @@ h1{color:#d8bd7c;letter-spacing:.14em;font-weight:normal}
 <p>これは単なる人物名の照合ではない。</p>
 <p>過去に閉じ込められた少女が、再び「春」として歩き出すための記録である。</p>
 <p>――そして、ここから物語は第二部へ移る。</p>
-<p><a href="index.html">帝國大學首頁へ戻る</a></p>
 </section>
+<section id="next" class="next">
+<p>――旧式端末に、新たな記録への接続口が開いた。</p>
+<p><strong>SHIKI-022 / 四季廳長官・極秘記録</strong></p>
+<p>花葉春月――旧姓・雪柳春月。</p>
+<a href="archive22.html">ARCHIVE 22へ進む</a>
+</section>
+<p><a href="index.html">帝國大學首頁へ戻る</a></p>
 <p><a href="archive20.html">ARCHIVE 20へ戻る</a></p>
 </main>
 <script>
@@ -90,6 +99,7 @@ const clock=document.querySelector('.clock');
 const msg=document.getElementById('msg');
 const secret=document.getElementById('secret');
 const final=document.getElementById('final');
+const next=document.getElementById('next');
 document.querySelectorAll('.choices button').forEach(b=>b.onclick=()=>{
  if(b.dataset.k===answer){
    clock.textContent='05 : 12';
@@ -102,8 +112,9 @@ document.querySelectorAll('.choices button').forEach(b=>b.onclick=()=>{
 });
 document.getElementById('unlock').onclick=()=>{
  final.classList.add('show');
+ next.classList.add('show');
  document.getElementById('unlock').disabled=true;
- msg.textContent='ARCHIVE 21・記録確定。';
+ msg.textContent='ARCHIVE 21・記録確定。次の機密記録への接続を許可します。';
  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
 };
 </script>
