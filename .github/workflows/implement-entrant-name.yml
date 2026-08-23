@@ -20,7 +20,6 @@ jobs:
         shell: python
         run: |
           from pathlib import Path
-          import re
 
           index = Path('index.html')
           text = index.read_text(encoding='utf-8')
@@ -32,7 +31,7 @@ jobs:
                   raise SystemExit('entrance marker not found')
               text = text.replace(marker, marker + addition, 1)
 
-          script = r'''\n<script>\n(function(){\n  const KEY = 'niu_entrant_name';\n  const input = document.getElementById('entrant-name');\n  if (!input) return;\n\n  const saved = localStorage.getItem(KEY);\n  if (saved) input.value = saved;\n\n  input.addEventListener('input', function(){\n    const value = this.value.trim();\n    if (value) localStorage.setItem(KEY, value);\n    else localStorage.removeItem(KEY);\n  });\n\n  const enter = document.querySelector('.entrance-enter');\n  if (enter) {\n    enter.addEventListener('click', function(){\n      const value = input.value.trim();\n      if (!value) {\n        input.focus();\n        input.style.boxShadow = '0 0 0 1px #dbc48e';\n        setTimeout(function(){ input.style.boxShadow = ''; }, 700);\n        return;\n      }\n      localStorage.setItem(KEY, value);\n    }, true);\n  }\n})();\n</script>\n'''
+          script = r'''\n<script>\n(function(){\n  const KEY = 'niu_entrant_name';\n  const input = document.getElementById('entrant-name');\n  if (!input) return;\n\n  const saved = localStorage.getItem(KEY);\n  if (saved) input.value = saved;\n\n  input.addEventListener('input', function(){\n    const value = this.value.trim();\n    if (value) localStorage.setItem(KEY, value);\n    else localStorage.removeItem(KEY);\n  });\n\n  const enter = document.querySelector('.entrance-enter');\n  if (enter) {\n    enter.addEventListener('click', function(event){\n      const value = input.value.trim();\n      if (!value) {\n        event.preventDefault();\n        event.stopImmediatePropagation();\n        input.focus();\n        input.style.boxShadow = '0 0 0 1px #dbc48e';\n        setTimeout(function(){ input.style.boxShadow = ''; }, 700);\n        return;\n      }\n      localStorage.setItem(KEY, value);\n    }, true);\n  }\n})();\n</script>\n'''
           if "niu_entrant_name" not in text:
               text = text.replace('</body>', script + '</body>', 1)
 
