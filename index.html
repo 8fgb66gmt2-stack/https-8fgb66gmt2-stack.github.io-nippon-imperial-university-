@@ -2481,6 +2481,44 @@ body.night .library-card {
     }
 }
 
+
+/* =========================================================
+   過去ログ回収ボタン
+========================================================= */
+#archiveRecoveryButton {
+    position: fixed;
+    top: 18px;
+    right: 20px;
+    z-index: 9000;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 8px 16px;
+    border: 1px solid var(--gold);
+    background: rgba(40,28,27,.94);
+    color: var(--gold-light);
+    font-size: 10px;
+    letter-spacing: .12em;
+    box-shadow: 0 5px 18px rgba(30,18,15,.22);
+    backdrop-filter: blur(4px);
+    transition: .25s ease;
+}
+#archiveRecoveryButton:hover {
+    background: var(--gold);
+    color: var(--black);
+    transform: translateY(-1px);
+}
+@media (max-width: 600px) {
+    #archiveRecoveryButton {
+        top: 10px;
+        right: 10px;
+        min-height: 36px;
+        padding: 6px 10px;
+        font-size: 9px;
+    }
+}
+
 </style>
 
 <style id="imperial-command-center-style">
@@ -6524,6 +6562,11 @@ body.taisho-nocturne:after{content:"";position:fixed;inset:0;pointer-events:none
 .hyakki-clues{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:-22px}.hyakki-clues span{border:1px solid rgba(74,47,35,.24);padding:5px 12px;font-size:10px;letter-spacing:.08em;color:#781722;background:rgba(255,255,255,.35)}.hyakki-note{text-align:center;color:#665854;font-size:10px;margin-top:18px}
 </style>
 <!-- /『彼岸奇譚』帝國大百科 entry -->
+
+
+<a id="archiveRecoveryButton" href="archive-recovery.html" aria-label="過去ログ回収室を開く">
+    過去ログ回収
+</a>
 
 </body>
 </html>
