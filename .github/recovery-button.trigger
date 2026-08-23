@@ -1,0 +1,1 @@
+activate archive recovery button
