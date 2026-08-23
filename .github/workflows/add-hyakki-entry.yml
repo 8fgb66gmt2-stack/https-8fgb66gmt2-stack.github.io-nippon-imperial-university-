@@ -1,0 +1,47 @@
+name: Add 『彼岸奇譚』入口
+
+on:
+  push:
+    paths:
+      - 'hyakki.html'
+      - '.github/workflows/add-hyakki-entry.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add-entry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add entry to index.html
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('index.html')
+          text = p.read_text(encoding='utf-8')
+          link = '<a href="hyakki.html" data-hyakki-entry="true">『彼岸奇譚』</a>'
+          if 'data-hyakki-entry="true"' not in text:
+              marker = '<div class="main-nav-inner">'
+              if marker in text:
+                  text = text.replace(marker, marker + '\n' + '        ' + link, 1)
+              else:
+                  body = '<body>'
+                  if body in text:
+                      text = text.replace(body, body + '\n<div style="position:fixed;right:18px;bottom:18px;z-index:9000"><a href="hyakki.html" style="display:block;padding:10px 15px;border:1px solid #a98545;background:#271b1a;color:#dbc48e;font-family:serif;font-size:11px;letter-spacing:.12em">『彼岸奇譚』帝國大百科</a></div>', 1)
+                  else:
+                      raise SystemExit('index.html に挿入位置が見つかりません')
+              p.write_text(text, encoding='utf-8')
+
+      - name: Commit and push
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet || git commit -m 'Add 『彼岸奇譚』 entry to university site'
+          git push
