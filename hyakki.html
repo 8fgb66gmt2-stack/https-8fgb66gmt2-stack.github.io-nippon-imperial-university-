@@ -8,7 +8,7 @@
 <style>
 :root{--ink:#241c1b;--muted:#6b5b55;--paper:#f3ecde;--paper2:#fcf8ef;--red:#781722;--gold:#a98545;--line:rgba(74,47,35,.24)}
 *{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:"Noto Serif JP","Yu Mincho",serif;line-height:2;background:radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.8),transparent 45%),var(--paper)}
-.wrap{max-width:1050px;margin:auto;padding:55px 22px 90px}.mast{border-top:4px double var(--gold);border-bottom:4px double var(--gold);padding:30px 10px;text-align:center}.kicker{font-size:10px;letter-spacing:.4em;color:var(--red)}h1{font-family:"Shippori Mincho",serif;letter-spacing:.12em;font-size:clamp(28px,5vw,52px);margin:8px 0}.subtitle{font-size:11px;color:var(--muted);letter-spacing:.18em}.editor{margin:30px auto;max-width:760px;padding:24px;border:1px solid var(--line);background:rgba(255,255,255,.45)}h2{font-family:"Shippori Mincho",serif;color:var(--red);border-left:4px solid var(--gold);padding-left:14px;margin-top:55px}h3{font-family:"Shippori Mincho",serif;color:var(--red);margin-top:30px}.notice{padding:18px 20px;background:rgba(120,23,34,.06);border:1px solid rgba(120,23,34,.2);font-size:12px}.search{display:flex;gap:8px;margin:22px 0}.search input{flex:1;padding:12px;border:1px solid var(--line);background:var(--paper2);font-family:inherit}.search button,.back{padding:11px 18px;border:1px solid var(--gold);background:transparent;color:var(--red);font-family:inherit;cursor:pointer}.entry{display:none;padding:20px;margin-top:12px;background:var(--paper2);border:1px solid var(--line)}.entry.show{display:block}.term{display:inline-block;padding:4px 9px;margin:3px;border:1px solid var(--line);cursor:pointer;font-size:12px}.secret{margin-top:45px;padding:22px;border:1px dashed var(--red);background:rgba(120,23,34,.035)}.redact{color:var(--red);letter-spacing:.15em}.footer{text-align:center;margin-top:70px;color:var(--muted);font-size:10px}
+.wrap{max-width:1050px;margin:auto;padding:55px 22px 90px}.mast{border-top:4px double var(--gold);border-bottom:4px double var(--gold);padding:30px 10px;text-align:center}.kicker{font-size:10px;letter-spacing:.4em;color:var(--red)}h1{font-family:"Shippori Mincho",serif;letter-spacing:.12em;font-size:clamp(28px,5vw,52px);margin:8px 0}.subtitle{font-size:11px;color:var(--muted);letter-spacing:.18em}.editor{margin:30px auto;max-width:760px;padding:24px;border:1px solid var(--line);background:rgba(255,255,255,.45)}h2{font-family:"Shippori Mincho",serif;color:var(--red);border-left:4px solid var(--gold);padding-left:14px;margin-top:55px}h3{font-family:"Shippori Mincho",serif;color:var(--red);margin-top:30px}.notice{padding:18px 20px;background:rgba(120,23,34,.06);border:1px solid rgba(120,23,34,.2);font-size:12px}.search{display:flex;gap:8px;margin:22px 0}.search input{flex:1;padding:12px;border:1px solid var(--line);background:var(--paper2);font-family:inherit}.search button,.back{padding:11px 18px;border:1px solid var(--gold);background:transparent;color:var(--red);font-family:inherit;cursor:pointer}.entry{display:none;padding:20px;margin-top:12px;background:var(--paper2);border:1px solid var(--line)}.entry.show{display:block}.term{display:inline-block;padding:4px 9px;margin:3px;border:1px solid var(--line);cursor:pointer;font-size:12px}.secret{margin-top:45px;padding:22px;border:1px dashed var(--red);background:rgba(120,23,34,.035)}.redact{color:var(--red);letter-spacing:.15em}.archive-link{display:inline-block;margin-top:12px;padding:9px 15px;border:1px solid var(--red);color:var(--red);font-size:11px;letter-spacing:.08em}.archive-link:hover{background:var(--red);color:var(--paper2)}.footer{text-align:center;margin-top:70px;color:var(--muted);font-size:10px}
 </style>
 </head>
 <body>
@@ -16,7 +16,7 @@
 <header class="mast"><div class="kicker">帝國勅撰・帝國大學附属圖書館參考資料</div><h1>『彼岸奇譚』帝國大百科</h1><div class="subtitle">日ノ本帝國の諸制度・四季の神々・帝都の文化・帝國近代の人物たち</div></header>
 <section class="editor"><strong>編纂者：卜部川樒</strong><br>日ノ本帝國國立帝國大學文科を首席で卒業／帝國近代文藝研究家・小説家・評論家<br>帝國暦二百三十八年（玲瓏百六年）　帝の命により奉撰</section>
 <div class="notice">本頁は帝國大學が公開する參考資料です。神話・制度・人物史を照合するための入口として設置されています。なお、旧資料には現行の公開記録と一致しない記述が存在します。</div>
-<div class="search"><input id="q" placeholder="項目を検索（例：春の不在／四季庁／卜部川樒）"><button onclick="searchHyakki()">検索</button></div>
+<div class="search"><input id="q" placeholder="項目を検索（例：春の不在／四季庁／記憶論）"><button onclick="searchHyakki()">検索</button></div>
 <div id="results"></div>
 <h2>凡例</h2><p>本書は、日ノ本帝國における国家制度、帝家、帝都、帝國暦、四季の神々、四季庁、各季節の里、軍事・治安機構、地方制度、帝國近代文化、帝國大學および同学出身の主要な文化人について整理したものである。</p>
 <h2>第一部　帝國</h2><h3>日ノ本帝國</h3><p>大和列島を中心に成り立つ帝國。古くから帝をいただき、神祇・祭祀・政治・軍事を一つにまとめながら発展してきた国家である。近代行政、鉄道、電話、新聞、映画が存在する一方、四季の現人神や里、神社、祭祀も国家制度の内部に生きている。ゆえに日ノ本とは、<strong>「神話が終わらなかった近代国家」</strong>なのである。</p>
@@ -31,6 +31,13 @@
 <h2>第九部　帝國大學出身文化人</h2><p><strong>有栖川劉ノ介</strong>――文科首席・小説家。<br><strong>六條杠葉</strong>――歌人・詩人・評論家。<br><strong>卜部川樒</strong>――文科首席・小説家。愛と所有欲、嫉妬、依存の境界を描いた。<br><strong>九条院朔臣</strong>――繊細かつ耽美的な文章で孤独を描いた小説家。<br><strong>森林太郎</strong>――文科卒・皇族・小説家。<br><strong>中原壱葉</strong>――詩人・国語教師。<br><strong>大窪晶与／花葉春月</strong>――芸術科首席・漫画家・四季庁長官。<br><strong>雪柳残雪</strong>――音楽科首席・音楽家・ボカロP・冬の現人神護衛官。</p>
 <h2>第十・十一部　帝國近代文化人と帝都文壇</h2><p><strong>藤宮薫子</strong>――帝大出身ではないが、帝都近代の女子教育を象徴する人物。<br>帝都文壇には有栖川、杠葉、樒、九条院、森林、中原、大窪らが連なり、「互いに認め合いながら、互いに気に入らない」という面倒な文化人のネットワークを形成した。</p>
 <div class="secret"><strong>編纂者追記</strong><br>私は十三人しか記録していない。<br>ならば、<strong>十四人目を書いたのは誰だ。</strong><br><br><span class="redact">関連資料：文星番号 拾肆／閲覧権限：読者</span></div>
+<h2>第十二部　附属圖書館・禁書照合記録</h2>
+<h3>『記憶論――人は何故、忘れるのか』</h3>
+<p>帝國大學附属圖書館の旧蔵書目録にのみ残る書名。著者名、刊行年、出版社の記録は欠落している。現行の蔵書検索では該当なし。</p>
+<div class="secret"><strong>請求記號：SH-000</strong><br>分類：神祇・四季制度・記憶論<br>状態：<span class="redact">閲覧禁止／原本所在不明</span><br><br>旧目録の余白に、鉛筆による書き込みが一つだけ残されている。<br><strong>「秋の名を呼ぶ本。」</strong><br><br>さらに、その下には別の筆跡で――<br><span class="redact">「名前を呼べば、記録が戻る。」</span><br><a class="archive-link" href="archive31.html">SHIKI-031「存在しない一頁」を開く →</a></div>
+<h3>照合不能資料・SHIKI-000</h3>
+<p>旧四季制度の創設記録において、秋の初代現人神に関する項目のみが欠落している。削除記録は存在するが、削除者・対象者ともに現行資料からは確認できない。</p>
+<div class="secret"><strong>図書館司書注記</strong><br>「この本を検索した学生は、必ず一度だけ『秋』を検索する。<br>しかし、二度目に検索した者の記録はない。」</div>
 <p style="text-align:center;margin-top:45px"><a class="back" href="index.html">帝國大學公式頁へ戻る</a></p>
 <div class="footer">『彼岸奇譚』帝國大百科　帝國勅撰　編纂者：卜部川樒<br>帝國大學附属圖書館・參考資料</div>
 </div>
@@ -40,8 +47,12 @@ const data={
 '四季庁':`<div class="entry show"><h3>四季庁</h3><p>現人神・護衛官・里・季節災害・異能犯罪を統括する政府直属機関。大学の神祇学研究室と共同記録を持つ。</p></div>`,
 '卜部川樒':`<div class="entry show"><h3>卜部川樒</h3><p>文科首席。小説家・評論家。本百科事典の編纂者。愛と所有欲、嫉妬、依存の境界を描いた。</p><p class="redact">編纂者追記：私は十三人しか記録していない。</p></div>`,
 '文星':`<div class="entry show"><h3>文星</h3><p>帝國大學を代表する文化人の称号。公開名簿は十三人。</p><p class="redact">関連資料：拾肆</p></div>`,
-'神痣':`<div class="entry show"><h3>神痣</h3><p>春＝桜、夏＝百合、秋＝菊、冬＝牡丹。選ばれた者の身体に現れる聖痕。</p></div>`};
-function searchHyakki(){const q=document.getElementById('q').value.trim();const r=document.getElementById('results');if(data[q]){r.innerHTML=data[q]}else if(q==='桜'||q==='百合'||q==='菊'||q==='牡丹'){r.innerHTML=`<div class="entry show"><h3>神痣照合</h3><p>${q}の記録を確認しました。四季神祇資料と人物録を照合してください。</p></div>`}else{r.innerHTML=`<div class="entry show"><p>該当項目は公開されていません。</p><small>ヒント：春の不在／四季庁／神痣／文星／卜部川樒</small></div>`}}
+'神痣':`<div class="entry show"><h3>神痣</h3><p>春＝桜、夏＝百合、秋＝菊、冬＝牡丹。選ばれた者の身体に現れる聖痕。</p></div>`,
+'記憶論':`<div class="entry show"><h3>『記憶論――人は何故、忘れるのか』</h3><p>現行蔵書目録には存在しない旧資料。請求記號は<strong>SH-000</strong>。</p><p>分類：神祇・四季制度・記憶論／状態：原本所在不明</p><p><strong>旧目録注記：「秋の名を呼ぶ本。」</strong></p><a class="archive-link" href="archive31.html">SHIKI-031「存在しない一頁」を開く →</a></div>`,
+'SH-000':`<div class="entry show"><h3>請求記號 SH-000</h3><p>旧四季制度に関する禁書級資料。書名は『記憶論――人は何故、忘れるのか』。著者・刊行年・所在は欠落。</p><p class="redact">「名前を呼べば、記録が戻る。」</p><a class="archive-link" href="archive31.html">SHIKI-031へ →</a></div>`,
+'秋の初代現人神':`<div class="entry show"><h3>秋の初代現人神</h3><p>記録番号 SHIKI-000。氏名・護衛官・退任理由・死亡記録はいずれも復元不能。</p><p class="redact">最後に残された一文：「彼女のことを、忘れないために。」</p></div>`
+};
+function searchHyakki(){const q=document.getElementById('q').value.trim();const r=document.getElementById('results');if(data[q]){r.innerHTML=data[q]}else if(q==='桜'||q==='百合'||q==='菊'||q==='牡丹'){r.innerHTML=`<div class="entry show"><h3>神痣照合</h3><p>${q}の記録を確認しました。四季神祇資料と人物録を照合してください。</p></div>`}else{r.innerHTML=`<div class="entry show"><p>該当項目は公開されていません。</p><small>ヒント：春の不在／四季庁／神痣／文星／卜部川樒／記憶論</small></div>`}}
 function showTerm(t){document.getElementById('q').value=t;searchHyakki();window.scrollTo({top:document.getElementById('results').offsetTop-30,behavior:'smooth'})}
 </script>
 </body></html>
