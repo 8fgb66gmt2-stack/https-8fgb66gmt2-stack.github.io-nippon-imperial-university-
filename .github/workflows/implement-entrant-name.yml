@@ -1,0 +1,51 @@
+name: Implement entrant name ARG layer
+
+on:
+  push:
+    branches:
+      - feature/entrant-name-arg
+    paths:
+      - .github/workflows/implement-entrant-name.yml
+
+permissions:
+  contents: write
+
+jobs:
+  implement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Patch entrance and add achievement 37
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          index = Path('index.html')
+          text = index.read_text(encoding='utf-8')
+
+          marker = '<div class="entrance-inner">'
+          if 'id="entrant-name"' not in text and "id='entrant-name'" not in text:
+              addition = '''\n        <div class="entrant-registration" style="margin:22px auto 0;max-width:320px;">\n            <div style="font-size:10px;letter-spacing:.22em;color:#d7c8b3;margin-bottom:8px;">入學者登録</div>\n            <input id="entrant-name" type="text" maxlength="24" autocomplete="off" placeholder="氏名を入力してください" aria-label="入學者名" style="width:100%;padding:10px 12px;background:rgba(0,0,0,.18);border:1px solid #a98545;color:#f5ead8;font-family:inherit;text-align:center;outline:none;">\n            <div id="entrant-name-note" style="font-size:8px;letter-spacing:.12em;color:#cdbfae;margin-top:7px;opacity:.72;">記録はこの端末にのみ保存されます</div>\n        </div>\n'''
+              if marker not in text:
+                  raise SystemExit('entrance marker not found')
+              text = text.replace(marker, marker + addition, 1)
+
+          script = r'''\n<script>\n(function(){\n  const KEY = 'niu_entrant_name';\n  const input = document.getElementById('entrant-name');\n  if (!input) return;\n\n  const saved = localStorage.getItem(KEY);\n  if (saved) input.value = saved;\n\n  input.addEventListener('input', function(){\n    const value = this.value.trim();\n    if (value) localStorage.setItem(KEY, value);\n    else localStorage.removeItem(KEY);\n  });\n\n  const enter = document.querySelector('.entrance-enter');\n  if (enter) {\n    enter.addEventListener('click', function(){\n      const value = input.value.trim();\n      if (!value) {\n        input.focus();\n        input.style.boxShadow = '0 0 0 1px #dbc48e';\n        setTimeout(function(){ input.style.boxShadow = ''; }, 700);\n        return;\n      }\n      localStorage.setItem(KEY, value);\n    }, true);\n  }\n})();\n</script>\n'''
+          if "niu_entrant_name" not in text:
+              text = text.replace('</body>', script + '</body>', 1)
+
+          index.write_text(text, encoding='utf-8')
+
+          achievement = Path('achievement37.html')
+          if not achievement.exists():
+              achievement.write_text(r'''<!DOCTYPE html>\n<html lang="ja">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title>ACHIEVEMENT 37｜名簿にない學生</title>\n<style>\nbody{margin:0;background:#17100f;color:#eadfce;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;line-height:2;min-height:100vh;display:grid;place-items:center;padding:24px;box-sizing:border-box}.archive{width:min(760px,100%);border:1px solid #8f713d;background:linear-gradient(145deg,#241817,#120d0d);box-shadow:0 20px 70px rgba(0,0,0,.45);padding:42px 34px;box-sizing:border-box}.kicker{font-size:10px;letter-spacing:.3em;color:#c9aa70}.title{font-size:clamp(28px,6vw,46px);letter-spacing:.12em;margin:.4em 0;color:#f2e6d4}.rule{height:1px;background:linear-gradient(90deg,transparent,#a98545,transparent);margin:25px 0}.record{border-left:2px solid #781722;padding:15px 20px;background:rgba(255,255,255,.025);margin:20px 0}.name{font-size:clamp(22px,5vw,36px);color:#dbc48e;letter-spacing:.12em;word-break:break-all}.muted{color:#a99b8b;font-size:12px}.warning{margin-top:30px;color:#c58b86;font-size:12px}.back{display:inline-block;margin-top:28px;border:1px solid #8f713d;padding:8px 18px;color:#eadfce;text-decoration:none;font-size:11px;letter-spacing:.12em}</style>\n</head>\n<body>\n<main class="archive">\n<div class="kicker">N.I.U. / IMPERIAL UNIVERSITY / STUDENT ARCHIVE</div>\n<h1 class="title">ACHIEVEMENT 37</h1>\n<div class="rule"></div>\n<p><strong>「名簿にない學生」</strong></p>\n<p class="muted">帝國大學舊制學籍簿・閲覧復元記録</p>\n<section class="record">\n<p>學籍番号：NIU-ENTRY-037</p>\n<p>身分：入學者</p>\n<p>氏名：</p>\n<div id="entrant-name-display" class="name">――――――</div>\n<p>入學記録：有<br>卒業記録：無<br>退學記録：無<br>死亡記録：無</p>\n<p>備考：<strong>本人による登録記録のみ存在。</strong></p>\n</section>\n<p class="warning">※ この記録を閲覧した時点で、あなたの入學記録が旧學籍簿へ照合されました。</p>\n<a class="back" href="index.html">帝國大學首頁へ戻る</a>\n</main>\n<script>\n(function(){\n const KEY='niu_entrant_name';\n const el=document.getElementById('entrant-name-display');\n const name=localStorage.getItem(KEY);\n if(name){el.textContent=name;}else{el.textContent='未登録';}\n})();\n</script>\n</body>\n</html>\n'''.replace('\\n','\n'), encoding='utf-8')
+
+      - name: Commit generated changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html achievement37.html
+          git diff --cached --quiet || git commit -m "feat: add entrant registration and achievement 37"
+          git push
