@@ -1,0 +1,152 @@
+name: Improve Imperial Night Mode
+
+on:
+  push:
+    branches:
+      - '日ノ本帝國國立帝國大學公式サイト'
+
+permissions:
+  contents: write
+
+jobs:
+  night-mode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: '日ノ本帝國國立帝國大學公式サイト'
+          fetch-depth: 1
+      - name: Append readable night mode CSS
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '/* IMPERIAL_READABLE_NIGHT_MODE */'
+          if marker in s:
+              raise SystemExit('night mode already installed')
+          css = r'''
+          <style id="imperial-readable-night-mode">
+          /* IMPERIAL_READABLE_NIGHT_MODE */
+          body.night,
+          body.imperial-night {
+            --paper: #17151a !important;
+            --paper-light: #25212a !important;
+            --paper-dark: #312b36 !important;
+            --ink: #eee8df !important;
+            --ink-soft: #c9c0b5 !important;
+            --line: rgba(226,207,170,.30) !important;
+            background-color: #17151a !important;
+            color: #eee8df !important;
+          }
+          body.night .section,
+          body.imperial-night .section { color:#eee8df; }
+          body.night .section-description,
+          body.imperial-night .section-description,
+          body.night .intro-card p,
+          body.imperial-night .intro-card p,
+          body.night .faculty-card p,
+          body.imperial-night .faculty-card p,
+          body.night .person-description,
+          body.imperial-night .person-description,
+          body.night .timeline-text,
+          body.imperial-night .timeline-text,
+          body.night .study-room-model,
+          body.imperial-night .study-room-model { color:#c9c0b5 !important; }
+          body.night .intro-card,
+          body.night .faculty-card,
+          body.night .person-card,
+          body.night .library-card,
+          body.night .star-card,
+          body.night .generation-person,
+          body.night .image-slot,
+          body.night .study-room-fact,
+          body.night .library-result,
+          body.imperial-night .intro-card,
+          body.imperial-night .faculty-card,
+          body.imperial-night .person-card,
+          body.imperial-night .library-card,
+          body.imperial-night .star-card,
+          body.imperial-night .generation-person,
+          body.imperial-night .image-slot,
+          body.imperial-night .study-room-fact,
+          body.imperial-night .library-result {
+            background: linear-gradient(145deg,#29242e,#211e26) !important;
+            color:#eee8df !important;
+            border-color:rgba(226,207,170,.30) !important;
+          }
+          body.night .section-title,
+          body.imperial-night .section-title,
+          body.night .timeline-title,
+          body.imperial-night .timeline-title,
+          body.night .campus-text h3,
+          body.imperial-night .campus-text h3,
+          body.night .person-name,
+          body.imperial-night .person-name,
+          body.night .star-name,
+          body.imperial-night .star-name { color:#ead7ae !important; }
+          body.night .section-kicker,
+          body.imperial-night .section-kicker,
+          body.night .intro-card h3,
+          body.imperial-night .intro-card h3,
+          body.night .faculty-card h3,
+          body.imperial-night .faculty-card h3,
+          body.night .person-category,
+          body.imperial-night .person-category { color:#d9979b !important; }
+          body.night input,
+          body.night textarea,
+          body.night select,
+          body.imperial-night input,
+          body.imperial-night textarea,
+          body.imperial-night select {
+            background:#211e26 !important;
+            color:#eee8df !important;
+            border-color:rgba(226,207,170,.38) !important;
+          }
+          body.night input::placeholder,
+          body.night textarea::placeholder,
+          body.imperial-night input::placeholder,
+          body.imperial-night textarea::placeholder { color:#9f968d !important; }
+          body.night table,
+          body.imperial-night table { color:#eee8df !important; }
+          body.night th,
+          body.imperial-night th { background:#332d38 !important; color:#ead7ae !important; }
+          body.night td,
+          body.imperial-night td { border-color:rgba(226,207,170,.25) !important; }
+          body.night blockquote,
+          body.imperial-night blockquote { background:#211e26 !important; color:#d8cec3 !important; border-left-color:#c9a866 !important; }
+          body.night .category-btn,
+          body.imperial-night .category-btn { background:#211e26 !important; color:#eee8df !important; border-color:rgba(226,207,170,.28) !important; }
+          body.night .category-btn.active,
+          body.imperial-night .category-btn.active { background:#7f2935 !important; color:#fff !important; border-color:#c9a866 !important; }
+          body.night .news-item,
+          body.imperial-night .news-item { border-color:rgba(226,207,170,.25) !important; }
+          body.night .news-title,
+          body.imperial-night .news-title { color:#eee8df !important; }
+          body.night .news-date,
+          body.imperial-night .news-date { color:#d9979b !important; }
+          body.night .library-search input,
+          body.imperial-night .library-search input { background:#211e26 !important; color:#eee8df !important; }
+          body.night .library-result,
+          body.imperial-night .library-result { background:#211e26 !important; color:#ddd4ca !important; }
+          body.night .timeline-item::before,
+          body.imperial-night .timeline-item::before { background:#25212a !important; }
+          body.night .hyakki-entry,
+          body.imperial-night .hyakki-entry { background:linear-gradient(135deg,#211d24,#29232c) !important; color:#eee8df !important; }
+          body.night .hyakki-clues span,
+          body.imperial-night .hyakki-clues span { background:#211e26 !important; color:#d9979b !important; border-color:rgba(226,207,170,.28) !important; }
+          </style>
+          '''
+          s = s.replace('</head>', css + '\n</head>', 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit readable night mode
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Improve readability of night mode'
+          git push origin '日ノ本帝國國立帝國大學公式サイト'
