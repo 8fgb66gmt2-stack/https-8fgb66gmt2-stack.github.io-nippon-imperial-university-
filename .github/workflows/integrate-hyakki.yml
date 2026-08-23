@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'hyakki.html'
+      - '.github/workflows/integrate-hyakki.yml'
 
 permissions:
   contents: write
