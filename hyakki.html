@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>『彼岸奇譚』帝國大百科｜日ノ本帝國國立帝國大學</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700;800&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#241c1b;--muted:#6b5b55;--paper:#f3ecde;--paper2:#fcf8ef;--red:#781722;--gold:#a98545;--line:rgba(74,47,35,.24)}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:"Noto Serif JP","Yu Mincho",serif;line-height:2;background:radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.8),transparent 45%),var(--paper)}
+.wrap{max-width:1050px;margin:auto;padding:55px 22px 90px}.mast{border-top:4px double var(--gold);border-bottom:4px double var(--gold);padding:30px 10px;text-align:center}.kicker{font-size:10px;letter-spacing:.4em;color:var(--red)}h1{font-family:"Shippori Mincho",serif;letter-spacing:.12em;font-size:clamp(28px,5vw,52px);margin:8px 0}.subtitle{font-size:11px;color:var(--muted);letter-spacing:.18em}.editor{margin:30px auto;max-width:760px;padding:24px;border:1px solid var(--line);background:rgba(255,255,255,.45)}h2{font-family:"Shippori Mincho",serif;color:var(--red);border-left:4px solid var(--gold);padding-left:14px;margin-top:55px}h3{font-family:"Shippori Mincho",serif;color:var(--red);margin-top:30px}.notice{padding:18px 20px;background:rgba(120,23,34,.06);border:1px solid rgba(120,23,34,.2);font-size:12px}.search{display:flex;gap:8px;margin:22px 0}.search input{flex:1;padding:12px;border:1px solid var(--line);background:var(--paper2);font-family:inherit}.search button,.back{padding:11px 18px;border:1px solid var(--gold);background:transparent;color:var(--red);font-family:inherit;cursor:pointer}.entry{display:none;padding:20px;margin-top:12px;background:var(--paper2);border:1px solid var(--line)}.entry.show{display:block}.term{display:inline-block;padding:4px 9px;margin:3px;border:1px solid var(--line);cursor:pointer;font-size:12px}.secret{margin-top:45px;padding:22px;border:1px dashed var(--red);background:rgba(120,23,34,.035)}.redact{color:var(--red);letter-spacing:.15em}.footer{text-align:center;margin-top:70px;color:var(--muted);font-size:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="mast"><div class="kicker">帝國勅撰・帝國大學附属圖書館參考資料</div><h1>『彼岸奇譚』帝國大百科</h1><div class="subtitle">日ノ本帝國の諸制度・四季の神々・帝都の文化・帝國近代の人物たち</div></header>
+<section class="editor"><strong>編纂者：卜部川樒</strong><br>日ノ本帝國國立帝國大學文科を首席で卒業／帝國近代文藝研究家・小説家・評論家<br>帝國暦二百三十八年（玲瓏百六年）　帝の命により奉撰</section>
+<div class="notice">本頁は帝國大學が公開する參考資料です。神話・制度・人物史を照合するための入口として設置されています。なお、旧資料には現行の公開記録と一致しない記述が存在します。</div>
+<div class="search"><input id="q" placeholder="項目を検索（例：春の不在／四季庁／卜部川樒）"><button onclick="searchHyakki()">検索</button></div>
+<div id="results"></div>
+<h2>凡例</h2><p>本書は、日ノ本帝國における国家制度、帝家、帝都、帝國暦、四季の神々、四季庁、各季節の里、軍事・治安機構、地方制度、帝國近代文化、帝國大學および同学出身の主要な文化人について整理したものである。</p>
+<h2>第一部　帝國</h2><h3>日ノ本帝國</h3><p>大和列島を中心に成り立つ帝國。古くから帝をいただき、神祇・祭祀・政治・軍事を一つにまとめながら発展してきた国家である。近代行政、鉄道、電話、新聞、映画が存在する一方、四季の現人神や里、神社、祭祀も国家制度の内部に生きている。ゆえに日ノ本とは、<strong>「神話が終わらなかった近代国家」</strong>なのである。</p>
+<h3>帝國議会</h3><p>近代的な立法機関。政党政治が行われる一方、四季庁、帝家、里、軍部、財閥など議会政治だけでは扱い切れない権力が存在する。</p>
+<h2>第二部　帝國暦と近代史</h2><h3>帝國暦</h3><p>帝國の成立と初代帝の即位を元年とする紀年法。元号と併用され、帝國暦二百三十八年・玲瓏百六年のように記される。</p><h3>玲瓏</h3><p>帝國暦百三十三年から現在まで続く元号。大正浪漫的美意識を基礎に、現代の通信・電子音楽・映像・航空技術を受容した<strong>玲瓏浪漫</strong>の時代である。</p>
+<h2>第三部　帝都と帝國近代</h2><p>帝都は御所、政府、四季庁、議会、大使館、大学、劇場、新聞社などが集中する国際都市。洋館に和室があり、神祇学とAI研究が並び、軍刀を佩いた護衛官がスマホを操作する。矛盾を解決せず、すべてを抱えたことが日ノ本の美学である。</p>
+<h2>第四部　四季神祇</h2><h3>現人神</h3><p>神々から授かった超常の異能を持つ者。春・夏・秋・冬の現人神は国家の存立に直結する。神であることを強いられながら、人間として生きる者でもある。</p><p><span class="term" onclick="showTerm('春')">春・桜</span><span class="term" onclick="showTerm('夏')">夏・百合</span><span class="term" onclick="showTerm('秋')">秋・菊</span><span class="term" onclick="showTerm('冬')">冬・牡丹</span></p>
+<h2>第五部　四季庁と里</h2><h3>四季庁</h3><p>政府直属の超常行政機関。現人神、護衛官、里、季節災害、異能犯罪を統括し、最優先事項は四季を絶やさないこと。</p><h3>里</h3><p>春の里・帝州、夏の里・衣世、秋の里・創紫、冬の里・エニシ。代行者を輩出する共同体であり、それぞれ固有の政治・教育制度を持つ。</p>
+<h2>第六部　治安・軍事</h2><p>国家治安機構、対テロ部隊「豪猪」、現人神を標的とする「賊」、季節を否定する根絶派、現人神の力を利用すべきとする改革派などが存在する。</p>
+<h2 id="spring">第七部　春の不在</h2><h3>十年間の春</h3><p>十年前、冬の里襲撃事件で春の現人神が攫われたことを契機に、春が十年にわたって失われた。冬→夏→秋→冬という三季の循環が続き、農業、医療、経済、文化のすべてが崩れ始めた。失われたのは季節だけではなく、人々の「春の記憶」だった。</p><div class="secret"><strong>帝國大學附属圖書館・照合記録 S-228</strong><br>公開百科事典と旧資料を照合した結果、春の現人神失踪年月日には<strong>一日の差異</strong>が確認された。<br><span class="redact">原簿：帝國暦二百二十八年　■■月■■日</span><br><small>※この記録は『彼岸奇譚』本文には記載されていない。</small></div>
+<h2>第八部　帝國大學</h2><p>文学、哲学、歴史、神祇、芸術、音楽、自然科学、工学などを擁する最高学府。単なる教育機関ではなく、帝國が「知識人」を認定する文化装置でもある。</p>
+<h2>第九部　帝國大學出身文化人</h2><p><strong>有栖川劉ノ介</strong>――文科首席・小説家。<br><strong>六條杠葉</strong>――歌人・詩人・評論家。<br><strong>卜部川樒</strong>――文科首席・小説家。愛と所有欲、嫉妬、依存の境界を描いた。<br><strong>九条院朔臣</strong>――繊細かつ耽美的な文章で孤独を描いた小説家。<br><strong>森林太郎</strong>――文科卒・皇族・小説家。<br><strong>中原壱葉</strong>――詩人・国語教師。<br><strong>大窪晶与／花葉春月</strong>――芸術科首席・漫画家・四季庁長官。<br><strong>雪柳残雪</strong>――音楽科首席・音楽家・ボカロP・冬の現人神護衛官。</p>
+<h2>第十・十一部　帝國近代文化人と帝都文壇</h2><p><strong>藤宮薫子</strong>――帝大出身ではないが、帝都近代の女子教育を象徴する人物。<br>帝都文壇には有栖川、杠葉、樒、九条院、森林、中原、大窪らが連なり、「互いに認め合いながら、互いに気に入らない」という面倒な文化人のネットワークを形成した。</p>
+<div class="secret"><strong>編纂者追記</strong><br>私は十三人しか記録していない。<br>ならば、<strong>十四人目を書いたのは誰だ。</strong><br><br><span class="redact">関連資料：文星番号 拾肆／閲覧権限：読者</span></div>
+<p style="text-align:center;margin-top:45px"><a class="back" href="index.html">帝國大學公式頁へ戻る</a></p>
+<div class="footer">『彼岸奇譚』帝國大百科　帝國勅撰　編纂者：卜部川樒<br>帝國大學附属圖書館・參考資料</div>
+</div>
+<script>
+const data={
+'春の不在':`<div class="entry show"><h3>春の不在</h3><p>十年間にわたり春が失われた帝國史上最大級の異常事態。旧資料S-228との照合が必要です。</p><p><a href="#spring">第七部を読む →</a></p></div>`,
+'四季庁':`<div class="entry show"><h3>四季庁</h3><p>現人神・護衛官・里・季節災害・異能犯罪を統括する政府直属機関。大学の神祇学研究室と共同記録を持つ。</p></div>`,
+'卜部川樒':`<div class="entry show"><h3>卜部川樒</h3><p>文科首席。小説家・評論家。本百科事典の編纂者。愛と所有欲、嫉妬、依存の境界を描いた。</p><p class="redact">編纂者追記：私は十三人しか記録していない。</p></div>`,
+'文星':`<div class="entry show"><h3>文星</h3><p>帝國大學を代表する文化人の称号。公開名簿は十三人。</p><p class="redact">関連資料：拾肆</p></div>`,
+'神痣':`<div class="entry show"><h3>神痣</h3><p>春＝桜、夏＝百合、秋＝菊、冬＝牡丹。選ばれた者の身体に現れる聖痕。</p></div>`};
+function searchHyakki(){const q=document.getElementById('q').value.trim();const r=document.getElementById('results');if(data[q]){r.innerHTML=data[q]}else if(q==='桜'||q==='百合'||q==='菊'||q==='牡丹'){r.innerHTML=`<div class="entry show"><h3>神痣照合</h3><p>${q}の記録を確認しました。四季神祇資料と人物録を照合してください。</p></div>`}else{r.innerHTML=`<div class="entry show"><p>該当項目は公開されていません。</p><small>ヒント：春の不在／四季庁／神痣／文星／卜部川樒</small></div>`}}
+function showTerm(t){document.getElementById('q').value=t;searchHyakki();window.scrollTo({top:document.getElementById('results').offsetTop-30,behavior:'smooth'})}
+</script>
+</body></html>
