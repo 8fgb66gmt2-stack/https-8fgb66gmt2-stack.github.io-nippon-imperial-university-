@@ -1,0 +1,123 @@
+name: N.I.U. Library Achievement 31 Patch
+
+on:
+  push:
+    branches:
+      - '日ノ本帝國國立帝國大學公式サイト'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-library-search:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Patch 帝國圖書検索室
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = '''        libraryResult.innerHTML = `
+
+            <strong>
+                「${keyword}」
+            </strong>
+            に關する資料を検索しました。
+
+            <br><br>
+
+            帝國大學附属圖書館
+            文藝資料室・史料目録によれば、
+            関連資料が複數件確認されてゐます。
+
+            <br><br>
+
+            ※これは帝國大學公式サイトの
+            世界觀演出用検索機能です。
+
+        `;'''
+          new = '''        /* =====================================================
+           ACHIEVEMENT 31 / SHIKI-031
+           「秋の初代現人神・復元不能」への図書館検索導線
+        ===================================================== */
+        const secretLibraryKeywords = [
+            "記",
+            "記憶",
+            "記憶論",
+            "SH-000",
+            "秋",
+            "秋の名"
+        ];
+
+        if (secretLibraryKeywords.includes(keyword)) {
+
+            libraryResult.innerHTML = `
+
+                <strong>旧蔵書・機密資料を1件発見。</strong>
+
+                <br><br>
+
+                『記憶論――人は何故、忘れるのか』
+                <br>
+                著者：神代 聖　／　請求記号：SH-000
+
+                <br><br>
+
+                <span style="color:var(--red);font-weight:700;">
+                    帝國大學附属圖書館・旧文庫
+                </span>
+
+                <br><br>
+
+                この資料には、現在の公開目録には存在しない
+                「秋」に関する記録が含まれてゐます。
+
+                <br><br>
+
+                <a href="archive31.html"
+                   style="display:inline-block;padding:9px 18px;border:1px solid var(--gold);color:var(--red);font-weight:700;letter-spacing:.08em;">
+                    SHIKI-031「存在しない一頁」へ
+                </a>
+
+            `;
+
+            return;
+        }
+
+        libraryResult.innerHTML = `
+
+            <strong>
+                「${keyword}」
+            </strong>
+            に關する資料を検索しました。
+
+            <br><br>
+
+            帝國大學附属圖書館
+            文藝資料室・史料目録によれば、
+            関連資料が複數件確認されてゐます。
+
+            <br><br>
+
+            ※これは帝國大學公式サイトの
+            世界觀演出用検索機能です。
+
+        `;'''
+          if old not in s:
+              raise SystemExit('target library search block not found')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          PY
+
+      - name: Commit patch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Add Achievement 31 library search route'
+          git push
