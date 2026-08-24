@@ -1,0 +1,41 @@
+name: Refresh player profile layer
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/profile-cache-bust.yml'
+      - 'profile-slots.js'
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add profile layer with cache-busting
+        shell: python
+        run: |
+          from pathlib import Path
+          changed=[]
+          for p in Path('.').rglob('*.html'):
+              if '.git' in p.parts:
+                  continue
+              s=p.read_text(encoding='utf-8')
+              old='<script src="profile-slots.js"></script>'
+              new='<script src="profile-slots.js?v=6"></script>'
+              if old in s:
+                  s=s.replace(old,new)
+              elif 'profile-slots.js?v=6' not in s and '</head>' in s:
+                  s=s.replace('</head>', new+'\n</head>',1)
+              else:
+                  continue
+              p.write_text(s,encoding='utf-8')
+              changed.append(str(p))
+          print('updated', len(changed), 'html files')
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html' '**/*.html' || true
+          git diff --cached --quiet || git commit -m 'fix: cache-bust player profile layer'
+          git push
