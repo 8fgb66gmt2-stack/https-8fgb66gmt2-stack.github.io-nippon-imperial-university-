@@ -13,7 +13,7 @@ body{margin:0;background:#130f12;color:#e8dfcf;font-family:serif;line-height:2}m
 <div class="meta">N.I.U. / SHIKI AGENCY / TOP SECRET / DOCUMENT 34</div>
 <h1>ARCHIVE 34・秋を消した理由</h1>
 <p class="notice">ARCHIVE 33「初代秋の護衛官」より認証情報を復元。</p>
-<section class="file"><p>閲覧権限：四季廳長官級以上</p><p>記録番号：SHIKI-034</p><p>状態：<strong>LOCKED</strong></p></section>
+<section class="file"><p>閲覧権限：四季廳長官級以上</p><p>記録番号：SHIKI-034</p><p>状態：<strong id="lockState">LOCKED</strong></p></section>
 <section class="secret"><h2>【認証条件】</h2><div class="terminal">「神代聖が最後に残した言葉を特定せよ。」
 
 ヒント：
@@ -36,16 +36,23 @@ body{margin:0;background:#130f12;color:#e8dfcf;font-family:serif;line-height:2}m
 もう秋の現人神である必要はない」</div></section>
 <section class="auth"><h2>【最終認証】</h2><p>神代聖が最後に残した言葉を入力してください。</p><input id="answer" type="text" autocomplete="off" placeholder="FINAL STATEMENT"><br><button id="submit" type="button">AUTHENTICATE</button><div id="result" class="result"></div></section>
 <section class="next"><p><strong>NEXT ARCHIVE</strong></p><p>SHIKI-035</p><p>「忘れられた現人神」</p><p>STATUS: ACCESS PENDING</p><p><a href="archive33.html">ARCHIVE 33「初代秋の護衛官」へ戻る</a></p><p><a href="index.html">帝國大學首頁へ戻る</a></p></section>
-<p>記録状態：SHIKI-034 ／ AUTHENTICATION REQUIRED</p>
+<p id="recordState">記録状態：SHIKI-034 ／ AUTHENTICATION REQUIRED</p>
 </main>
 <script>
 (() => {
   'use strict';
   const KEY='archive34_unlocked';
-  const ANSWER='ワタクシは眞紅を愛している。秋の現人神としてではなく、貴女自身を。ワタクシが、秋を終わらせます。もう秋の現人神である必要はない';
+  const ANSWERS=[
+    'ワタクシは眞紅を愛している。秋の現人神としてではなく、貴女自身を。ワタクシが、秋を終わらせます。もう秋の現人神である必要はない',
+    'もう秋の現人神である必要はない',
+    'ワタクシは眞紅を愛している',
+    'ワタクシが、秋を終わらせます'
+  ];
   const input=document.getElementById('answer');
   const button=document.getElementById('submit');
   const result=document.getElementById('result');
+  const lockState=document.getElementById('lockState');
+  const recordState=document.getElementById('recordState');
 
   function normalize(value){
     return String(value ?? '')
@@ -60,16 +67,20 @@ body{margin:0;background:#130f12;color:#e8dfcf;font-family:serif;line-height:2}m
     localStorage.setItem(KEY,'unlocked');
     localStorage.setItem('achievement_34','unlocked');
     localStorage.setItem('shiki_archive34_unlocked','unlocked');
+    lockState.textContent='UNLOCKED';
+    recordState.textContent='記録状態：SHIKI-034 ／ RECORD RECOVERED';
     result.style.display='block';
     result.innerHTML='<strong>AUTHENTICATION ACCEPTED</strong><br><br>SHIKI-034 RECORD RECOVERED<br><br><a href="achievement34.html">ACHIEVEMENT 34「秋を消した理由」</a>';
   }
 
   function authenticate(){
-    if(normalize(input.value)===normalize(ANSWER)) unlock();
-    else {
-      result.style.display='block';
-      result.textContent='ACCESS DENIED';
+    const entered=normalize(input.value);
+    if(entered && ANSWERS.some(answer=>entered===normalize(answer) || entered.includes(normalize(answer)))){
+      unlock();
+      return;
     }
+    result.style.display='block';
+    result.textContent='ACCESS DENIED';
   }
 
   button.addEventListener('click',authenticate);
