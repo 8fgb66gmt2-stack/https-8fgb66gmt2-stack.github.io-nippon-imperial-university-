@@ -2,8 +2,8 @@
 (function(){
   'use strict';
   const GLOBAL = new Set(['niu_entrant_name','niu_active_profile','niu_profiles_version']);
-  const VERSION = '3';
-  const PREFIX = 'niu_profile_v3::';
+  const VERSION = '4';
+  const PREFIX = 'niu_profile_v4::';
   const nativeLength = Object.getOwnPropertyDescriptor(Storage.prototype,'length').get;
   const native = {
     getItem: Storage.prototype.getItem,
@@ -23,18 +23,39 @@
       native.setItem.call(window.localStorage,'niu_active_profile',name);
     }
     const target = active();
-    if(target !== 'default' && oldVersion !== VERSION){
+    if(target !== 'default'){
       const targetPrefix = PREFIX + encodeURIComponent(target) + '::';
-      const keys = [];
+      const legacyV2Prefix = 'niu_profile_v2::' + encodeURIComponent(target) + '::';
+
+      const existingV4 = new Set();
       for(let i=0;i<nativeLength.call(window.localStorage);i++){
         const k=native.key.call(window.localStorage,i);
-        if(k && !GLOBAL.has(k) && !k.startsWith('niu_profile_v') && k !== 'niu_active_profile' && k !== 'niu_profiles_version') keys.push(k);
+        if(k && k.startsWith(targetPrefix)) existingV4.add(k.slice(targetPrefix.length));
       }
-      keys.forEach(k=>{
-        const v=native.getItem.call(window.localStorage,k);
-        native.setItem.call(window.localStorage,targetPrefix+k,v);
-        native.removeItem.call(window.localStorage,k);
+      const copyV2 = [];
+      for(let i=0;i<nativeLength.call(window.localStorage);i++){
+        const k=native.key.call(window.localStorage,i);
+        if(k && k.startsWith(legacyV2Prefix)) copyV2.push(k);
+      }
+      copyV2.forEach(k=>{
+        const shortKey = k.slice(legacyV2Prefix.length);
+        if(!existingV4.has(shortKey)){
+          native.setItem.call(window.localStorage,targetPrefix+shortKey,native.getItem.call(window.localStorage,k));
+        }
       });
+
+      if(oldVersion !== VERSION){
+        const keys = [];
+        for(let i=0;i<nativeLength.call(window.localStorage);i++){
+          const k=native.key.call(window.localStorage,i);
+          if(k && !GLOBAL.has(k) && !k.startsWith('niu_profile_v') && k !== 'niu_active_profile' && k !== 'niu_profiles_version') keys.push(k);
+        }
+        keys.forEach(k=>{
+          const v=native.getItem.call(window.localStorage,k);
+          native.setItem.call(window.localStorage,targetPrefix+k,v);
+          native.removeItem.call(window.localStorage,k);
+        });
+      }
     }
     native.setItem.call(window.localStorage,'niu_profiles_version',VERSION);
   }
