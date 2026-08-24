@@ -1,0 +1,36 @@
+name: Refresh player profile loader
+
+on:
+  push:
+    branches:
+      - "日ノ本帝國國立帝國大學公式サイト"
+    paths:
+      - profile-slots.js
+      - .github/workflows/refresh-profile-loader.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add cache-busted profile loader and explicit activation
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('index.html')
+          text = p.read_text(encoding='utf-8')
+          text = text.replace('<script src="profile-slots.js"></script>', '<script src="profile-slots.js?v=7"></script>', 1)
+          text = text.replace("localStorage.setItem(KEY, value);", "if (window.NIUProfiles) window.NIUProfiles.activate(value); else localStorage.setItem(KEY, value);", 1)
+          p.write_text(text, encoding='utf-8')
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "fix: cache-bust player profile loader"
+          git push
