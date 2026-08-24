@@ -1,0 +1,9 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>地下資料室</title><style>body{background:#080807;color:#cfc1aa;font-family:serif;padding:40px;max-width:760px;margin:auto}pre{background:#020202;padding:25px;color:#9da991}button{padding:12px}</style><h1>地下資料室・R-17</h1><pre>ACCESS CHECK
+
+FILM-07   [ ]
+03181920  [ ]
+0000      [ ]
+KAMISHIRO [ ]
+0319      [ ]
+
+「五つの鍵を一つの記録へ戻せ。」</pre><p>鍵を揃えた者は「研究対象」の記録を開ける。</p><button onclick="c()">照合</button><p id="m"></p><script>function c(){let keys=['game_film','game_telegraph','game_clock','game_score','game_404'];if(keys.every(k=>localStorage.getItem(k)==='true')){m.innerHTML='<strong>全鍵照合成功。</strong><br><br><a href="achievement22.html">第22記録へ</a>'}else m.textContent='鍵が不足している。五つの遊戯を完了せよ。'}</script>

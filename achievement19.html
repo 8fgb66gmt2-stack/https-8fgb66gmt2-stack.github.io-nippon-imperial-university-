@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>アチーブメント十九｜欠番</title>
+<style>
+body{margin:0;background:#111;color:#d8cfbf;font-family:serif;line-height:2}main{max-width:760px;margin:8vh auto;padding:42px;border:1px solid #695936;background:#191715;box-shadow:0 0 60px #000}h1{font-weight:400;letter-spacing:.2em;color:#c8aa6c}small{color:#756d62}pre{white-space:pre-wrap;background:#080808;padding:24px;color:#a9b69f;border-left:3px solid #8b3038}.clue{color:#cda65e}.hidden{display:none}.seal{margin-top:35px;padding:18px;border:1px dashed #6f6147;text-align:center;color:#a58d62}input,button{padding:11px;font:inherit}input{background:#eee8dc;border:0}button{background:#ad8b50;color:#15120e;border:0;cursor:pointer}.err{color:#c87a81}.ok{display:none;margin-top:24px;color:#d8bd7a}.ok.show{display:block}</style>
+</head>
+<body><main>
+<small>日ノ本帝國國立帝國大學｜學籍資料室</small>
+<h1>アチーブメント十九　「欠番」</h1>
+<p>このページは大学公式サイトの索引には掲載されていない。</p>
+<pre>学籍原簿　昭和七年度
+
+番号 0318　紅城院眞紅　　記録あり
+番号 0319　神代聖　　　　記録あり
+番号 0320　――――――　　欠番
+番号 0321　卜部川樒　　　記録あり
+
+注：0320は「欠番」ではなく「転記禁止」とする。</pre>
+<p class="clue">三つの名前のあいだにある数字を読め。</p>
+<p>眞紅＝18　　聖＝19　　樒＝21</p>
+<div class="seal">20だけが存在しない。</div>
+<p>では、欠番に入る文字を入力せよ。</p>
+<input id="a" autocomplete="off" placeholder="ひらがなでも可"><button onclick="check()">照合</button>
+<div id="err" class="err"></div><div id="ok" class="ok"><strong>照合完了。</strong><br>欠番：二十。<br>「存在しないものほど、記録に近い。」<br><br><a href="achievement20.html">次の記録へ</a></div>
+<script>function check(){const v=document.getElementById('a').value.trim().toLowerCase();if(['20','二十','にじゅう','欠番'].includes(v)){localStorage.setItem('achievement19','true');document.getElementById('ok').classList.add('show');document.getElementById('err').textContent='';}else document.getElementById('err').textContent='記録と一致しません。';}</script>
+</main></body></html>
