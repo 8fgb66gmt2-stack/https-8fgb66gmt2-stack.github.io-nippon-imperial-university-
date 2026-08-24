@@ -1,0 +1,64 @@
+name: Fix player profile activation
+
+on:
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - '.github/workflows/fix-player-profile.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Patch profile activation
+        shell: python
+        run: |
+          from pathlib import Path
+
+          def patch(path, marker, addition):
+              p = Path(path)
+              if not p.exists():
+                  return False
+              text = p.read_text(encoding='utf-8')
+              if marker in text:
+                  return False
+              text = text.replace('</head>', addition + '\n</head>', 1)
+              p.write_text(text, encoding='utf-8')
+              return True
+
+          bootstrap = '''<script src="profile-slots.js"></script>
+          <script>
+          (function(){
+            function activate(){
+              try {
+                var name = localStorage.getItem('niu_entrant_name');
+                if(name && window.NIUProfiles) window.NIUProfiles.activate(name);
+              } catch(e) {}
+            }
+            activate();
+            document.addEventListener('DOMContentLoaded', activate);
+          })();
+          </script>'''
+
+          # Ensure the homepage has the profile layer before any game-state code runs.
+          patch('index.html', 'NIU-PROFILE-BOOTSTRAP', '<!-- NIU-PROFILE-BOOTSTRAP -->\n' + bootstrap)
+
+          # Ensure the ARG hub switches to the name currently entered on the homepage.
+          patch('arg-hub.html', 'NIU-PROFILE-BOOTSTRAP', '<!-- NIU-PROFILE-BOOTSTRAP -->\n' + bootstrap)
+
+          # Achievement 18 must switch profiles before writing its unlock flag.
+          patch('achievement18.html', 'NIU-PROFILE-BOOTSTRAP', '<!-- NIU-PROFILE-BOOTSTRAP -->\n' + bootstrap)
+
+      - name: Commit patch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html arg-hub.html achievement18.html
+          git diff --cached --quiet || git commit -m "fix: activate entrant profile before ARG state"
+          git push
