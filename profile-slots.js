@@ -1,5 +1,6 @@
 /* N.I.U. / PLAYER PROFILE SLOTS — V7
    One browser may host many players. Game state is isolated by entrant name.
+   Cache refresh marker: 2026-08-24
 */
 (function(){
   'use strict';
