@@ -1,16 +1,12 @@
-/* N.I.U. / PLAYER PROFILE SLOTS — V5
-   Player progress is separated by entrant name.
-   Browser localStorage is still the physical storage, but every game-state key
-   is transparently namespaced by the current player profile.
+/* N.I.U. / PLAYER PROFILE SLOTS — V6
+   One browser may host many players. Game state is isolated by entrant name.
 */
 (function(){
   'use strict';
 
   const GLOBAL = new Set(['niu_entrant_name','niu_active_profile','niu_profiles_version']);
-  const VERSION = '5';
-  const PREFIX = 'niu_profile_v5::';
-
-  const nativeLength = Object.getOwnPropertyDescriptor(Storage.prototype,'length').get;
+  const VERSION = '6';
+  const PREFIX = 'niu_profile_v6::';
   const native = {
     getItem: Storage.prototype.getItem,
     setItem: Storage.prototype.setItem,
@@ -18,171 +14,81 @@
     clear: Storage.prototype.clear,
     key: Storage.prototype.key
   };
+  const nativeLength = Object.getOwnPropertyDescriptor(Storage.prototype,'length').get;
 
   function cleanName(v){
-    return String(v || '').trim()
-      .replace(/[\\/:*?"<>|]/g,'')
-      .slice(0,40);
+    return String(v || '').trim().replace(/[\\/:*?"<>|]/g,'').replace(/\s+/g,' ').slice(0,40);
+  }
+  function raw(k){ return native.getItem.call(window.localStorage,k); }
+  function rawSet(k,v){ native.setItem.call(window.localStorage,k,String(v)); }
+  function active(){ return cleanName(raw('niu_active_profile')) || cleanName(raw('niu_entrant_name')) || ''; }
+  function scoped(k){
+    k=String(k);
+    if(GLOBAL.has(k) || !active()) return k;
+    return PREFIX + encodeURIComponent(active()) + '::' + k;
   }
 
-  function raw(key){
-    return native.getItem.call(window.localStorage,key);
-  }
-
-  function setRaw(key,value){
-    native.setItem.call(window.localStorage,key,String(value));
-  }
-
-  function active(){
-    return cleanName(raw('niu_active_profile')) || cleanName(raw('niu_entrant_name')) || 'default';
-  }
-
-  function scoped(key){
-    key = String(key);
-    return GLOBAL.has(key)
-      ? key
-      : PREFIX + encodeURIComponent(active()) + '::' + key;
-  }
-
-  /* Convert existing V4 profile data to V5 without mixing players. */
-  function migrateV4(){
-    const current = active();
-    if(current === 'default') return;
-
-    const oldPrefix = 'niu_profile_v4::' + encodeURIComponent(current) + '::';
-    const newPrefix = PREFIX + encodeURIComponent(current) + '::';
-
-    const copies = [];
-    for(let i=0;i<nativeLength.call(window.localStorage);i++){
-      const k = native.key.call(window.localStorage,i);
-      if(k && k.startsWith(oldPrefix)){
-        copies.push(k);
-      }
+  function activate(name){
+    name=cleanName(name);
+    if(!name) return false;
+    const previous=active();
+    rawSet('niu_entrant_name',name);
+    rawSet('niu_active_profile',name);
+    rawSet('niu_profiles_version',VERSION);
+    if(previous!==name){
+      window.dispatchEvent(new CustomEvent('niu:profile-changed',{detail:{previous,current:name}}));
     }
-
-    copies.forEach(k=>{
-      const shortKey = k.slice(oldPrefix.length);
-      const destination = newPrefix + shortKey;
-      if(raw(destination) === null){
-        setRaw(destination, native.getItem.call(window.localStorage,k));
-      }
-    });
+    return true;
   }
 
-  /*
-     If a player name already exists, that name is the profile.
-     This prevents a Chromebook/browser from silently inheriting the previous
-     player's active profile merely because the device was previously used.
-  */
-  function synchronizeProfile(){
-    const entrant = cleanName(raw('niu_entrant_name'));
-    const selected = cleanName(raw('niu_active_profile'));
-
-    if(entrant && entrant !== selected){
-      setRaw('niu_active_profile',entrant);
-    }
-
-    migrateV4();
-    setRaw('niu_profiles_version',VERSION);
+  /* Do not import old/global achievement values into a new profile. */
+  if(cleanName(raw('niu_entrant_name'))){
+    rawSet('niu_active_profile',cleanName(raw('niu_entrant_name')));
   }
+  rawSet('niu_profiles_version',VERSION);
 
-  synchronizeProfile();
-
-  Storage.prototype.getItem = function(k){
-    return native.getItem.call(this,scoped(k));
-  };
-
-  Storage.prototype.setItem = function(k,v){
-    k = String(k);
-
-    if(k === 'niu_entrant_name'){
-      const name = cleanName(v);
-      setRaw('niu_entrant_name',name);
-      if(name) setRaw('niu_active_profile',name);
-      return;
-    }
-
+  Storage.prototype.getItem=function(k){ return native.getItem.call(this,scoped(k)); };
+  Storage.prototype.setItem=function(k,v){
+    k=String(k);
+    if(k==='niu_entrant_name') return activate(v);
     return native.setItem.call(this,scoped(k),String(v));
   };
-
-  Storage.prototype.removeItem = function(k){
-    return native.removeItem.call(this,scoped(k));
-  };
-
-  Storage.prototype.clear = function(){
-    const prefix = PREFIX + encodeURIComponent(active()) + '::';
-    const remove = [];
-
+  Storage.prototype.removeItem=function(k){ return native.removeItem.call(this,scoped(k)); };
+  Storage.prototype.clear=function(){
+    const a=active();
+    if(!a) return;
+    const prefix=PREFIX+encodeURIComponent(a)+'::';
+    const remove=[];
     for(let i=0;i<nativeLength.call(this);i++){
-      const k = native.key.call(this,i);
+      const k=native.key.call(this,i);
       if(k && k.startsWith(prefix)) remove.push(k);
     }
-
     remove.forEach(k=>native.removeItem.call(this,k));
   };
-
-  Storage.prototype.key = function(index){
-    const globals = [];
-    const mine = [];
-    const prefix = PREFIX + encodeURIComponent(active()) + '::';
-
+  Storage.prototype.key=function(index){
+    const a=active(), prefix=a?PREFIX+encodeURIComponent(a)+'::':'';
+    const list=[];
     for(let i=0;i<nativeLength.call(this);i++){
-      const k = native.key.call(this,i);
+      const k=native.key.call(this,i);
       if(!k) continue;
-      if(GLOBAL.has(k)) globals.push(k);
-      else if(k.startsWith(prefix)) mine.push(k.slice(prefix.length));
+      if(GLOBAL.has(k)) list.push(k);
+      else if(prefix && k.startsWith(prefix)) list.push(k.slice(prefix.length));
     }
-
-    const all = globals.concat(mine);
-    return all[index] ?? null;
+    return list[index] ?? null;
   };
-
-  Object.defineProperty(Storage.prototype,'length',{
-    configurable:true,
-    get:function(){
-      let n = 0;
-      const prefix = PREFIX + encodeURIComponent(active()) + '::';
-
-      for(let i=0;i<nativeLength.call(window.localStorage);i++){
-        const k = native.key.call(window.localStorage,i);
-        if(k && (GLOBAL.has(k) || k.startsWith(prefix))) n++;
-      }
-
-      return n;
+  Object.defineProperty(Storage.prototype,'length',{configurable:true,get:function(){
+    const a=active(),prefix=a?PREFIX+encodeURIComponent(a)+'::':'';let n=0;
+    for(let i=0;i<nativeLength.call(this);i++){
+      const k=native.key.call(this,i);
+      if(k && (GLOBAL.has(k)||(prefix&&k.startsWith(prefix)))) n++;
     }
+    return n;
+  }});
+
+  window.NIUProfiles={activate,current:active,cleanName};
+
+  document.addEventListener('DOMContentLoaded',function(){
+    const input=document.getElementById('entrant-name');
+    if(input){ const saved=raw('niu_entrant_name'); if(saved) input.value=saved; }
   });
-
-  window.NIUProfiles = {
-    activate:function(name){
-      name = cleanName(name);
-      if(!name) return false;
-      setRaw('niu_active_profile',name);
-      setRaw('niu_entrant_name',name);
-      return true;
-    },
-
-    current:function(){
-      return active();
-    },
-
-    reset:function(name){
-      const old = active();
-      if(name) setRaw('niu_active_profile',cleanName(name));
-
-      const target = active();
-      const prefix = PREFIX + encodeURIComponent(target) + '::';
-      const remove = [];
-
-      for(let i=0;i<nativeLength.call(window.localStorage);i++){
-        const k = native.key.call(window.localStorage,i);
-        if(k && k.startsWith(prefix)) remove.push(k);
-      }
-
-      remove.forEach(k=>native.removeItem.call(window.localStorage,k));
-      setRaw('niu_entrant_name',target);
-      setRaw('niu_active_profile',target);
-
-      return {previous:old,current:target};
-    }
-  };
 })();
