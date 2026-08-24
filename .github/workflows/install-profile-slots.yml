@@ -1,0 +1,56 @@
+name: Install N.I.U. player save slots
+
+on:
+  push:
+    branches:
+      - '日ノ本帝國國立帝國大學公式サイト'
+    paths:
+      - 'profile-slots.js'
+      - 'index.html'
+      - '.github/workflows/install-profile-slots.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install profile manager on all HTML pages
+        shell: python
+        run: |
+          from pathlib import Path
+
+          tag = '<script src="profile-slots.js"></script>'
+          changed = []
+
+          for path in Path('.').rglob('*.html'):
+              if '.git' in path.parts:
+                  continue
+              text = path.read_text(encoding='utf-8')
+              original = text
+              if tag not in text and '</head>' in text:
+                  text = text.replace('</head>', tag + '\n</head>', 1)
+
+              if path.name == 'index.html' and 'NIUProfiles.activate' not in text:
+                  addition = '''\n<script>\n(function(){\n  const input=document.getElementById('entrant-name');\n  if(!input) return;\n  const enter=document.querySelector('.entrance-enter');\n  if(enter){\n    enter.addEventListener('click',function(e){\n      const name=input.value.trim();\n      if(!name) return;\n      if(window.NIUProfiles) window.NIUProfiles.activate(name);\n    },true);\n  }\n})();\n</script>\n'''
+                  text = text.replace('</body>', addition + '</body>', 1)
+
+              if text != original:
+                  path.write_text(text, encoding='utf-8')
+                  changed.append(str(path))
+
+          print('Patched:', len(changed), 'HTML files')
+          for p in changed:
+              print(p)
+
+      - name: Commit installation
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html'
+          git diff --cached --quiet || git commit -m "feat: enable player-specific ARG save slots"
+          git push
