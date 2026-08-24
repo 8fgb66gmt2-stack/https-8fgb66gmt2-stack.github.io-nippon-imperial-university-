@@ -2653,6 +2653,20 @@ body.night .hyakki-clues span,
 body.imperial-night .hyakki-clues span { background:#211e26 !important; color:#d9979b !important; border-color:rgba(226,207,170,.28) !important; }
 </style>
 
+<!-- NIU-PROFILE-BOOTSTRAP -->
+<script src="profile-slots.js"></script>
+<script>
+(function(){
+  function activate(){
+    try {
+      var name = localStorage.getItem('niu_entrant_name');
+      if(name && window.NIUProfiles) window.NIUProfiles.activate(name);
+    } catch(e) {}
+  }
+  activate();
+  document.addEventListener('DOMContentLoaded', activate);
+})();
+</script>
 </head>
 
 <body>
