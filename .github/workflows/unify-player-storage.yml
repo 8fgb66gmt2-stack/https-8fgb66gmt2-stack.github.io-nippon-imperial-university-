@@ -1,0 +1,45 @@
+name: Unify NIU player storage
+
+on:
+  push:
+    branches:
+      - '日ノ本帝國國立帝國大學公式サイト'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inject player storage before page scripts
+        shell: python
+        run: |
+          from pathlib import Path
+          marker = '<script src="player-storage.js"></script>'
+          changed = []
+          for path in Path('.').glob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              if marker in text:
+                  continue
+              if '</head>' not in text.lower():
+                  continue
+              text = text.replace('</head>', marker + '</head>', 1)
+              path.write_text(text, encoding='utf-8')
+              changed.append(str(path))
+          print('Injected:', len(changed), 'HTML files')
+          print('\n'.join(changed))
+      - name: Commit normalization
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html'
+          if git diff --cached --quiet; then
+            echo 'No HTML changes needed.'
+            exit 0
+          fi
+          git commit -m 'fix: isolate ARG progress per player [skip ci]'
+          git push
