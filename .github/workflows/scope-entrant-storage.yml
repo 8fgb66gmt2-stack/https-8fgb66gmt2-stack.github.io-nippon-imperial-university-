@@ -1,0 +1,54 @@
+name: Scope ARG storage by entrant
+
+on:
+  push:
+    branches:
+      - "日ノ本帝國國立帝國大學公式サイト"
+    paths:
+      - "*.html"
+      - "**/*.html"
+      - "profile-slots.js"
+      - ".github/workflows/scope-entrant-storage.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scope-storage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inject profile storage layer into every HTML page
+        shell: python
+        run: |
+          from pathlib import Path
+
+          script = '<script src="profile-slots.js"></script>'
+          changed = []
+
+          for path in Path('.').rglob('*.html'):
+              if '.git' in path.parts:
+                  continue
+              text = path.read_text(encoding='utf-8')
+              if 'src="profile-slots.js"' in text or "src='profile-slots.js'" in text:
+                  continue
+              if '<head>' not in text.lower():
+                  continue
+              pos = text.lower().find('<head>') + len('<head>')
+              text = text[:pos] + '\n' + script + '\n' + text[pos:]
+              path.write_text(text, encoding='utf-8')
+              changed.append(str(path))
+
+          print(f'Injected profile storage layer into {len(changed)} HTML files.')
+          for item in changed:
+              print(item)
+
+      - name: Commit scoped HTML pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html' '**/*.html'
+          git diff --cached --quiet || git commit -m "fix: apply entrant-specific ARG saves to all pages"
+          git push
