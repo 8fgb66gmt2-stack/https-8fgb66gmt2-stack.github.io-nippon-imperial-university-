@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>新規入學｜日ノ本帝國國立帝國大學</title>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#171211;color:#eadfce;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;padding:20px;box-sizing:border-box}.box{width:min(620px,94vw);padding:42px 34px;background:linear-gradient(145deg,#251b19,#171211);border:1px solid #a98545;box-shadow:0 0 0 6px #171211,0 0 0 7px #a98545,0 25px 70px rgba(0,0,0,.45);text-align:center}.mark{font-size:42px;color:#dbc48e}.k{font:10px monospace;letter-spacing:.28em;color:#a98545}.title{font-size:30px;letter-spacing:.12em;margin:12px 0}.rule{width:100px;height:1px;margin:22px auto;background:linear-gradient(90deg,transparent,#a98545,transparent)}p{font-size:12px;line-height:2.2;color:#c8bcab}.warn{margin:22px 0;padding:14px;border:1px solid #6f2028;background:rgba(120,23,34,.14);font-size:11px;line-height:2}.name{width:min(360px,100%);box-sizing:border-box;padding:12px;background:#0e0c0c;color:#f2e7d3;border:1px solid #8e754c;font:15px inherit;text-align:center;outline:none}.name:focus{border-color:#dbc48e;box-shadow:0 0 0 2px rgba(219,196,142,.15)}button{margin-top:18px;padding:12px 28px;background:transparent;color:#ead9b6;border:1px solid #a98545;font:13px inherit;letter-spacing:.12em;cursor:pointer}button:hover{background:#a98545;color:#211815}.back{display:inline-block;margin-top:18px;color:#a98545;font-size:10px;text-decoration:none}.status{min-height:24px;margin-top:16px;color:#dbc48e;font-size:10px}
+</style>
+</head>
+<body>
+<main class="box">
+<div class="mark">❦</div>
+<div class="k">N.I.U. / NEW STUDENT RECORD</div>
+<h1 class="title">新規入學</h1>
+<div class="rule"></div>
+<p>この端末の帝國大學ゲーム進行記録を初期化し、<br>新しい入學者として最初から遊び直します。</p>
+<div class="warn">現在のアチーブメント解放状況・章の進行・ARGの回収記録は、この端末から削除されます。<br>肖像寫眞・夜間モード・蓄音機の個人設定は保持します。</div>
+<input id="name" class="name" maxlength="24" autocomplete="off" placeholder="新しい入學者名を入力してください">
+<br>
+<button id="start">記録を初期化して入學する</button>
+<div id="status" class="status"></div>
+<a class="back" href="index.html">帝國大學公式首頁へ戻る</a>
+</main>
+<script>
+const input=document.getElementById('name');
+const button=document.getElementById('start');
+const status=document.getElementById('status');
+function resetAndStart(){
+ const name=input.value.trim();
+ if(!name){status.textContent='入學者名を入力してください。';input.focus();return;}
+ if(!confirm('この端末のゲーム進行記録を初期化します。よろしいですか？')) return;
+ const keepPrefixes=['imperialImage_','imperialNight','imperialPlaylistTracks'];
+ const keep=new Set(keepPrefixes);
+ const keys=[];
+ for(let i=0;i<localStorage.length;i++) keys.push(localStorage.key(i));
+ keys.forEach(key=>{if(!key||![...keep].some(p=>key===p||key.startsWith(p))) localStorage.removeItem(key)});
+ localStorage.setItem('niu_entrant_name',name);
+ status.textContent='新しい入學記録を作成しました。帝國大學へ移動します……';
+ setTimeout(()=>location.href='index.html',450);
+}
+button.addEventListener('click',resetAndStart);
+input.addEventListener('keydown',e=>{if(e.key==='Enter')resetAndStart()});
+</script>
+</body>
+</html>
