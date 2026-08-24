@@ -40,24 +40,60 @@ body{margin:0;background:#130f12;color:#e8dfcf;font-family:serif;line-height:2}m
 <p id="recordState">記録状態：SHIKI-034 ／ AUTHENTICATION REQUIRED</p>
 </main>
 <script>
-(() => {
-  'use strict';
-  const KEY='archive34_unlocked';
-  const ANSWERS=[
-    'ワタクシは眞紅を愛している。秋の現人神としてではなく、貴女自身を。ワタクシが、秋を終わらせます。もう秋の現人神である必要はない',
-    'もう秋の現人神である必要はない',
-    'ワタクシは眞紅を愛している',
-    'ワタクシが、秋を終わらせます'
-  ];
-  const input=document.getElementById('answer');
-  const button=document.getElementById('submit');
-  const result=document.getElementById('result');
-  const lockState=document.getElementById('lockState');
-  const recordState=document.getElementById('recordState');
-  function normalize(value){return String(value??'').normalize('NFKC').replace(/[\s　]+/g,'').replace(/[「」『』"“”'「」]/g,'').replace(/[。、，．,.！!？?・]/g,'').trim();}
-  function unlock(){localStorage.setItem(KEY,'unlocked');localStorage.setItem('achievement_34','unlocked');localStorage.setItem('shiki_archive34_unlocked','unlocked');lockState.textContent='UNLOCKED';recordState.textContent='記録状態：SHIKI-034 ／ RECORD RECOVERED';result.style.display='block';result.innerHTML='<strong>AUTHENTICATION ACCEPTED</strong><br><br>SHIKI-034 RECORD RECOVERED<br><br><a href="achievement34.html">ACHIEVEMENT 34「秋を消した理由」</a>';}
-  function authenticate(){const entered=normalize(input.value);if(entered&&ANSWERS.some(answer=>entered===normalize(answer)||entered.includes(normalize(answer)))){unlock();return;}result.style.display='block';result.textContent='ACCESS DENIED';}
-  button.addEventListener('click',authenticate);input.addEventListener('keydown',e=>{if(e.key==='Enter')authenticate();});if(localStorage.getItem(KEY)==='unlocked'||localStorage.getItem('achievement_34')==='unlocked')unlock();
+/* ARCHIVE 34 AUTH v3 — deliberately self-contained so other site scripts cannot break authentication. */
+(function(){
+  var input=document.getElementById('answer');
+  var button=document.getElementById('submit');
+  var result=document.getElementById('result');
+  var lock=document.getElementById('lockState');
+  var record=document.getElementById('recordState');
+
+  function norm(s){
+    return String(s||'')
+      .normalize('NFKC')
+      .replace(/[\s　]/g,'')
+      .replace(/[「」『』“”\"'。、，．,.！!？?・]/g,'')
+      .toLowerCase();
+  }
+
+  function accepted(s){
+    var x=norm(s);
+    if(!x) return false;
+    /* Full statement */
+    if(x.indexOf(norm('ワタクシは眞紅を愛している'))>=0 &&
+       x.indexOf(norm('秋の現人神としてではなく貴女自身を'))>=0 &&
+       x.indexOf(norm('ワタクシが秋を終わらせます'))>=0 &&
+       x.indexOf(norm('もう秋の現人神である必要はない'))>=0) return true;
+    /* Final sentence — the intended answer */
+    if(x.indexOf(norm('もう秋の現人神である必要はない'))>=0) return true;
+    /* Accept the key final statement even if the player copied surrounding text. */
+    if(x.indexOf(norm('ワタクシが秋を終わらせます'))>=0) return true;
+    return false;
+  }
+
+  function unlock(){
+    try{
+      localStorage.setItem('archive34_unlocked','unlocked');
+      localStorage.setItem('achievement_34','unlocked');
+      localStorage.setItem('shiki_archive34_unlocked','unlocked');
+    }catch(e){}
+    lock.textContent='UNLOCKED';
+    record.textContent='記録状態：SHIKI-034 ／ RECORD RECOVERED';
+    result.style.display='block';
+    result.innerHTML='<strong>AUTHENTICATION ACCEPTED</strong><br><br>SHIKI-034 RECORD RECOVERED<br><br><a href="achievement34.html">ACHIEVEMENT 34「秋を消した理由」</a>';
+  }
+
+  function authenticate(){
+    if(accepted(input.value)) unlock();
+    else { result.style.display='block'; result.textContent='ACCESS DENIED'; }
+  }
+
+  button.addEventListener('click',authenticate,true);
+  input.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();authenticate();}},true);
+
+  try{
+    if(localStorage.getItem('archive34_unlocked')==='unlocked' || localStorage.getItem('achievement_34')==='unlocked') unlock();
+  }catch(e){}
 })();
 </script>
 </body>
