@@ -2653,6 +2653,7 @@ body.night .hyakki-clues span,
 body.imperial-night .hyakki-clues span { background:#211e26 !important; color:#d9979b !important; border-color:rgba(226,207,170,.28) !important; }
 </style>
 
+<script src="profile-slots.js"></script>
 </head>
 
 <body>
@@ -6697,5 +6698,20 @@ body.taisho-nocturne:after{content:"";position:fixed;inset:0;pointer-events:none
 (function(){const KEY='niu_entrant_name',input=document.getElementById('entrant-name'),button=document.getElementById('enterButton');if(!input||!button)return;const saved=localStorage.getItem(KEY);if(saved)input.value=saved;function enter(){const name=input.value.trim();if(!name){input.closest('.entrant-registration')?.classList.add('invalid');input.focus();setTimeout(()=>input.closest('.entrant-registration')?.classList.remove('invalid'),600);return}localStorage.setItem(KEY,name);document.dispatchEvent(new CustomEvent('niu:entrant-registered',{detail:{name}}));document.getElementById('entrance')?.classList.add('hide')}input.addEventListener('keydown',e=>{if(e.key==='Enter')enter()});button.addEventListener('click',enter)})();
 </script>
 
+
+<script>
+(function(){
+  const input=document.getElementById('entrant-name');
+  if(!input) return;
+  const enter=document.querySelector('.entrance-enter');
+  if(enter){
+    enter.addEventListener('click',function(e){
+      const name=input.value.trim();
+      if(!name) return;
+      if(window.NIUProfiles) window.NIUProfiles.activate(name);
+    },true);
+  }
+})();
+</script>
 </body>
 </html>

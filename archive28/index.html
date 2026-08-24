@@ -1,1 +1,17 @@
-<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=../archive28.html"><title>ARCHIVE 28・秋の護衛官</title></head><body><p>N.I.U. / SHIKI AGENCY</p><h1>ARCHIVE 28・秋の護衛官</h1><p>機密記録へ転送しています。</p><p><a href="../archive28.html">ARCHIVE 28へ進む</a></p></body></html>
+<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=../archive28.html"><title>ARCHIVE 28・秋の護衛官</title><script src="profile-slots.js"></script>
+</head><body><p>N.I.U. / SHIKI AGENCY</p><h1>ARCHIVE 28・秋の護衛官</h1><p>機密記録へ転送しています。</p><p><a href="../archive28.html">ARCHIVE 28へ進む</a></p>
+<script>
+(function(){
+  const input=document.getElementById('entrant-name');
+  if(!input) return;
+  const enter=document.querySelector('.entrance-enter');
+  if(enter){
+    enter.addEventListener('click',function(e){
+      const name=input.value.trim();
+      if(!name) return;
+      if(window.NIUProfiles) window.NIUProfiles.activate(name);
+    },true);
+  }
+})();
+</script>
+</body></html>
