@@ -25,4 +25,19 @@
   Object.defineProperty(Storage.prototype,'length',{configurable:true,get:function(){const a=active(),prefix=a?PREFIX+encodeURIComponent(a)+'::':'';let n=0;for(let i=0;i<nativeLength.call(this);i++){const k=native.key.call(this,i);if(k&&(GLOBAL.has(k)||(prefix&&k.startsWith(prefix))))n++}return n}});
   window.NIUProfiles={activate,current:active,cleanName};
   document.addEventListener('DOMContentLoaded',function(){const input=document.getElementById('entrant-name');if(input){const saved=raw('niu_entrant_name');if(saved)input.value=saved;input.addEventListener('change',function(){const value=cleanName(this.value);if(value)activate(value)})}});
+
+  /* Mobile layout fix: keep the ARG password trigger and archive shortcuts from overlapping. */
+  (function installMobileArchiveLayout(){
+    if(document.getElementById('niu-mobile-archive-layout-fix')) return;
+    const style=document.createElement('style');
+    style.id='niu-mobile-archive-layout-fix';
+    style.textContent=`
+      @media (max-width:760px){
+        #arg2-trigger{left:10px !important;bottom:198px !important;z-index:10002 !important;}
+        a[href="shiryo-shitsu.html"]{bottom:132px !important;z-index:10001 !important;}
+        a[href="archive16.html"]{bottom:78px !important;z-index:10001 !important;}
+      }
+    `;
+    (document.head||document.documentElement).appendChild(style);
+  })();
 })();
