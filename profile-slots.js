@@ -26,16 +26,52 @@
   window.NIUProfiles={activate,current:active,cleanName};
   document.addEventListener('DOMContentLoaded',function(){const input=document.getElementById('entrant-name');if(input){const saved=raw('niu_entrant_name');if(saved)input.value=saved;input.addEventListener('change',function(){const value=cleanName(this.value);if(value)activate(value)})}});
 
-  /* Mobile layout fix: keep the ARG password trigger and archive shortcuts from overlapping. */
+  /* Mobile layout fix V2: the three bottom archive controls receive
+     separate vertical slots so their hit areas can never overlap. */
   (function installMobileArchiveLayout(){
-    if(document.getElementById('niu-mobile-archive-layout-fix')) return;
+    if(document.getElementById('niu-mobile-archive-layout-fix-v2')) return;
     const style=document.createElement('style');
-    style.id='niu-mobile-archive-layout-fix';
+    style.id='niu-mobile-archive-layout-fix-v2';
     style.textContent=`
       @media (max-width:760px){
-        #arg2-trigger{left:10px !important;bottom:198px !important;z-index:10002 !important;}
-        a[href="shiryo-shitsu.html"]{bottom:132px !important;z-index:10001 !important;}
-        a[href="archive16.html"]{bottom:78px !important;z-index:10001 !important;}
+        #arg2-trigger{
+          position:fixed !important;
+          left:10px !important;
+          right:10px !important;
+          bottom:240px !important;
+          width:auto !important;
+          min-height:44px !important;
+          z-index:10003 !important;
+          transform:none !important;
+        }
+        a[href="shiryo-shitsu.html"]{
+          position:fixed !important;
+          left:10px !important;
+          right:10px !important;
+          bottom:180px !important;
+          width:auto !important;
+          min-height:44px !important;
+          z-index:10002 !important;
+          transform:none !important;
+        }
+        a[href="archive16.html"]{
+          position:fixed !important;
+          left:10px !important;
+          right:10px !important;
+          bottom:120px !important;
+          width:auto !important;
+          min-height:44px !important;
+          z-index:10001 !important;
+          transform:none !important;
+        }
+      }
+      @media (max-width:380px){
+        #arg2-trigger{bottom:250px !important;}
+        a[href="shiryo-shitsu.html"]{bottom:188px !important;}
+        a[href="archive16.html"]{bottom:126px !important;}
+      }
+      @media (max-width:760px){
+        body{padding-bottom:300px !important;}
       }
     `;
     (document.head||document.documentElement).appendChild(style);
