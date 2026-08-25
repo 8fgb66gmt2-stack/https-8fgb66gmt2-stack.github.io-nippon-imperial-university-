@@ -1,13 +1,14 @@
-/* N.I.U. / PLAYER PROFILE SLOTS — V10
-   Fixes mobile entrance controls, profile-state migration, and duplicate loads.
+/* N.I.U. / PLAYER PROFILE SLOTS — V11
+   Owns player-specific localStorage namespacing.
+   Includes migration from the older player-storage namespace.
 */
 (function(){
   'use strict';
-  if(window.__NIU_PROFILE_SLOTS_V10__) return;
-  window.__NIU_PROFILE_SLOTS_V10__ = true;
+  if(window.__NIU_PROFILE_SLOTS_V11__) return;
+  window.__NIU_PROFILE_SLOTS_V11__ = true;
 
   const GLOBAL=new Set(['niu_entrant_name','niu_active_profile','niu_profiles_version']);
-  const VERSION='10';
+  const VERSION='11';
   const PREFIX='niu_profile_v8::';
   const native={getItem:Storage.prototype.getItem,setItem:Storage.prototype.setItem,removeItem:Storage.prototype.removeItem,clear:Storage.prototype.clear,key:Storage.prototype.key};
   const nativeLength=Object.getOwnPropertyDescriptor(Storage.prototype,'length').get;
@@ -17,32 +18,49 @@
   const active=()=>cleanName(raw('niu_active_profile'))||cleanName(raw('niu_entrant_name'))||'';
   const scoped=k=>{k=String(k);if(GLOBAL.has(k)||!active())return k;return PREFIX+encodeURIComponent(active())+'::'+k;};
 
+  function legacyPlayerPrefix(name){
+    let h=2166136261;
+    for(let i=0;i<name.length;i++){
+      h^=name.charCodeAt(i);
+      h=Math.imul(h,16777619);
+    }
+    return 'niu:p:'+('00000000'+(h>>>0).toString(16)).slice(-8)+':';
+  }
+
   function migrateProfile(name){
     name=cleanName(name); if(!name)return false;
     const base=PREFIX+encodeURIComponent(name)+'::';
     const nested=base+base;
+    const legacy=legacyPlayerPrefix(name);
     const keys=[];
     for(let i=0;i<nativeLength.call(window.localStorage);i++){
       const k=native.key.call(window.localStorage,i);
-      if(k&&(k.startsWith(nested)||k.startsWith(base)))keys.push(k);
+      if(k&&(k.startsWith(nested)||k.startsWith(legacy)||k.startsWith(base)))keys.push(k);
     }
     keys.forEach(k=>{
       if(k.startsWith(nested)){
         const target=base+k.slice(nested.length),value=native.getItem.call(window.localStorage,k);
         if(value!==null&&native.getItem.call(window.localStorage,target)===null)native.setItem.call(window.localStorage,target,value);
+      }else if(k.startsWith(legacy)){
+        const target=base+k.slice(legacy.length),value=native.getItem.call(window.localStorage,k);
+        if(value!==null&&native.getItem.call(window.localStorage,target)===null)native.setItem.call(window.localStorage,target,value);
       }
     });
+
     ['niu_arg2_found','niu_arg2_stage1','niu_arg2_stage2','niu_arg2_stage3'].forEach(k=>{
-      const legacy=native.getItem.call(window.localStorage,k),target=base+k;
-      if(legacy!==null&&native.getItem.call(window.localStorage,target)===null)native.setItem.call(window.localStorage,target,legacy);
+      const legacyValue=native.getItem.call(window.localStorage,k),target=base+k;
+      if(legacyValue!==null&&native.getItem.call(window.localStorage,target)===null)native.setItem.call(window.localStorage,target,legacyValue);
     });
+    return true;
   }
 
   function activate(name){
     name=cleanName(name);if(!name)return false;
     const previous=active();
     migrateProfile(name);
-    rawSet('niu_entrant_name',name);rawSet('niu_active_profile',name);rawSet('niu_profiles_version',VERSION);
+    rawSet('niu_entrant_name',name);
+    rawSet('niu_active_profile',name);
+    rawSet('niu_profiles_version',VERSION);
     if(previous!==name)window.dispatchEvent(new CustomEvent('niu:profile-changed',{detail:{previous,current:name}}));
     return true;
   }
@@ -71,8 +89,8 @@
   }
 
   function installFixes(){
-    if(!document.getElementById('niu-mobile-fix-v10')){
-      const style=document.createElement('style');style.id='niu-mobile-fix-v10';style.textContent=`
+    if(!document.getElementById('niu-mobile-fix-v11')){
+      const style=document.createElement('style');style.id='niu-mobile-fix-v11';style.textContent=`
         #entrance{z-index:100000!important}
         @media(max-width:760px){
           #arg2-trigger{left:10px!important;right:10px!important;bottom:240px!important;width:auto!important;min-height:44px!important;z-index:10003!important;pointer-events:auto!important;touch-action:manipulation!important}
