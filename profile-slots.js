@@ -1,216 +1,98 @@
-/* N.I.U. / PLAYER PROFILE SLOTS — V9
-   One browser may host many players. Game state is isolated by entrant name.
-   V9 fixes duplicate script loading, nested localStorage prefixes, and mobile
-   archive controls appearing over the entrant registration screen.
+/* N.I.U. / PLAYER PROFILE SLOTS — V10
+   Fixes mobile entrance controls, profile-state migration, and duplicate loads.
 */
 (function(){
   'use strict';
+  if(window.__NIU_PROFILE_SLOTS_V10__) return;
+  window.__NIU_PROFILE_SLOTS_V10__ = true;
 
-  /* index.html currently contains several historical profile-slots.js tags.
-     Only the first execution is allowed to patch Storage.prototype. */
-  if(window.__NIU_PROFILE_SLOTS_V9__) return;
-  window.__NIU_PROFILE_SLOTS_V9__ = true;
+  const GLOBAL=new Set(['niu_entrant_name','niu_active_profile','niu_profiles_version']);
+  const VERSION='10';
+  const PREFIX='niu_profile_v8::';
+  const native={getItem:Storage.prototype.getItem,setItem:Storage.prototype.setItem,removeItem:Storage.prototype.removeItem,clear:Storage.prototype.clear,key:Storage.prototype.key};
+  const nativeLength=Object.getOwnPropertyDescriptor(Storage.prototype,'length').get;
+  const cleanName=v=>String(v||'').trim().replace(/[\\/:*?"<>|]/g,'').replace(/\s+/g,' ').slice(0,40);
+  const raw=k=>native.getItem.call(window.localStorage,k);
+  const rawSet=(k,v)=>native.setItem.call(window.localStorage,k,String(v));
+  const active=()=>cleanName(raw('niu_active_profile'))||cleanName(raw('niu_entrant_name'))||'';
+  const scoped=k=>{k=String(k);if(GLOBAL.has(k)||!active())return k;return PREFIX+encodeURIComponent(active())+'::'+k;};
 
-  const GLOBAL = new Set(['niu_entrant_name','niu_active_profile','niu_profiles_version']);
-  const VERSION = '9';
-  const PREFIX = 'niu_profile_v8::';
-  const native = {
-    getItem: Storage.prototype.getItem,
-    setItem: Storage.prototype.setItem,
-    removeItem: Storage.prototype.removeItem,
-    clear: Storage.prototype.clear,
-    key: Storage.prototype.key
-  };
-  const nativeLength = Object.getOwnPropertyDescriptor(Storage.prototype,'length').get;
-
-  function cleanName(v){
-    return String(v||'').trim().replace(/[\\/:*?"<>|]/g,'').replace(/\s+/g,' ').slice(0,40);
-  }
-  function raw(k){return native.getItem.call(window.localStorage,k);}
-  function rawSet(k,v){native.setItem.call(window.localStorage,k,String(v));}
-  function active(){return cleanName(raw('niu_active_profile'))||cleanName(raw('niu_entrant_name'))||'';}
-  function scoped(k){
-    k=String(k);
-    if(GLOBAL.has(k)||!active()) return k;
-    return PREFIX+encodeURIComponent(active())+'::'+k;
-  }
-  function activate(name){
-    name=cleanName(name);
-    if(!name) return false;
-    const previous=active();
-    rawSet('niu_entrant_name',name);
-    rawSet('niu_active_profile',name);
-    rawSet('niu_profiles_version',VERSION);
-    if(previous!==name){
-      window.dispatchEvent(new CustomEvent('niu:profile-changed',{detail:{previous,current:name}}));
-    }
-    return true;
-  }
-
-  /* Migrate values accidentally nested by the previous duplicate bootstrap.
-     Example: v8::name::v8::name::niu_arg2_found -> v8::name::niu_arg2_found */
-  function migrateNestedProfileKeys(){
-    const name=active();
-    if(!name) return;
+  function migrateProfile(name){
+    name=cleanName(name); if(!name)return false;
     const base=PREFIX+encodeURIComponent(name)+'::';
     const nested=base+base;
-    const copy=[];
+    const keys=[];
     for(let i=0;i<nativeLength.call(window.localStorage);i++){
       const k=native.key.call(window.localStorage,i);
-      if(k && k.startsWith(nested)) copy.push(k);
+      if(k&&(k.startsWith(nested)||k.startsWith(base)))keys.push(k);
     }
-    copy.forEach(k=>{
-      const target=base+k.slice(nested.length);
-      const value=native.getItem.call(window.localStorage,k);
-      if(value!==null && native.getItem.call(window.localStorage,target)===null){
-        native.setItem.call(window.localStorage,target,value);
+    keys.forEach(k=>{
+      if(k.startsWith(nested)){
+        const target=base+k.slice(nested.length),value=native.getItem.call(window.localStorage,k);
+        if(value!==null&&native.getItem.call(window.localStorage,target)===null)native.setItem.call(window.localStorage,target,value);
       }
+    });
+    ['niu_arg2_found','niu_arg2_stage1','niu_arg2_stage2','niu_arg2_stage3'].forEach(k=>{
+      const legacy=native.getItem.call(window.localStorage,k),target=base+k;
+      if(legacy!==null&&native.getItem.call(window.localStorage,target)===null)native.setItem.call(window.localStorage,target,legacy);
     });
   }
 
-  if(cleanName(raw('niu_entrant_name'))) rawSet('niu_active_profile',cleanName(raw('niu_entrant_name')));
+  function activate(name){
+    name=cleanName(name);if(!name)return false;
+    const previous=active();
+    migrateProfile(name);
+    rawSet('niu_entrant_name',name);rawSet('niu_active_profile',name);rawSet('niu_profiles_version',VERSION);
+    if(previous!==name)window.dispatchEvent(new CustomEvent('niu:profile-changed',{detail:{previous,current:name}}));
+    return true;
+  }
+
+  if(cleanName(raw('niu_entrant_name')))rawSet('niu_active_profile',cleanName(raw('niu_entrant_name')));
   rawSet('niu_profiles_version',VERSION);
-  migrateNestedProfileKeys();
+  migrateProfile(active());
 
   Storage.prototype.getItem=function(k){return native.getItem.call(this,scoped(k));};
-  Storage.prototype.setItem=function(k,v){
-    k=String(k);
-    if(k==='niu_entrant_name') return activate(v);
-    return native.setItem.call(this,scoped(k),String(v));
-  };
+  Storage.prototype.setItem=function(k,v){k=String(k);if(k==='niu_entrant_name')return activate(v);return native.setItem.call(this,scoped(k),String(v));};
   Storage.prototype.removeItem=function(k){return native.removeItem.call(this,scoped(k));};
-  Storage.prototype.clear=function(){
-    const a=active();
-    if(!a) return;
-    const prefix=PREFIX+encodeURIComponent(a)+'::';
-    const remove=[];
-    for(let i=0;i<nativeLength.call(this);i++){
-      const k=native.key.call(this,i);
-      if(k&&k.startsWith(prefix)) remove.push(k);
-    }
-    remove.forEach(k=>native.removeItem.call(this,k));
-  };
-  Storage.prototype.key=function(index){
-    const a=active(),prefix=a?PREFIX+encodeURIComponent(a)+'::':'';
-    const list=[];
-    for(let i=0;i<nativeLength.call(this);i++){
-      const k=native.key.call(this,i);
-      if(!k) continue;
-      if(GLOBAL.has(k)) list.push(k);
-      else if(prefix&&k.startsWith(prefix)) list.push(k.slice(prefix.length));
-    }
-    return list[index]??null;
-  };
-  Object.defineProperty(Storage.prototype,'length',{
-    configurable:true,
-    get:function(){
-      const a=active(),prefix=a?PREFIX+encodeURIComponent(a)+'::':'';
-      let n=0;
-      for(let i=0;i<nativeLength.call(this);i++){
-        const k=native.key.call(this,i);
-        if(k&&(GLOBAL.has(k)||(prefix&&k.startsWith(prefix)))) n++;
-      }
-      return n;
-    }
-  });
-
+  Storage.prototype.clear=function(){const a=active();if(!a)return;const p=PREFIX+encodeURIComponent(a)+'::',rm=[];for(let i=0;i<nativeLength.call(this);i++){const k=native.key.call(this,i);if(k&&k.startsWith(p))rm.push(k);}rm.forEach(k=>native.removeItem.call(this,k));};
+  Storage.prototype.key=function(index){const a=active(),p=a?PREFIX+encodeURIComponent(a)+'::':'',list=[];for(let i=0;i<nativeLength.call(this);i++){const k=native.key.call(this,i);if(!k)continue;if(GLOBAL.has(k))list.push(k);else if(p&&k.startsWith(p))list.push(k.slice(p.length));}return list[index]??null;};
+  Object.defineProperty(Storage.prototype,'length',{configurable:true,get:function(){const a=active(),p=a?PREFIX+encodeURIComponent(a)+'::':'',n=Array.from({length:nativeLength.call(this)},(_,i)=>native.key.call(this,i)).filter(k=>k&&(GLOBAL.has(k)||(p&&k.startsWith(p)))).length;return n;}});
   window.NIUProfiles={activate,current:active,cleanName};
 
-  function installMobileArchiveLayout(){
-    if(document.getElementById('niu-mobile-archive-layout-fix-v4')) return;
-    const style=document.createElement('style');
-    style.id='niu-mobile-archive-layout-fix-v4';
-    style.textContent=`
-      /* Entrance screen must own the whole viewport. */
-      #entrance:not(.hide) ~ #arg2-trigger,
-      #entrance:not(.hide) ~ a[href="shiryo-shitsu.html"],
-      #entrance:not(.hide) ~ a[href="archive16.html"]{
-        display:none !important;
-        pointer-events:none !important;
-      }
-      #entrance{z-index:100000 !important;}
-      @media (max-width:760px){
-        #arg2-trigger{
-          position:fixed !important;
-          left:10px !important;
-          right:10px !important;
-          bottom:240px !important;
-          width:auto !important;
-          min-height:44px !important;
-          z-index:10003 !important;
-          transform:none !important;
-          pointer-events:auto !important;
-          touch-action:manipulation !important;
-        }
-        a[href="shiryo-shitsu.html"]{
-          position:fixed !important;
-          left:10px !important;
-          right:10px !important;
-          bottom:180px !important;
-          width:auto !important;
-          min-height:44px !important;
-          z-index:10002 !important;
-          transform:none !important;
-          pointer-events:auto !important;
-          touch-action:manipulation !important;
-        }
-        a[href="archive16.html"]{
-          position:fixed !important;
-          left:10px !important;
-          right:10px !important;
-          bottom:120px !important;
-          width:auto !important;
-          min-height:44px !important;
-          z-index:10001 !important;
-          transform:none !important;
-          pointer-events:auto !important;
-          touch-action:manipulation !important;
-        }
-        body{padding-bottom:300px !important;}
-      }
-      @media (max-width:380px){
-        #arg2-trigger{bottom:250px !important;}
-        a[href="shiryo-shitsu.html"]{bottom:188px !important;}
-        a[href="archive16.html"]{bottom:126px !important;}
-      }
-    `;
-    (document.head||document.documentElement).appendChild(style);
-  }
-
-  function installEntranceBehavior(){
+  function syncEntranceControls(){
     const entrance=document.getElementById('entrance');
-    const enter=document.getElementById('enterButton');
-    if(!entrance) return;
-    const revealControls=()=>{
-      entrance.classList.add('hide');
-      document.body.classList.remove('niu-entrance-active');
-    };
-    if(enter) enter.addEventListener('click',revealControls,{capture:false});
+    if(!entrance)return;
+    const locked=!entrance.classList.contains('hide');
+    const selectors=['#arg2-trigger','a[href="shiryo-shitsu.html"]','a[href="archive16.html"]'];
+    selectors.forEach(sel=>document.querySelectorAll(sel).forEach(el=>{
+      if(locked){el.dataset.niuEntranceHidden='1';el.style.setProperty('display','none','important');el.style.setProperty('pointer-events','none','important');}
+      else if(el.dataset.niuEntranceHidden==='1'){el.style.removeProperty('display');el.style.removeProperty('pointer-events');delete el.dataset.niuEntranceHidden;}
+    }));
   }
 
-  document.addEventListener('DOMContentLoaded',function(){
+  function installFixes(){
+    if(!document.getElementById('niu-mobile-fix-v10')){
+      const style=document.createElement('style');style.id='niu-mobile-fix-v10';style.textContent=`
+        #entrance{z-index:100000!important}
+        @media(max-width:760px){
+          #arg2-trigger{left:10px!important;right:10px!important;bottom:240px!important;width:auto!important;min-height:44px!important;z-index:10003!important;pointer-events:auto!important;touch-action:manipulation!important}
+          a[href="shiryo-shitsu.html"]{left:10px!important;right:10px!important;bottom:180px!important;min-height:44px!important;z-index:10002!important;pointer-events:auto!important;touch-action:manipulation!important}
+          a[href="archive16.html"]{left:10px!important;right:10px!important;bottom:120px!important;min-height:44px!important;z-index:10001!important;pointer-events:auto!important;touch-action:manipulation!important}
+        }
+        @media(max-width:380px){#arg2-trigger{bottom:250px!important}a[href="shiryo-shitsu.html"]{bottom:188px!important}a[href="archive16.html"]{bottom:126px!important}}
+      `;(document.head||document.documentElement).appendChild(style);
+    }
+    syncEntranceControls();
+    const entrance=document.getElementById('entrance');
+    if(entrance){new MutationObserver(syncEntranceControls).observe(entrance,{attributes:true,attributeFilter:['class']});}
+    const enter=document.getElementById('enterButton');
+    if(enter)enter.addEventListener('click',()=>setTimeout(syncEntranceControls,0),{capture:true});
     const input=document.getElementById('entrant-name');
     if(input){
-      const saved=raw('niu_entrant_name');
-      if(saved) input.value=saved;
-      input.addEventListener('change',function(){
-        const value=cleanName(this.value);
-        if(value) activate(value);
-      });
-      input.addEventListener('input',function(){
-        const value=cleanName(this.value);
-        if(value) activate(value);
-      });
+      const saved=raw('niu_entrant_name');if(saved)input.value=saved;
+      input.addEventListener('input',()=>{const n=cleanName(input.value);if(n)activate(n);});
+      input.addEventListener('change',()=>{const n=cleanName(input.value);if(n)activate(n);});
     }
-    installMobileArchiveLayout();
-    installEntranceBehavior();
-
-    /* Do not replace the site's original ARG2 click handler. We only ensure
-       that iOS treats the control as a normal tappable control. */
-    const trigger=document.getElementById('arg2-trigger');
-    if(trigger){
-      trigger.style.pointerEvents='auto';
-      trigger.style.touchAction='manipulation';
-    }
-  });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installFixes,{once:true});else installFixes();
 })();
