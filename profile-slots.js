@@ -1,9 +1,12 @@
-/* N.I.U. / PLAYER PROFILE SLOTS — V14 */
+/* N.I.U. / PLAYER PROFILE SLOTS — V15
+   Public-site hotfix: duplicate loader cleanup, profile-save migration,
+   entrance controls, and gramophone fallback.
+*/
 (function(){
 'use strict';
-if(window.__NIU_PROFILE_SLOTS_V14__)return;
-window.__NIU_PROFILE_SLOTS_V14__=true;
-const G=new Set(['niu_entrant_name','niu_active_profile','niu_profiles_version']),P='niu_profile_v8::',V='14';
+if(window.__NIU_PROFILE_SLOTS_V15__)return;
+window.__NIU_PROFILE_SLOTS_V15__=true;
+const G=new Set(['niu_entrant_name','niu_active_profile','niu_profiles_version']),P='niu_profile_v8::',V='15';
 const N={getItem:Storage.prototype.getItem,setItem:Storage.prototype.setItem,removeItem:Storage.prototype.removeItem,clear:Storage.prototype.clear,key:Storage.prototype.key};
 const L=Object.getOwnPropertyDescriptor(Storage.prototype,'length').get;
 const clean=v=>String(v||'').trim().replace(/[\\/:*?"<>|]/g,'').replace(/\s+/g,' ').slice(0,40),raw=k=>N.getItem.call(localStorage,k),rawSet=(k,v)=>N.setItem.call(localStorage,k,String(v)),active=()=>clean(raw('niu_active_profile'))||clean(raw('niu_entrant_name'))||'',scope=k=>G.has(String(k))||!active()?String(k):P+encodeURIComponent(active())+'::'+k;
@@ -14,11 +17,11 @@ if(clean(raw('niu_entrant_name')))rawSet('niu_active_profile',clean(raw('niu_ent
 Storage.prototype.getItem=function(k){return N.getItem.call(this,scope(k))};
 Storage.prototype.setItem=function(k,v){k=String(k);return k==='niu_entrant_name'?activate(v):N.setItem.call(this,scope(k),String(v))};
 Storage.prototype.removeItem=function(k){return N.removeItem.call(this,scope(k))};
-Storage.prototype.clear=function(){let a=active(),p=a?P+encodeURIComponent(a)+'::':'',r=[];for(let i=0;i<L.call(this);i++){let k=N.key.call(this,i);if(k&&p&&k.startsWith(p))r.push(k)}r.forEach(k=>N.removeItem.call(this,k))};
 window.NIUProfiles={activate,current:active,cleanName:clean};
-function entranceFix(){let e=document.getElementById('entrance');if(!e)return;let locked=!e.classList.contains('hide');['#arg2-trigger','a[href="shiryo-shitsu.html"]','a[href="archive16.html"]'].forEach(s=>document.querySelectorAll(s).forEach(x=>{if(locked){x.dataset.niuHidden='1';x.style.setProperty('display','none','important')}else if(x.dataset.niuHidden){x.style.removeProperty('display');delete x.dataset.niuHidden}}))}
+function cleanupDuplicateLoaders(){const seen=new Set(),src='profile-slots.js';document.querySelectorAll('script[src]').forEach(s=>{const u=s.getAttribute('src')||'';if(u.split('?')[0].endsWith(src)){if(seen.size){s.remove()}else seen.add(src)}})}
+function entranceFix(){let e=document.getElementById('entrance');if(!e)return;let locked=!e.classList.contains('hide');['#arg2-trigger','a[href="shiryo-shitsu.html"]','a[href="archive16.html"]'].forEach(s=>document.querySelectorAll(s).forEach(x=>{if(locked){x.dataset.niuHidden='1';x.style.setProperty('display','none','important');x.style.setProperty('pointer-events','none','important')}else if(x.dataset.niuHidden){x.style.removeProperty('display');x.style.removeProperty('pointer-events');delete x.dataset.niuHidden}}))}
 function wav(){let r=22050,d=12,n=r*d,p=new Int16Array(n),ns=[261.63,329.63,392,523.25,392,329.63,293.66,349.23,440,587.33,440,349.23];for(let i=0;i<n;i++){let t=i/r,j=Math.floor(t*2)%ns.length,q=(t*2)%1,en=Math.min(1,q*18)*Math.min(1,(1-q)*12),z=Math.sin(2*Math.PI*ns[j]*t)*.72+Math.sin(4*Math.PI*ns[j]*t)*.12;p[i]=(z*en+(Math.random()*2-1)*.012)*11000}let s=p.length*2,b=new ArrayBuffer(44+s),v=new DataView(b),w=(o,x)=>{for(let i=0;i<x.length;i++)v.setUint8(o+i,x.charCodeAt(i))};w(0,'RIFF');v.setUint32(4,36+s,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,r,true);v.setUint32(28,r*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,s,true);for(let i=0;i<p.length;i++)v.setInt16(44+i*2,p[i],true);return URL.createObjectURL(new Blob([b],{type:'audio/wav'}))}
-function audioFix(){let a=document.getElementById('imperialAudio');if(!a||a.dataset.niuAudioFix)return;a.dataset.niuAudioFix='1';let done=false,f=()=>{if(done)return;done=true;a.src=wav();a.load();let s=document.getElementById('audioStatus');if(s)s.textContent='予備音源を再生します。'};a.addEventListener('error',f,{once:true});a.addEventListener('stalled',()=>setTimeout(()=>{if(!a.readyState)f()},1500));setTimeout(()=>{if(!a.readyState&&!a.paused)f()},2000)}
-function boot(){entranceFix();audioFix();let e=document.getElementById('entrance');if(e)new MutationObserver(entranceFix).observe(e,{attributes:true,attributeFilter:['class']});let b=document.getElementById('enterButton');if(b)b.addEventListener('click',()=>setTimeout(entranceFix,0),true);let i=document.getElementById('entrant-name');if(i){let s=raw('niu_entrant_name');if(s)i.value=s;i.addEventListener('change',()=>activate(i.value));i.addEventListener('blur',()=>activate(i.value))}}
+function audioFix(){let a=document.getElementById('imperialAudio');if(!a||a.dataset.niuAudioFix)return;a.dataset.niuAudioFix='1';let done=false;const fallback=()=>{if(done)return;done=true;a.src=wav();a.load();let s=document.getElementById('audioStatus');if(s)s.textContent='予備音源を再生します。'};a.addEventListener('error',fallback,{once:true});a.addEventListener('stalled',()=>setTimeout(()=>{if(!a.readyState)fallback()},1200));a.addEventListener('abort',fallback,{once:true});const tryPlay=()=>a.play().catch(()=>{if(a.error)fallback()});a.addEventListener('canplay',()=>{}, {once:true});window.addEventListener('pointerdown',()=>{if(a.paused)tryPlay()},{once:true});setTimeout(()=>{if(a.error)fallback()},1000)}
+function boot(){cleanupDuplicateLoaders();entranceFix();audioFix();let e=document.getElementById('entrance');if(e)new MutationObserver(entranceFix).observe(e,{attributes:true,attributeFilter:['class']});let b=document.getElementById('enterButton');if(b)b.addEventListener('click',()=>{setTimeout(entranceFix,0);let a=document.getElementById('imperialAudio');if(a)a.play().catch(()=>{})},true);let i=document.getElementById('entrant-name');if(i){let s=raw('niu_entrant_name');if(s)i.value=s;i.addEventListener('change',()=>activate(i.value));i.addEventListener('blur',()=>activate(i.value))}}
 if(document.readyState==='loading')addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
