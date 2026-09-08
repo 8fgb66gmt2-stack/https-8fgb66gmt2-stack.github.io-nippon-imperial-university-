@@ -1,12 +1,12 @@
-/* N.I.U. / PLAYER PROFILE SLOTS — V15
+/* N.I.U. / PLAYER PROFILE SLOTS — V16
    Public-site hotfix: duplicate loader cleanup, profile-save migration,
    entrance controls, gramophone fallback, and related institutions footer.
 */
 (function(){
 'use strict';
-if(window.__NIU_PROFILE_SLOTS_V15__)return;
-window.__NIU_PROFILE_SLOTS_V15__=true;
-const G=new Set(['niu_entrant_name','niu_active_profile','niu_profiles_version']),P='niu_profile_v8::',V='15';
+if(window.__NIU_PROFILE_SLOTS_V16__)return;
+window.__NIU_PROFILE_SLOTS_V16__=true;
+const G=new Set(['niu_entrant_name','niu_active_profile','niu_profiles_version']),P='niu_profile_v8::',V='16';
 const N={getItem:Storage.prototype.getItem,setItem:Storage.prototype.setItem,removeItem:Storage.prototype.removeItem,clear:Storage.prototype.clear,key:Storage.prototype.key};
 const L=Object.getOwnPropertyDescriptor(Storage.prototype,'length').get;
 const clean=v=>String(v||'').trim().replace(/[\\/:*?"<>|]/g,'').replace(/\s+/g,' ').slice(0,40),raw=k=>N.getItem.call(localStorage,k),rawSet=(k,v)=>N.setItem.call(localStorage,k,String(v)),active=()=>clean(raw('niu_active_profile'))||clean(raw('niu_entrant_name'))||'',scope=k=>G.has(String(k))||!active()?String(k):P+encodeURIComponent(active())+'::'+k;
@@ -24,17 +24,33 @@ function wav(){let r=22050,d=12,n=r*d,p=new Int16Array(n),ns=[261.63,329.63,392,
 function audioFix(){let a=document.getElementById('imperialAudio');if(!a||a.dataset.niuAudioFix)return;a.dataset.niuAudioFix='1';let done=false;const fallback=()=>{if(done)return;done=true;a.src=wav();a.load();let s=document.getElementById('audioStatus');if(s)s.textContent='予備音源を再生します。'};a.addEventListener('error',fallback,{once:true});a.addEventListener('stalled',()=>setTimeout(()=>{if(!a.readyState)fallback()},1200));a.addEventListener('abort',fallback,{once:true});const tryPlay=()=>a.play().catch(()=>{if(a.error)fallback()});a.addEventListener('canplay',()=>{}, {once:true});window.addEventListener('pointerdown',()=>{if(a.paused)tryPlay()},{once:true});setTimeout(()=>{if(a.error)fallback()},1000)}
 function relatedInstitutionsFooter(){
   const footer=document.querySelector('footer');
-  if(!footer||footer.querySelector('.related-institutions-block'))return;
-  const inner=footer.querySelector('.footer-inner');
-  if(!inner)return;
-  const block=document.createElement('div');
-  block.className='footer-block related-institutions-block';
-  block.innerHTML='<h4>RELATED INSTITUTIONS</h4><ul><li><a href="https://8fgb66gmt2-stack.github.io/-web-Shikicho/">四季廳（本廳舍）</a></li></ul>';
-  inner.appendChild(block);
-  const style=document.createElement('style');
-  style.textContent='.footer-inner{grid-template-columns:repeat(3,minmax(0,1fr))!important}.related-institutions-block a{transition:color .25s ease}.related-institutions-block a:hover{color:var(--gold-light)!important}@media(max-width:760px){.footer-inner{grid-template-columns:1fr!important}}';
-  document.head.appendChild(style);
+  const inner=footer&&footer.querySelector('.footer-inner');
+  if(!inner)return false;
+  let block=inner.querySelector('.related-institutions-block');
+  if(!block){
+    block=document.createElement('div');
+    block.className='footer-block related-institutions-block';
+    block.innerHTML='<h4>RELATED INSTITUTIONS</h4><ul><li><a href="https://8fgb66gmt2-stack.github.io/-web-Shikicho/">四季廳（本廳舍）</a></li></ul>';
+    inner.appendChild(block);
+  }
+  const styleId='niu-related-institutions-style';
+  if(!document.getElementById(styleId)){
+    const style=document.createElement('style');
+    style.id=styleId;
+    style.textContent='.footer-inner{grid-template-columns:1.5fr repeat(3,minmax(0,1fr))!important}.related-institutions-block a{transition:color .25s ease}.related-institutions-block a:hover{color:var(--gold-light)!important}@media(max-width:850px){.footer-inner{grid-template-columns:1fr!important}}';
+    document.head.appendChild(style);
+  }
+  return true;
 }
-function boot(){cleanupDuplicateLoaders();entranceFix();audioFix();relatedInstitutionsFooter();let e=document.getElementById('entrance');if(e)new MutationObserver(entranceFix).observe(e,{attributes:true,attributeFilter:['class']});let b=document.getElementById('enterButton');if(b)b.addEventListener('click',()=>{setTimeout(entranceFix,0);let a=document.getElementById('imperialAudio');if(a)a.play().catch(()=>{})},true);let i=document.getElementById('entrant-name');if(i){let s=raw('niu_entrant_name');if(s)i.value=s;i.addEventListener('change',()=>activate(i.value));i.addEventListener('blur',()=>activate(i.value))}}
+function boot(){
+  cleanupDuplicateLoaders();
+  entranceFix();
+  audioFix();
+  relatedInstitutionsFooter();
+  [100,500,1500,3000].forEach(ms=>setTimeout(relatedInstitutionsFooter,ms));
+  let e=document.getElementById('entrance');if(e)new MutationObserver(entranceFix).observe(e,{attributes:true,attributeFilter:['class']});
+  let b=document.getElementById('enterButton');if(b)b.addEventListener('click',()=>{setTimeout(entranceFix,0);let a=document.getElementById('imperialAudio');if(a)a.play().catch(()=>{})},true);
+  let i=document.getElementById('entrant-name');if(i){let s=raw('niu_entrant_name');if(s)i.value=s;i.addEventListener('change',()=>activate(i.value));i.addEventListener('blur',()=>activate(i.value))}
+}
 if(document.readyState==='loading')addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
