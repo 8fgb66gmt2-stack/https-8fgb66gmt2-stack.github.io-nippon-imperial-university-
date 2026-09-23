@@ -85,7 +85,7 @@ const R=[
 ["haru","shikimi","school","九条院塾・帝國大學へ連なる教育・文壇圏。"],
 ["shikimi","saku","school","帝國大學以来の親しい文壇関係。"],
 ["shikimi","shoko","love","正式な交際関係にあった元恋人。"],
-["shikimi","shoji","family","親子。修治は樒の息子。"],
+["shikimi","shuji","family","親子。修治は樒の息子。"],
 ["shikimi","kaguya","art","藝術上の交流。樒の批評を輝矢は「理解」と受け取る。"],
 ["ryuno","yuzuriha","love","帝國大學第二世代の夫婦。"],
 ["ichiyo","yakumo","family","養兄弟。九条院塾門下。"],
@@ -99,10 +99,10 @@ const R=[
 ["hina","anzu","family","母娘。杏莉は秋の現人神。"],
 ["mizuki","hina","event","誘拐・拘束事件。雛菊は8歳で誘拐され5年間拘束された。"],
 ["mizuki","kaoru","event","側近・共犯関係として記録。"],
-["mizuki","higashiki","season","華歳・神格をめぐる因縁。"],
+["mizuki","higan","season","華歳・神格をめぐる因縁。"],
 ["kurenai","hina","season","秋の旧記録との照合。"],
 ["zansetsu","shikimi","art","帝國文化圏・藝術活動上の関係。"],
-["shoji","shikimi","family","樒の息子。"]
+["shuji","shikimi","family","樒の息子。"]
 ];
 const people=Object.fromEntries(P.map(x=>[x[0],{id:x[0],name:x[1],era:x[2],role:x[3],cat:x[4],tags:x[5]}]));
 const rel={};R.forEach(x=>{(rel[x[0]]??=[]).push(x);(rel[x[1]]??=[]).push(x)});
