@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日ノ本帝國・人物相関図｜帝國大學資料室</title>
+<meta name="description" content="日ノ本帝國の人物相関を、人物・家系・文壇・四季神祇・藝術文化・事件の分類から閲覧できる人物相関図。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700;800;900&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#241c1b;--soft:#665854;--paper:#f3ecde;--paper2:#fcf8ef;--red:#781722;--red2:#4c0d14;--gold:#a98545;--gold2:#dbc48e;--line:rgba(74,47,35,.25);--shadow:0 14px 40px rgba(40,25,20,.14)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Noto Serif JP","Yu Mincho",serif;line-height:1.85;background:radial-gradient(ellipse at 20% 5%,rgba(255,255,255,.75),transparent 42%),linear-gradient(90deg,rgba(100,70,40,.035) 1px,transparent 1px),linear-gradient(rgba(100,70,40,.025) 1px,transparent 1px),var(--paper);background-size:auto,8px 8px,8px 8px,auto}body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.055;background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(70,40,20,.18) 4px)}
+a{color:inherit;text-decoration:none}button{font:inherit}
+header{background:linear-gradient(135deg,#271b1a,#442422);color:#f5ead8;border-bottom:4px double var(--gold);box-shadow:0 8px 25px rgba(30,18,15,.22);position:sticky;top:0;z-index:100}
+.head{max-width:1280px;margin:auto;padding:20px 22px 16px;display:flex;align-items:end;justify-content:space-between;gap:25px}.brand{display:flex;align-items:center;gap:15px}.mark{width:52px;height:52px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold2);font-size:23px}.brand h1{font-family:"Shippori Mincho";font-size:clamp(18px,2.7vw,28px);letter-spacing:.13em;margin:0}.brand p{margin:2px 0 0;font-size:9px;letter-spacing:.28em;opacity:.65}.meta{font-size:9px;letter-spacing:.15em;color:#d7c8b3;text-align:right}
+nav{border-top:1px solid rgba(215,188,130,.2)}nav .navin{max-width:1280px;margin:auto;display:flex;justify-content:center;flex-wrap:wrap}nav a{padding:8px 15px;font-size:10px;letter-spacing:.1em}nav a:hover{color:var(--gold2)}
+.hero{max-width:1280px;margin:auto;padding:65px 25px 45px;text-align:center}.kicker{font-size:10px;letter-spacing:.38em;color:var(--red)}h2{font-family:"Shippori Mincho";font-size:clamp(30px,5vw,54px);letter-spacing:.12em;margin:8px 0}.rule{width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:18px auto}.lead{max-width:800px;margin:auto;color:var(--soft);font-size:12px;line-height:2.2}
+.controls{position:sticky;top:100px;z-index:80;max-width:1200px;margin:0 auto 24px;padding:14px 18px;background:rgba(252,248,239,.94);backdrop-filter:blur(8px);border:1px solid var(--line);box-shadow:0 8px 25px rgba(50,35,25,.08)}
+.filterrow{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}.filter{border:1px solid var(--line);background:rgba(255,255,255,.5);padding:7px 13px;font-size:10px;letter-spacing:.08em;cursor:pointer}.filter.active,.filter:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.status{margin-top:9px;text-align:center;font-size:9px;color:var(--soft);letter-spacing:.08em}.legend{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:9px;font-size:9px;color:var(--soft)}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;border:1px solid currentColor}.family{color:#781722}.literature{color:#526b52}.season{color:#566b88}.art{color:#80643e}.conflict{color:#694a70}.mentor{color:#6b5a42}
+
+main{max-width:1280px;margin:auto;padding:0 20px 100px}.map{position:relative;min-height:1800px;padding:25px 0 80px}
+.rail{position:absolute;left:50%;top:30px;bottom:70px;width:1px;background:linear-gradient(var(--gold),rgba(169,133,69,.12),var(--gold));transform:translateX(-50%);pointer-events:none}.era{position:relative;margin:0 0 70px}.era-title{text-align:center;font-family:"Shippori Mincho";font-size:15px;letter-spacing:.15em;color:var(--red);margin-bottom:25px}.era-title span{display:inline-block;background:var(--paper);padding:4px 16px;border:1px solid var(--line)}
+.row{display:grid;grid-template-columns:1fr 80px 1fr;align-items:center;gap:16px;margin:18px 0}.side{display:flex;justify-content:flex-end}.side.right{justify-content:flex-start}.centerline{height:1px;background:var(--line);position:relative}.centerline:after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;background:var(--gold);border-radius:50%;transform:translate(-50%,-50%)}
+.node{width:min(100%,390px);border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.86),rgba(229,218,201,.62));box-shadow:0 7px 22px rgba(50,35,25,.06);padding:16px 18px;cursor:pointer;transition:.25s;position:relative}.node:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.node.selected{border:2px solid var(--red);box-shadow:0 0 0 4px rgba(120,23,34,.1),var(--shadow)}.node.dim{opacity:.18;filter:grayscale(.65)}.node.hidden{display:none}.node .type{font-size:8px;letter-spacing:.15em;color:var(--red)}.node h3{font-family:"Shippori Mincho";font-size:18px;margin:2px 0 3px}.node p{font-size:10px;color:var(--soft);margin:0;line-height:1.8}.tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}.tag{font-size:8px;padding:2px 6px;border:1px solid var(--line);color:var(--soft)}
+#relations{max-width:950px;margin:0 auto 55px;padding:25px;border:1px solid var(--line);background:rgba(255,255,255,.48);min-height:100px}.relhead{font-family:"Shippori Mincho";font-size:18px;color:var(--red);margin:0 0 10px}.relitem{padding:9px 0;border-bottom:1px solid rgba(74,47,35,.12);font-size:11px}.relitem:last-child{border:0}.reltype{display:inline-block;font-size:8px;color:var(--red);border:1px solid rgba(120,23,34,.35);padding:2px 6px;margin-right:7px}
+.note{max-width:950px;margin:0 auto 25px;padding:12px 16px;border-left:3px solid var(--gold);background:rgba(169,133,69,.06);font-size:10px;color:var(--soft)}
+footer{background:#241918;color:#d7c9b7;padding:35px 20px;text-align:center;border-top:3px double var(--gold);font-size:9px;letter-spacing:.08em}
+@media(max-width:760px){.head{align-items:center}.meta{display:none}.controls{top:78px}.map{min-height:0}.rail{left:18px;top:45px}.row{grid-template-columns:28px 1fr;gap:12px}.centerline{display:none}.side,.side.right{grid-column:2;justify-content:flex-start}.side:first-child{grid-column:2}.side.right{grid-column:2}.era{margin-bottom:45px}.node{max-width:none}.hero{padding-top:42px}.filter{padding:7px 10px}}
+</style>
+</head>
+<body>
+<header>
+<div class="head"><div class="brand"><div class="mark">帝</div><div><h1>日ノ本帝國・人物相関図</h1><p>NIHON IMPERIAL RELATION ARCHIVE</p></div></div><div class="meta">帝國大學・人物資料室<br>公開相関記録　改訂版</div></div>
+<nav><div class="navin"><a href="index.html">帝國大學首頁</a><a href="#map">人物相関図</a><a href="#relations">関係記録</a><a href="hyakki.html">帝國大百科</a><a href="shiryo-shitsu.html">資料室</a></div></nav>
+</header>
+
+<section class="hero"><div class="kicker">IMPERIAL CHARACTER RELATION ARCHIVE</div><h2>人物相関図</h2><div class="rule"></div><p class="lead">人物を選ぶと、その人物と直接つながる関係だけが強調表示されます。分類を切り替えながら、九条院家・卜部川家、帝國大學文壇、四季神祇、藝術文化、そしてそれらを横断する因縁を、上から下へ辿ってください。</p></section>
+
+<section class="controls">
+<div class="filterrow" id="filters">
+<button class="filter active" data-filter="all">全て</button><button class="filter" data-filter="family">家族・婚姻</button><button class="filter" data-filter="literature">文壇・教育</button><button class="filter" data-filter="season">四季神祇</button><button class="filter" data-filter="art">藝術・文化</button><button class="filter" data-filter="conflict">対立・因縁</button><button class="filter" data-filter="mentor">師弟・後見</button>
+</div><div class="status" id="status">全人物を表示中。人物を押すと関係を追跡できます。</div>
+<div class="legend"><span class="family"><i class="dot"></i>家族・婚姻</span><span class="literature"><i class="dot"></i>文壇・教育</span><span class="season"><i class="dot"></i>四季神祇</span><span class="art"><i class="dot"></i>藝術・文化</span><span class="conflict"><i class="dot"></i>対立・因縁</span><span class="mentor"><i class="dot"></i>師弟・後見</span></div>
+</section>
+
+<main>
+<div id="relations"><h3 class="relhead">人物を選択してください</h3><div id="relationBody">人物カードを押すと、直接の関係・関係種別・相手人物がここに表示されます。</div></div>
+<div class="note">※公開済みの人物設定をもとにした相関アーカイブです。関係の追加・訂正が生じた場合は、この頁の人物データを更新してください。未確定の設定は「因縁」として断定せず、記録上の関係として表示します。</div>
+<section class="map" id="map"><div class="rail"></div><div id="mapRows"></div></section>
+</main>
+
+<footer>日ノ本帝國國立帝國大學　帝國大學・人物資料室　｜　人物相関図 完全版</footer>
+
+<script>
+const people=[
+{id:"haru",name:"九条院春臣",role:"日ノ本帝國教育の祖・帝國大學設立者",cat:["literature","mentor"],era:"第一世代・帝國教育",tags:["九条院家","教育","帝國大學"]},
+{id:"saku",name:"九条院朔臣",role:"文學者・九条院春臣の弟",cat:["family","literature"],era:"帝國大學文壇",tags:["九条院家","文星"]},
+{id:"saki",name:"九条院紗希",role:"九条院春臣の一人娘・初の女子留学生",cat:["family","art"],era:"九条院家",tags:["九条院家","女子留学","紅霧國"]},
+{id:"kaya",name:"香矢",role:"九条院春臣の妻",cat:["family"],era:"九条院家",tags:["九条院家","婚姻"]},
+{id:"kaguya",name:"鳴海輝矢",role:"画家・彫刻家・舞台美術家",cat:["art","family"],era:"帝都藝術界",tags:["藝術","九条院家"]},
+{id:"mizuki",name:"瑞稀・フィオーレ",role:"九条院春臣の元婚約者・雛菊をめぐる重要人物",cat:["conflict","season"],era:"華歳・四季神祇",tags:["元婚約","華歳","雛菊"]},
+{id:"aoko",name:"瑗子",role:"九条院家に連なる人物",cat:["family"],era:"九条院家",tags:["九条院家","親族"]},
+{id:"shuji",name:"卜部川修治",role:"九条院家と卜部川家をつなぐ人物",cat:["family","literature"],era:"卜部川家",tags:["卜部川家","親族"]},
+{id:"shikimi",name:"卜部川樒",role:"小説家・評論家／帝國大學文科首席",cat:["literature","mentor","family"],era:"帝國大學文壇",tags:["文星","卜部川家","文科"]},
+{id:"kaoruko",name:"藤宮薫子",role:"樒と深く結びつく人物",cat:["family","mentor"],era:"卜部川樒周辺",tags:["薫子","樒"]},
+{id:"shoko",name:"御影薔子",role:"文學者・帝國大學文科出身",cat:["literature"],era:"帝國大學文壇",tags:["文星","文科"]},
+{id:"ryunosuke",name:"有栖川劉ノ介",role:"小説家・帝國大學文科首席",cat:["literature"],era:"帝國大學文壇",tags:["文星","文科"]},
+{id:"ichiyo",name:"中原壱葉",role:"詩人・文學者",cat:["literature"],era:"帝國大學文壇",tags:["文星","文科"]},
+{id:"yuzuriha",name:"六條杠葉",role:"歌人・詩人・帝國大學初の女學生",cat:["literature","mentor"],era:"帝國大學文壇",tags:["文星","女子教育"]},
+{id:"muroji",name:"九頭竜夢路",role:"小説家・帝國大學文科出身",cat:["literature"],era:"帝國大學文壇",tags:["文星","文科"]},
+{id:"kurenai",name:"紅城院眞紅",role:"小説家・劇作家・評論家／怪奇幻想派",cat:["literature","season","conflict"],era:"帝都文壇・四季記録",tags:["文星","秋","怪奇幻想"]},
+{id:"hayashi",name:"森林太郎",role:"文學者・帝國大學文科／皇太子",cat:["literature","family"],era:"帝國大學文壇",tags:["文星","皇室","文科"]},
+{id:"harutsuki",name:"花葉春月",role:"四季廳長官・漫畫家（大窪晶与）",cat:["season","art","family"],era:"花葉家・四季廳",tags:["春","四季廳","漫畫"]},
+{id:"higan",name:"花葉雛菊",role:"春の現人神",cat:["season","family"],era:"花葉家・四季神祇",tags:["春","現人神","花葉家"]},
+{id:"anzu",name:"祝月杏莉",role:"秋の現人神・雛菊の娘",cat:["season","family"],era:"花葉家・次世代",tags:["秋","現人神","花葉家"]},
+{id:"zansetsu",name:"雪柳残雪",role:"藝術科首席・作曲家",cat:["art","family"],era:"帝國大學藝術科",tags:["文星","作曲","雪柳家"]},
+{id:"kamishiro",name:"神代聖",role:"帝國大學文科初代首席・文學者",cat:["literature","conflict"],era:"帝國大學文壇・初代",tags:["文星","初代","旧記録"]},
+{id:"akiyo",name:"大窪晶与",role:"花葉春月の筆名／四季廳長官・漫畫家",cat:["art","season","family"],era:"四季廳・藝術界",tags:["花葉春月","四季廳","漫畫"]},
+{id:"kaoru",name:"美上",role:"瑞稀・フィオーレと結びつく人物",cat:["conflict"],era:"華歳・因縁",tags:["瑞稀","華歳"]},
+{id:"kaya2",name:"香矢",role:"九条院家・婚姻関係",cat:["family"],era:"九条院家",tags:["婚姻"]},
+{id:"mifune",name:"ミフネ",role:"『彼岸奇譚』外部世界と交差する象徴的人物",cat:["conflict","art"],era:"記録外・異世界",tags:["異世界","記録外"]}
+];
+const rel=[
+["haru","saku","family","兄弟"],["haru","kaya","family","夫婦"],["haru","kaguya","family","義兄弟"],["haru","mizuki","conflict","元婚約"],["haru","aoko","family","姪"],["haru","shuji","family","姪の夫"],["shuji","shikimi","family","親族"],["shikimi","kaoruko","family","深い関係"],["shikimi","shoko","literature","文壇・人物録"],["shikimi","kamishiro","literature","帝國大學文壇の世代関係"],["haru","saki","family","父娘"],["saki","kaguya","art","帝國文化圏"],["mizuki","higan","conflict","因縁・雛菊をめぐる関係"],["mizuki","kaoru","conflict","共犯関係として記録"],["mizuki","higan","season","華歳・神格をめぐる因縁"],["harutsuki","higan","season","春の現人神と四季廳長官"],["harutsuki","anzu","family","父娘"],["harutsuki","zansetsu","family","兄弟"],["harutsuki","akiyo","art","同一人物・筆名"],["higan","anzu","family","母娘"],["higan","mizuki","conflict","雛菊をめぐる因縁"],["kamishiro","kurenai","conflict","旧四季記録をめぐる因縁"],["kamishiro","shikimi","literature","帝國大學文壇・世代関係"],["ryunosuke","yuzuriha","literature","帝國大學第二世代"],["ichiyo","muroji","literature","帝國大學第六世代"],["hayashi","harutsuki","literature","帝國大學第五世代"],["harutsuki","zansetsu","art","藝術科・文化活動"],["kurenai","higan","season","秋の旧記録との照合"],["shikimi","haru","literature","帝國大學・文壇圏"],["shikimi","kaoruko","mentor","保護・後見的関係"],["haru","shikimi","literature","帝國大學文壇"],["zansetsu","shikimi","art","帝國文化圏"],["mifune","kurenai","conflict","記録上の象徴的照合"]
+];
+const byId=Object.fromEntries(people.map(p=>[p.id,p])), relBy={}; rel.forEach(r=>{(relBy[r[0]]??=[]).push(r);(relBy[r[1]]??=[]).push(r)});
+let current="all",selected=null;
+function relatedIds(id){const s=new Set();(relBy[id]||[]).forEach(r=>{s.add(r[0]);s.add(r[1])});return s}
+function visible(p){return current==="all"||p.cat.includes(current)}
+function node(p){return `<article class="node" data-id="${p.id}" data-cat="${p.cat.join(' ')}"><div class="type">${p.era}</div><h3>${p.name}</h3><p>${p.role}</p><div class="tags">${p.tags.map(x=>`<span class="tag">${x}</span>`).join('')}</div></article>`}
+function render(){const eras=[...new Set(people.map(p=>p.era))],wrap=document.getElementById("mapRows");wrap.innerHTML="";eras.forEach((era,idx)=>{const ps=people.filter(p=>p.era===era&&visible(p));if(!ps.length)return;const sec=document.createElement("section");sec.className="era";sec.innerHTML=`<div class="era-title"><span>${era}</span></div>`;ps.forEach((p,i)=>{const other=ps[(i+1)%ps.length];let row=document.createElement("div");row.className="row";row.innerHTML=`<div class="side">${node(p)}</div><div class="centerline"></div><div class="side right">${i===ps.length-1?"":node(other)}</div>`;sec.appendChild(row);if(i===ps.length-1&&ps.length>1){} });wrap.appendChild(sec)});bind();applySelection()}
+function bind(){document.querySelectorAll(".node").forEach(n=>n.addEventListener("click",()=>select(n.dataset.id)))}
+function select(id){selected=id;const p=byId[id],ids=relatedIds(id);document.querySelectorAll(".node").forEach(n=>{n.classList.remove("selected","dim");if(n.dataset.id===id)n.classList.add("selected");else if(!ids.has(n.dataset.id))n.classList.add("dim")});const items=(relBy[id]||[]).map(r=>{const other=r[0]===id?r[1]:r[0];return `<div class="relitem"><span class="reltype">${r[3]}</span><strong>${byId[other]?.name||other}</strong>　<small>${label(r[2])}</small></div>`}).join("");document.getElementById("relationBody").innerHTML=items||"直接の関係記録はまだ登録されていません。";document.querySelector(".relhead").textContent=p.name+" — 関係記録";document.getElementById("status").textContent=`${p.name}を選択中。直接の関係 ${(relBy[id]||[]).length} 件を強調表示。`;document.getElementById("relations").scrollIntoView({behavior:"smooth",block:"center"})}
+function applySelection(){if(!selected)return;const ids=relatedIds(selected);document.querySelectorAll(".node").forEach(n=>{n.classList.remove("selected","dim");if(n.dataset.id===selected)n.classList.add("selected");else if(!ids.has(n.dataset.id))n.classList.add("dim")})}
+function label(x){return {family:"家族・婚姻",literature:"文壇・教育",season:"四季神祇",art:"藝術・文化",conflict:"対立・因縁",mentor:"師弟・後見"}[x]||x}
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");current=b.dataset.filter;selected=null;document.querySelector(".relhead").textContent="人物を選択してください";document.getElementById("relationBody").textContent="人物カードを押すと、直接の関係・関係種別・相手人物がここに表示されます。";document.getElementById("status").textContent=current==="all"?"全人物を表示中。人物を押すと関係を追跡できます。":label(current)+"の人物を表示中。";render()}));
+render();
+</script>
+</body>
+</html>
