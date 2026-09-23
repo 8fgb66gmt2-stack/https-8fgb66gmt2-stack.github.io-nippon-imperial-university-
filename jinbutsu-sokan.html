@@ -1,104 +1,125 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<script src="profile-slots.js"></script>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>日ノ本帝國・人物相関図｜帝國大學資料室</title>
-<meta name="description" content="日ノ本帝國の人物相関を、人物・家系・文壇・四季神祇・藝術文化・事件の分類から閲覧できる人物相関図。">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>帝國人物資料室・人物相関記録｜日ノ本帝國國立帝國大學</title>
+<meta name="description" content="日ノ本帝國國立帝國大學・人物資料室。帝國文壇、九条院家、卜部川家、四季廳、藝術界に残る人物関係を記録する。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700;800;900&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#241c1b;--soft:#665854;--paper:#f3ecde;--paper2:#fcf8ef;--red:#781722;--red2:#4c0d14;--gold:#a98545;--gold2:#dbc48e;--line:rgba(74,47,35,.25);--shadow:0 14px 40px rgba(40,25,20,.14)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Noto Serif JP","Yu Mincho",serif;line-height:1.85;background:radial-gradient(ellipse at 20% 5%,rgba(255,255,255,.75),transparent 42%),linear-gradient(90deg,rgba(100,70,40,.035) 1px,transparent 1px),linear-gradient(rgba(100,70,40,.025) 1px,transparent 1px),var(--paper);background-size:auto,8px 8px,8px 8px,auto}body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.055;background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(70,40,20,.18) 4px)}
-a{color:inherit;text-decoration:none}button{font:inherit}
-header{background:linear-gradient(135deg,#271b1a,#442422);color:#f5ead8;border-bottom:4px double var(--gold);box-shadow:0 8px 25px rgba(30,18,15,.22);position:sticky;top:0;z-index:100}
-.head{max-width:1280px;margin:auto;padding:20px 22px 16px;display:flex;align-items:end;justify-content:space-between;gap:25px}.brand{display:flex;align-items:center;gap:15px}.mark{width:52px;height:52px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold2);font-size:23px}.brand h1{font-family:"Shippori Mincho";font-size:clamp(18px,2.7vw,28px);letter-spacing:.13em;margin:0}.brand p{margin:2px 0 0;font-size:9px;letter-spacing:.28em;opacity:.65}.meta{font-size:9px;letter-spacing:.15em;color:#d7c8b3;text-align:right}
-nav{border-top:1px solid rgba(215,188,130,.2)}nav .navin{max-width:1280px;margin:auto;display:flex;justify-content:center;flex-wrap:wrap}nav a{padding:8px 15px;font-size:10px;letter-spacing:.1em}nav a:hover{color:var(--gold2)}
-.hero{max-width:1280px;margin:auto;padding:65px 25px 45px;text-align:center}.kicker{font-size:10px;letter-spacing:.38em;color:var(--red)}h2{font-family:"Shippori Mincho";font-size:clamp(30px,5vw,54px);letter-spacing:.12em;margin:8px 0}.rule{width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:18px auto}.lead{max-width:800px;margin:auto;color:var(--soft);font-size:12px;line-height:2.2}
-.controls{position:sticky;top:100px;z-index:80;max-width:1200px;margin:0 auto 24px;padding:14px 18px;background:rgba(252,248,239,.94);backdrop-filter:blur(8px);border:1px solid var(--line);box-shadow:0 8px 25px rgba(50,35,25,.08)}
-.filterrow{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}.filter{border:1px solid var(--line);background:rgba(255,255,255,.5);padding:7px 13px;font-size:10px;letter-spacing:.08em;cursor:pointer}.filter.active,.filter:hover{background:var(--red);color:#fff;border-color:var(--red)}
-.status{margin-top:9px;text-align:center;font-size:9px;color:var(--soft);letter-spacing:.08em}.legend{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:9px;font-size:9px;color:var(--soft)}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;border:1px solid currentColor}.family{color:#781722}.literature{color:#526b52}.season{color:#566b88}.art{color:#80643e}.conflict{color:#694a70}.mentor{color:#6b5a42}
-
-main{max-width:1280px;margin:auto;padding:0 20px 100px}.map{position:relative;min-height:1800px;padding:25px 0 80px}
-.rail{position:absolute;left:50%;top:30px;bottom:70px;width:1px;background:linear-gradient(var(--gold),rgba(169,133,69,.12),var(--gold));transform:translateX(-50%);pointer-events:none}.era{position:relative;margin:0 0 70px}.era-title{text-align:center;font-family:"Shippori Mincho";font-size:15px;letter-spacing:.15em;color:var(--red);margin-bottom:25px}.era-title span{display:inline-block;background:var(--paper);padding:4px 16px;border:1px solid var(--line)}
-.row{display:grid;grid-template-columns:1fr 80px 1fr;align-items:center;gap:16px;margin:18px 0}.side{display:flex;justify-content:flex-end}.side.right{justify-content:flex-start}.centerline{height:1px;background:var(--line);position:relative}.centerline:after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;background:var(--gold);border-radius:50%;transform:translate(-50%,-50%)}
-.node{width:min(100%,390px);border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.86),rgba(229,218,201,.62));box-shadow:0 7px 22px rgba(50,35,25,.06);padding:16px 18px;cursor:pointer;transition:.25s;position:relative}.node:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.node.selected{border:2px solid var(--red);box-shadow:0 0 0 4px rgba(120,23,34,.1),var(--shadow)}.node.dim{opacity:.18;filter:grayscale(.65)}.node.hidden{display:none}.node .type{font-size:8px;letter-spacing:.15em;color:var(--red)}.node h3{font-family:"Shippori Mincho";font-size:18px;margin:2px 0 3px}.node p{font-size:10px;color:var(--soft);margin:0;line-height:1.8}.tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}.tag{font-size:8px;padding:2px 6px;border:1px solid var(--line);color:var(--soft)}
-#relations{max-width:950px;margin:0 auto 55px;padding:25px;border:1px solid var(--line);background:rgba(255,255,255,.48);min-height:100px}.relhead{font-family:"Shippori Mincho";font-size:18px;color:var(--red);margin:0 0 10px}.relitem{padding:9px 0;border-bottom:1px solid rgba(74,47,35,.12);font-size:11px}.relitem:last-child{border:0}.reltype{display:inline-block;font-size:8px;color:var(--red);border:1px solid rgba(120,23,34,.35);padding:2px 6px;margin-right:7px}
-.note{max-width:950px;margin:0 auto 25px;padding:12px 16px;border-left:3px solid var(--gold);background:rgba(169,133,69,.06);font-size:10px;color:var(--soft)}
-footer{background:#241918;color:#d7c9b7;padding:35px 20px;text-align:center;border-top:3px double var(--gold);font-size:9px;letter-spacing:.08em}
-@media(max-width:760px){.head{align-items:center}.meta{display:none}.controls{top:78px}.map{min-height:0}.rail{left:18px;top:45px}.row{grid-template-columns:28px 1fr;gap:12px}.centerline{display:none}.side,.side.right{grid-column:2;justify-content:flex-start}.side:first-child{grid-column:2}.side.right{grid-column:2}.era{margin-bottom:45px}.node{max-width:none}.hero{padding-top:42px}.filter{padding:7px 10px}}
+:root{--ink:#241c1b;--soft:#665854;--paper:#f3ecde;--light:#fcf8ef;--red:#781722;--red2:#4c0d14;--gold:#a98545;--gold2:#dbc48e;--line:rgba(74,47,35,.25)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Noto Serif JP","Yu Mincho",serif;line-height:1.9;background:radial-gradient(ellipse at 20% 5%,#fff9 0,transparent 42%),linear-gradient(90deg,#64462808 1px,transparent 1px),linear-gradient(#64462806 1px,transparent 1px),var(--paper);background-size:auto,8px 8px,8px 8px}body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.055;background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,#4628142d 4px)}a{color:inherit;text-decoration:none}button,input{font:inherit}
+header{background:linear-gradient(135deg,#271b1a,#442422);color:#f5ead8;border-bottom:4px double var(--gold);box-shadow:0 8px 25px #1e120f40;position:sticky;top:0;z-index:100}.head{max-width:1250px;margin:auto;padding:22px 22px 16px;display:flex;justify-content:space-between;align-items:end;gap:25px}.brand{display:flex;align-items:center;gap:15px}.mark{width:54px;height:54px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold2);font-family:"Shippori Mincho";font-size:24px}.brand h1{font-family:"Shippori Mincho";font-size:clamp(17px,2.7vw,28px);letter-spacing:.13em;margin:0}.brand p{margin:2px 0 0;font-size:8px;letter-spacing:.3em;opacity:.65}.meta{font-size:9px;letter-spacing:.13em;color:#d7c8b3;text-align:right}nav{border-top:1px solid #d7bc8238}nav .navin{max-width:1250px;margin:auto;display:flex;justify-content:center;flex-wrap:wrap}nav a{padding:9px 15px;font-size:10px;letter-spacing:.1em}nav a:hover{color:var(--gold2)}
+.wrap{max-width:1250px;margin:auto;padding:0 22px}.hero{text-align:center;padding:62px 10px 40px}.kicker{font-size:10px;letter-spacing:.38em;color:var(--red)}h2{font-family:"Shippori Mincho";font-size:clamp(30px,5vw,52px);letter-spacing:.13em;margin:8px 0}.rule{width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:18px auto}.lead{max-width:780px;margin:auto;color:var(--soft);font-size:12px;line-height:2.25}.classification{margin:18px auto 0;color:var(--red);font-size:9px;letter-spacing:.12em}
+.notice{max-width:980px;margin:0 auto 25px;padding:14px 18px;border-left:4px solid var(--red);background:#fff8e980;font-size:10px;color:var(--soft)}.notice strong{color:var(--red)}
+.controls{position:sticky;top:101px;z-index:80;background:#fcf8eff0;backdrop-filter:blur(8px);border:1px solid var(--line);box-shadow:0 8px 25px #32231912;padding:14px;margin-bottom:28px}.filters{display:flex;justify-content:center;gap:7px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:#fff9;padding:7px 13px;cursor:pointer;font-size:10px;letter-spacing:.08em;color:var(--ink)}.filter.active,.filter:hover{background:var(--red);border-color:var(--red);color:white}.search{display:block;width:min(680px,100%);margin:11px auto 0;border:1px solid #bba990;background:#fffaf1;padding:9px 13px;outline:none;font-size:11px}.status{text-align:center;font-size:9px;color:var(--soft);margin-top:8px}
+.section{padding:25px 0 70px}.section-head{border-bottom:1px solid var(--gold);padding-bottom:10px;margin-bottom:22px}.section-head h3{font-family:"Shippori Mincho";font-size:21px;color:var(--red);margin:0}.section-head p{font-size:9px;color:var(--soft);margin:3px 0 0}
+.timeline{position:relative}.timeline:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(var(--gold),#a9854510,var(--gold));transform:translateX(-50%)}.era{position:relative;margin-bottom:65px}.era-title{text-align:center;position:relative;z-index:2;margin-bottom:18px}.era-title span{display:inline-block;padding:5px 18px;border:1px solid var(--line);background:var(--paper);font-family:"Shippori Mincho";font-size:13px;color:var(--red);letter-spacing:.12em}
+.row{display:grid;grid-template-columns:1fr 72px 1fr;gap:12px;align-items:center;margin:14px 0}.side{display:flex;justify-content:flex-end}.side.r{justify-content:flex-start}.axis{height:1px;background:#a9854566;position:relative}.axis:after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;border-radius:50%;background:var(--gold);transform:translate(-50%,-50%)}
+.node{width:min(100%,400px);text-align:left;border:1px solid var(--line);background:linear-gradient(145deg,#fffdf7d9,#e5dac9a6);padding:14px 17px;cursor:pointer;transition:.22s;box-shadow:0 6px 18px #3223190d}.node:hover{transform:translateY(-3px);box-shadow:0 12px 30px #32231918}.node.selected{border:2px solid var(--red);box-shadow:0 0 0 4px #78172218}.node.dim{opacity:.16;filter:grayscale(1)}.node.hidden{display:none}.node .kind{font-size:8px;color:var(--red);letter-spacing:.14em}.node h4{font-family:"Shippori Mincho";font-size:17px;margin:2px 0}.node p{font-size:9px;color:var(--soft);margin:0}.tags{margin-top:7px}.tag{display:inline-block;border:1px solid #c9bba9;padding:1px 5px;margin:2px 3px 0 0;font-size:7px;color:var(--soft)}
+#record{margin:0 auto 25px;max-width:980px;border:1px solid var(--line);background:#fff9f078;padding:23px;min-height:110px}.record-k{font-size:8px;letter-spacing:.25em;color:var(--red)}#record h3{font-family:"Shippori Mincho";font-size:22px;color:var(--red);margin:3px 0 8px}.rel{padding:8px 0;border-bottom:1px solid #4a2f231c;font-size:10px}.rel:last-child{border:0}.rel b{color:var(--red);font-weight:700}.empty{font-size:10px;color:var(--soft)}
+.index{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.card{border:1px solid var(--line);background:#fffaf1;padding:15px;cursor:pointer;transition:.2s}.card:hover{border-color:var(--red);box-shadow:0 8px 22px #32231912}.card h4{font-family:"Shippori Mincho";font-size:15px;color:var(--red);margin:0}.card .meta{font-size:8px;color:var(--soft);text-align:left;margin:2px 0 7px}.card p{font-size:9px;color:var(--soft);margin:0;line-height:1.8}
+.archive-note{border-top:2px solid var(--ink);padding-top:18px;margin-top:10px}.archive-note h3{font-family:"Shippori Mincho";font-size:19px;color:var(--red);margin:0 0 8px}.archive-note p{font-size:10px;color:var(--soft)}.quote{background:#241918;color:#eadfce;padding:18px 20px;margin-top:22px;font-size:11px}.quote em{color:#d9bd7f}
+footer{background:#241918;color:#d7c9b7;border-top:3px double var(--gold);padding:35px 20px;text-align:center;font-size:9px;letter-spacing:.08em}
+@media(max-width:760px){.head{align-items:center}.head .meta{display:none}.controls{top:77px}.timeline:before{left:15px}.row{grid-template-columns:28px 1fr;gap:10px}.side,.side.r{grid-column:2;justify-content:flex-start}.axis{display:none}.index{grid-template-columns:1fr}.hero{padding-top:42px}}
 </style>
 </head>
 <body>
-<header>
-<div class="head"><div class="brand"><div class="mark">帝</div><div><h1>日ノ本帝國・人物相関図</h1><p>NIHON IMPERIAL RELATION ARCHIVE</p></div></div><div class="meta">帝國大學・人物資料室<br>公開相関記録　改訂版</div></div>
-<nav><div class="navin"><a href="index.html">帝國大學首頁</a><a href="#map">人物相関図</a><a href="#relations">関係記録</a><a href="hyakki.html">帝國大百科</a><a href="shiryo-shitsu.html">資料室</a></div></nav>
-</header>
+<header><div class="head"><div class="brand"><div class="mark">帝</div><div><h1>帝國人物資料室</h1><p>NIHON IMPERIAL UNIVERSITY / PERSONNEL ARCHIVE</p></div></div><div class="meta">帝國大學附属圖書館<br>公開人物相関記録　改訂版</div></div>
+<nav><div class="navin"><a href="index.html">帝國大學首頁</a><a href="hyakki.html">帝國大百科</a><a href="shiryo-shitsu.html">資料室</a><a href="jinbutsu-sokan.html">人物相関記録</a><a href="archive16.html">ARCHIVE 16・反転頁</a></div></nav></header>
 
-<section class="hero"><div class="kicker">IMPERIAL CHARACTER RELATION ARCHIVE</div><h2>人物相関図</h2><div class="rule"></div><p class="lead">人物を選ぶと、その人物と直接つながる関係だけが強調表示されます。分類を切り替えながら、九条院家・卜部川家、帝國大學文壇、四季神祇、藝術文化、そしてそれらを横断する因縁を、上から下へ辿ってください。</p></section>
+<div class="wrap">
+<section class="hero"><div class="kicker">N.I.U. / PERSONNEL RELATION ARCHIVE</div><h2>人物相関記録</h2><div class="rule"></div><p class="lead">人物そのものではなく、人物と人物のあいだに残った関係を記録する。血縁、婚姻、師弟、文壇、藝術、事件。ひとつの人物に、ひとつの線しか引いてはならない。</p><div class="classification">資料分類：帝國文壇／九条院家／卜部川家／四季廳／藝術界／事件記録</div></section>
 
-<section class="controls">
-<div class="filterrow" id="filters">
-<button class="filter active" data-filter="all">全て</button><button class="filter" data-filter="family">家族・婚姻</button><button class="filter" data-filter="literature">文壇・教育</button><button class="filter" data-filter="season">四季神祇</button><button class="filter" data-filter="art">藝術・文化</button><button class="filter" data-filter="conflict">対立・因縁</button><button class="filter" data-filter="mentor">師弟・後見</button>
-</div><div class="status" id="status">全人物を表示中。人物を押すと関係を追跡できます。</div>
-<div class="legend"><span class="family"><i class="dot"></i>家族・婚姻</span><span class="literature"><i class="dot"></i>文壇・教育</span><span class="season"><i class="dot"></i>四季神祇</span><span class="art"><i class="dot"></i>藝術・文化</span><span class="conflict"><i class="dot"></i>対立・因縁</span><span class="mentor"><i class="dot"></i>師弟・後見</span></div>
-</section>
+<div class="notice"><strong>資料室備考：</strong>本頁は公開済み人物記録と、帝國大學文科附属資料室に残る旧記録を照合したものである。公開記録と一致しない資料については、断定を避け「記録上の関係」として収録する。ARCHIVE 16・反転頁と併読すること。</div>
 
-<main>
-<div id="relations"><h3 class="relhead">人物を選択してください</h3><div id="relationBody">人物カードを押すと、直接の関係・関係種別・相手人物がここに表示されます。</div></div>
-<div class="note">※公開済みの人物設定をもとにした相関アーカイブです。関係の追加・訂正が生じた場合は、この頁の人物データを更新してください。未確定の設定は「因縁」として断定せず、記録上の関係として表示します。</div>
-<section class="map" id="map"><div class="rail"></div><div id="mapRows"></div></section>
-</main>
+<section class="controls"><div class="filters" id="filters">
+<button class="filter active" data-f="all">全記録</button><button class="filter" data-f="family">血縁・家族</button><button class="filter" data-f="love">恋愛・婚姻</button><button class="filter" data-f="school">教育・文壇</button><button class="filter" data-f="season">四季神祇</button><button class="filter" data-f="event">事件・因縁</button><button class="filter" data-f="art">藝術・作品</button><button class="filter" data-f="unfiled">記録外</button></div><input id="search" class="search" placeholder="人物名・作品名・関係を検索……"><div class="status" id="status">全記録を表示中。</div></section>
 
-<footer>日ノ本帝國國立帝國大學　帝國大學・人物資料室　｜　人物相関図 完全版</footer>
+<section id="record"><div class="record-k">RELATIONSHIP RECORD</div><h3>人物を選択してください</h3><div class="empty">人物カードを選択すると、直接の関係と資料上の記録が表示されます。</div></section>
+
+<section class="section" id="map"><div class="section-head"><h3>人物相関・縦覧記録</h3><p>帝國大學文壇・九条院家・四季關係資料を、世代・資料群ごとに上から下へ縦覧できます。</p></div><div class="timeline" id="timeline"></div></section>
+
+<section class="section"><div class="section-head"><h3>人物索引</h3><p>現在の公開人物記録および反転頁照合資料。</p></div><div class="index" id="index"></div></section>
+
+<section class="archive-note"><h3>附記――ARCHIVE 16・反転頁との照合</h3><p>第十五頁の封緘を解いた者へ。この資料は人物そのものを記録するためのものではない。人物と人物のあいだに何が残ったかを記録する。血縁、婚姻、師弟、文壇、藝術、事件。ひとつの人物に、ひとつの線しか引いてはならない。</p><div class="quote">「人物は、一人では人物にならない。<br>誰かに愛され、嫌われ、教え、教えられ、傷つけ、傷つけられた、その<strong>関係の総体</strong>として初めて記録になる。」<br><br><em>――帝國大學文科附属資料室・夜間閲覧係　追記</em></div></section>
+</div>
+<footer>日ノ本帝國國立帝國大學　帝國大學・人物資料室　｜　人物相関記録<br><a href="index.html">← 帝國大學首頁へ戻る</a></footer>
 
 <script>
-const people=[
-{id:"haru",name:"九条院春臣",role:"日ノ本帝國教育の祖・帝國大學設立者",cat:["literature","mentor"],era:"第一世代・帝國教育",tags:["九条院家","教育","帝國大學"]},
-{id:"saku",name:"九条院朔臣",role:"文學者・九条院春臣の弟",cat:["family","literature"],era:"帝國大學文壇",tags:["九条院家","文星"]},
-{id:"saki",name:"九条院紗希",role:"九条院春臣の一人娘・初の女子留学生",cat:["family","art"],era:"九条院家",tags:["九条院家","女子留学","紅霧國"]},
-{id:"kaya",name:"香矢",role:"九条院春臣の妻",cat:["family"],era:"九条院家",tags:["九条院家","婚姻"]},
-{id:"kaguya",name:"鳴海輝矢",role:"画家・彫刻家・舞台美術家",cat:["art","family"],era:"帝都藝術界",tags:["藝術","九条院家"]},
-{id:"mizuki",name:"瑞稀・フィオーレ",role:"九条院春臣の元婚約者・雛菊をめぐる重要人物",cat:["conflict","season"],era:"華歳・四季神祇",tags:["元婚約","華歳","雛菊"]},
-{id:"aoko",name:"瑗子",role:"九条院家に連なる人物",cat:["family"],era:"九条院家",tags:["九条院家","親族"]},
-{id:"shuji",name:"卜部川修治",role:"九条院家と卜部川家をつなぐ人物",cat:["family","literature"],era:"卜部川家",tags:["卜部川家","親族"]},
-{id:"shikimi",name:"卜部川樒",role:"小説家・評論家／帝國大學文科首席",cat:["literature","mentor","family"],era:"帝國大學文壇",tags:["文星","卜部川家","文科"]},
-{id:"kaoruko",name:"藤宮薫子",role:"樒と深く結びつく人物",cat:["family","mentor"],era:"卜部川樒周辺",tags:["薫子","樒"]},
-{id:"shoko",name:"御影薔子",role:"文學者・帝國大學文科出身",cat:["literature"],era:"帝國大學文壇",tags:["文星","文科"]},
-{id:"ryunosuke",name:"有栖川劉ノ介",role:"小説家・帝國大學文科首席",cat:["literature"],era:"帝國大學文壇",tags:["文星","文科"]},
-{id:"ichiyo",name:"中原壱葉",role:"詩人・文學者",cat:["literature"],era:"帝國大學文壇",tags:["文星","文科"]},
-{id:"yuzuriha",name:"六條杠葉",role:"歌人・詩人・帝國大學初の女學生",cat:["literature","mentor"],era:"帝國大學文壇",tags:["文星","女子教育"]},
-{id:"muroji",name:"九頭竜夢路",role:"小説家・帝國大學文科出身",cat:["literature"],era:"帝國大學文壇",tags:["文星","文科"]},
-{id:"kurenai",name:"紅城院眞紅",role:"小説家・劇作家・評論家／怪奇幻想派",cat:["literature","season","conflict"],era:"帝都文壇・四季記録",tags:["文星","秋","怪奇幻想"]},
-{id:"hayashi",name:"森林太郎",role:"文學者・帝國大學文科／皇太子",cat:["literature","family"],era:"帝國大學文壇",tags:["文星","皇室","文科"]},
-{id:"harutsuki",name:"花葉春月",role:"四季廳長官・漫畫家（大窪晶与）",cat:["season","art","family"],era:"花葉家・四季廳",tags:["春","四季廳","漫畫"]},
-{id:"higan",name:"花葉雛菊",role:"春の現人神",cat:["season","family"],era:"花葉家・四季神祇",tags:["春","現人神","花葉家"]},
-{id:"anzu",name:"祝月杏莉",role:"秋の現人神・雛菊の娘",cat:["season","family"],era:"花葉家・次世代",tags:["秋","現人神","花葉家"]},
-{id:"zansetsu",name:"雪柳残雪",role:"藝術科首席・作曲家",cat:["art","family"],era:"帝國大學藝術科",tags:["文星","作曲","雪柳家"]},
-{id:"kamishiro",name:"神代聖",role:"帝國大學文科初代首席・文學者",cat:["literature","conflict"],era:"帝國大學文壇・初代",tags:["文星","初代","旧記録"]},
-{id:"akiyo",name:"大窪晶与",role:"花葉春月の筆名／四季廳長官・漫畫家",cat:["art","season","family"],era:"四季廳・藝術界",tags:["花葉春月","四季廳","漫畫"]},
-{id:"kaoru",name:"美上",role:"瑞稀・フィオーレと結びつく人物",cat:["conflict"],era:"華歳・因縁",tags:["瑞稀","華歳"]},
-{id:"kaya2",name:"香矢",role:"九条院家・婚姻関係",cat:["family"],era:"九条院家",tags:["婚姻"]},
-{id:"mifune",name:"ミフネ",role:"『彼岸奇譚』外部世界と交差する象徴的人物",cat:["conflict","art"],era:"記録外・異世界",tags:["異世界","記録外"]}
+const P=[
+["haru","九条院春臣","第一世代・帝國教育","日ノ本帝國教育の祖・帝國大學設立者",["family","school","love"],["九条院家","教育","帝國大學"]],
+["saku","九条院朔臣","第四世代・帝國文壇","小説家・劇作家・詩人／春臣の弟",["family","school","art","love"],["九条院家","文星"]],
+["kaya","巫覡香矢","九条院家","九条院春臣の妻／鳴海輝矢の妹",["family","love","event"],["九条院家","竜宮","婚姻"]],
+["saki","九条院紗希","九条院家","春臣の一人娘・日ノ本帝國初の女子留学生",["family","art"],["九条院家","女子留学","紅霧國"]],
+["kaguya","鳴海輝矢","帝都藝術界","画家・彫刻家・舞台美術家／宵闇の射手",["family","art"],["藝術","宵闇の射手"]],
+["mizuki","瑞稀・フィオーレ","華歳・虚華教会","春臣の元婚約者。華歳を率い、雛菊を拘束した人物",["event","love","season"],["華歳","虚華教会","雛菊"]],
+["shikimi","卜部川樒","第三世代・帝國文壇","小説家・評論家／帝國大學文科首席",["school","love","art","family"],["文星","卜部川家","文科"]],
+["kaoruko","藤宮薫子","卜部川樒周辺","樒と深く結びつく人物",["love","family","event"],["薫子","樒"]],
+["shoko","御影薔子","第五世代・帝國文壇","女優・劇作家・詩人／『華園』創設者",["school","love","art"],["文星","華園"]],
+["ryuno","有栖川劉ノ介","第二世代・帝國文壇","小説家・帝國大學文科首席",["school","love"],["文星","第二世代"]],
+["yuzuriha","六條杠葉","第二世代・帝國文壇","歌人・詩人・帝國大學初の女學生",["school","love"],["文星","女子教育"]],
+["ichiyo","中原壱葉","第六世代・帝國文壇","詩人・教師／九条院塾門下",["school","art"],["文星","九条院塾"]],
+["yakumo","中原八雲","第六世代・帝國文壇","教師・翻訳者／九条院塾門下",["school","art"],["九条院塾"]],
+["muroji","九頭竜夢路","第六世代・帝國文壇","探偵小説家／『鏡の中の密室』",["school","art","event"],["文星","探偵小説"]],
+["kurenai","紅城院眞紅","帝都文壇・四季記録","文士／神代聖の妻／『吸血鬼ミフネア』",["love","art","season"],["文星","怪奇幻想"]],
+["kamishiro","神代聖","第一世代・帝國文壇","帝國大學文科初代首席・文學者",["school","love","art"],["文星","初代","旧記録"]],
+["hayashi","森林太郎","第五世代・帝國文壇","文學者・冬の現人神／皇太子",["school","season"],["文星","冬","皇室"]],
+["harutsuki","花葉春月","花葉家・四季廳","四季廳長官・漫畫家／『ヴラド・ドラキュラ』",["season","art","family","love"],["春","四季廳","漫畫"]],
+["hina","花葉雛菊","花葉家・四季神祇","春の現人神・審神者",["season","family","love","event"],["春","現人神","花葉家"]],
+["anzu","祝月杏莉","花葉家・次世代","秋の現人神・雛菊の娘",["season","family"],["秋","現人神","神痣"]],
+["zansetsu","雪柳残雪","第七世代・藝術科","藝術科首席・作曲家／春月の弟",["family","art","event"],["文星","作曲","雪柳家"]],
+["shuji","卜部川修治","帝國文壇","俳優／樒の息子",["family","art"],["卜部川家","俳優"]],
+["kaoru","美上","華歳・因縁","瑞稀・フィオーレと結びつく人物",["event"],["瑞稀","華歳"]],
+["akiyo","大窪晶与","四季廳・藝術界","花葉春月の筆名／四季廳長官・漫畫家",["season","art"],["四季廳","花葉春月"]],
+["mifune","ミフネ","記録外・異世界","『彼岸奇譚』外部世界と交差する象徴的人物",["unfiled","event","art"],["記録外","異世界"]]
 ];
-const rel=[
-["haru","saku","family","兄弟"],["haru","kaya","family","夫婦"],["haru","kaguya","family","義兄弟"],["haru","mizuki","conflict","元婚約"],["haru","aoko","family","姪"],["haru","shuji","family","姪の夫"],["shuji","shikimi","family","親族"],["shikimi","kaoruko","family","深い関係"],["shikimi","shoko","literature","文壇・人物録"],["shikimi","kamishiro","literature","帝國大學文壇の世代関係"],["haru","saki","family","父娘"],["saki","kaguya","art","帝國文化圏"],["mizuki","higan","conflict","因縁・雛菊をめぐる関係"],["mizuki","kaoru","conflict","共犯関係として記録"],["mizuki","higan","season","華歳・神格をめぐる因縁"],["harutsuki","higan","season","春の現人神と四季廳長官"],["harutsuki","anzu","family","父娘"],["harutsuki","zansetsu","family","兄弟"],["harutsuki","akiyo","art","同一人物・筆名"],["higan","anzu","family","母娘"],["higan","mizuki","conflict","雛菊をめぐる因縁"],["kamishiro","kurenai","conflict","旧四季記録をめぐる因縁"],["kamishiro","shikimi","literature","帝國大學文壇・世代関係"],["ryunosuke","yuzuriha","literature","帝國大學第二世代"],["ichiyo","muroji","literature","帝國大學第六世代"],["hayashi","harutsuki","literature","帝國大學第五世代"],["harutsuki","zansetsu","art","藝術科・文化活動"],["kurenai","higan","season","秋の旧記録との照合"],["shikimi","haru","literature","帝國大學・文壇圏"],["shikimi","kaoruko","mentor","保護・後見的関係"],["haru","shikimi","literature","帝國大學文壇"],["zansetsu","shikimi","art","帝國文化圏"],["mifune","kurenai","conflict","記録上の象徴的照合"]
+const R=[
+["haru","saku","family","兄弟。朔臣は兄を深く愛したからこそ「春臣先生の弟」とだけ紹介されることを嫌う。"],
+["haru","kaya","love","夫婦。婚約解消の転機として出会い、後に真の夫婦となった。"],
+["kaya","kaguya","family","兄妹。輝矢が兄、香矢が妹。"],
+["haru","mizuki","love","元婚約。春臣は瑞稀について調査した上で婚約を断る意思を固めていた。"],
+["haru","saki","family","父娘。紗希は春臣の一人娘。"],
+["haru","shikimi","school","九条院塾・帝國大學へ連なる教育・文壇圏。"],
+["shikimi","saku","school","帝國大學以来の親しい文壇関係。"],
+["shikimi","shoko","love","正式な交際関係にあった元恋人。"],
+["shikimi","shoji","family","親子。修治は樒の息子。"],
+["shikimi","kaguya","art","藝術上の交流。樒の批評を輝矢は「理解」と受け取る。"],
+["ryuno","yuzuriha","love","帝國大學第二世代の夫婦。"],
+["ichiyo","yakumo","family","養兄弟。九条院塾門下。"],
+["muroji","mifune","unfiled","記録外資料との象徴的照合。"],
+["kamishiro","kurenai","love","夫婦。神代聖と紅城院眞紅。"],
+["kamishiro","shikimi","school","帝國大學文壇の世代関係。"],
+["hayashi","harutsuki","school","帝國大學第五世代・文化圏。"],
+["harutsuki","hina","love","夫婦。雛菊と春月は四季を守る側に立つ。"],
+["harutsuki","zansetsu","family","兄弟。春月が兄、残雪が弟。"],
+["harutsuki","akiyo","art","同一人物・筆名。"],
+["hina","anzu","family","母娘。杏莉は秋の現人神。"],
+["mizuki","hina","event","誘拐・拘束事件。雛菊は8歳で誘拐され5年間拘束された。"],
+["mizuki","kaoru","event","側近・共犯関係として記録。"],
+["mizuki","higashiki","season","華歳・神格をめぐる因縁。"],
+["kurenai","hina","season","秋の旧記録との照合。"],
+["zansetsu","shikimi","art","帝國文化圏・藝術活動上の関係。"],
+["shoji","shikimi","family","樒の息子。"]
 ];
-const byId=Object.fromEntries(people.map(p=>[p.id,p])), relBy={}; rel.forEach(r=>{(relBy[r[0]]??=[]).push(r);(relBy[r[1]]??=[]).push(r)});
-let current="all",selected=null;
-function relatedIds(id){const s=new Set();(relBy[id]||[]).forEach(r=>{s.add(r[0]);s.add(r[1])});return s}
-function visible(p){return current==="all"||p.cat.includes(current)}
-function node(p){return `<article class="node" data-id="${p.id}" data-cat="${p.cat.join(' ')}"><div class="type">${p.era}</div><h3>${p.name}</h3><p>${p.role}</p><div class="tags">${p.tags.map(x=>`<span class="tag">${x}</span>`).join('')}</div></article>`}
-function render(){const eras=[...new Set(people.map(p=>p.era))],wrap=document.getElementById("mapRows");wrap.innerHTML="";eras.forEach((era,idx)=>{const ps=people.filter(p=>p.era===era&&visible(p));if(!ps.length)return;const sec=document.createElement("section");sec.className="era";sec.innerHTML=`<div class="era-title"><span>${era}</span></div>`;ps.forEach((p,i)=>{const other=ps[(i+1)%ps.length];let row=document.createElement("div");row.className="row";row.innerHTML=`<div class="side">${node(p)}</div><div class="centerline"></div><div class="side right">${i===ps.length-1?"":node(other)}</div>`;sec.appendChild(row);if(i===ps.length-1&&ps.length>1){} });wrap.appendChild(sec)});bind();applySelection()}
-function bind(){document.querySelectorAll(".node").forEach(n=>n.addEventListener("click",()=>select(n.dataset.id)))}
-function select(id){selected=id;const p=byId[id],ids=relatedIds(id);document.querySelectorAll(".node").forEach(n=>{n.classList.remove("selected","dim");if(n.dataset.id===id)n.classList.add("selected");else if(!ids.has(n.dataset.id))n.classList.add("dim")});const items=(relBy[id]||[]).map(r=>{const other=r[0]===id?r[1]:r[0];return `<div class="relitem"><span class="reltype">${r[3]}</span><strong>${byId[other]?.name||other}</strong>　<small>${label(r[2])}</small></div>`}).join("");document.getElementById("relationBody").innerHTML=items||"直接の関係記録はまだ登録されていません。";document.querySelector(".relhead").textContent=p.name+" — 関係記録";document.getElementById("status").textContent=`${p.name}を選択中。直接の関係 ${(relBy[id]||[]).length} 件を強調表示。`;document.getElementById("relations").scrollIntoView({behavior:"smooth",block:"center"})}
-function applySelection(){if(!selected)return;const ids=relatedIds(selected);document.querySelectorAll(".node").forEach(n=>{n.classList.remove("selected","dim");if(n.dataset.id===selected)n.classList.add("selected");else if(!ids.has(n.dataset.id))n.classList.add("dim")})}
-function label(x){return {family:"家族・婚姻",literature:"文壇・教育",season:"四季神祇",art:"藝術・文化",conflict:"対立・因縁",mentor:"師弟・後見"}[x]||x}
-document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");current=b.dataset.filter;selected=null;document.querySelector(".relhead").textContent="人物を選択してください";document.getElementById("relationBody").textContent="人物カードを押すと、直接の関係・関係種別・相手人物がここに表示されます。";document.getElementById("status").textContent=current==="all"?"全人物を表示中。人物を押すと関係を追跡できます。":label(current)+"の人物を表示中。";render()}));
-render();
+const people=Object.fromEntries(P.map(x=>[x[0],{id:x[0],name:x[1],era:x[2],role:x[3],cat:x[4],tags:x[5]}]));
+const rel={};R.forEach(x=>{(rel[x[0]]??=[]).push(x);(rel[x[1]]??=[]).push(x)});
+let filter="all",selected=null;
+const label={family:"血縁・家族",love:"恋愛・婚姻",school:"教育・文壇",season:"四季神祇",event:"事件・因縁",art:"藝術・作品",unfiled:"記録外"};
+function match(p,q){return (filter==="all"||p.cat.includes(filter))&&(!q||(p.name+p.role+p.era+p.tags.join("")+(rel[p.id]||[]).map(x=>x[3]).join("")).toLowerCase().includes(q))}
+function card(p){return '<article class="node" data-id="'+p.id+'"><div class="kind">'+p.era+'</div><h4>'+p.name+'</h4><p>'+p.role+'</p><div class="tags">'+p.tags.map(t=>'<span class="tag">'+t+'</span>').join("")+'</div></article>'}
+function render(){const q=document.getElementById("search").value.trim().toLowerCase(),timeline=document.getElementById("timeline"),index=document.getElementById("index");timeline.innerHTML="";index.innerHTML="";
+const eras=[...new Set(P.map(x=>x[2]))];let count=0;
+eras.forEach(era=>{const arr=P.filter(x=>x[2]===era&&match(people[x[0]],q));if(!arr.length)return;count+=arr.length;const s=document.createElement("section");s.className="era";s.innerHTML='<div class="era-title"><span>'+era+'</span></div>';for(let i=0;i<arr.length;i+=2){const a=arr[i],b=arr[i+1],row=document.createElement("div");row.className="row";row.innerHTML='<div class="side">'+card(people[a[0]])+'</div><div class="axis"></div><div class="side r">'+(b?card(people[b[0]]):"")+'</div>';s.appendChild(row)}timeline.appendChild(s)});
+P.filter(x=>match(people[x[0]],q)).forEach(x=>{const c=document.createElement("article");c.className="card";c.dataset.id=x[0];c.innerHTML="<h4>"+x[1]+"</h4><div class='meta'>"+x[2]+"</div><p>"+x[3]+"</p>";index.appendChild(c)});
+document.getElementById("status").textContent=(filter==="all"?"全記録":label[filter])+"　｜　該当人物 "+count+" 名";bind();if(selected)apply()}
+function bind(){document.querySelectorAll(".node,.card").forEach(el=>el.onclick=()=>select(el.dataset.id))}
+function apply(){const ids=new Set([selected]);(rel[selected]||[]).forEach(x=>ids.add(x[0]===selected?x[1]:x[0]));document.querySelectorAll(".node").forEach(n=>{n.classList.toggle("selected",n.dataset.id===selected);n.classList.toggle("dim",!ids.has(n.dataset.id))})}
+function select(id){selected=id;const p=people[id],box=document.getElementById("record"),rs=rel[id]||[];box.innerHTML='<div class="record-k">RELATIONSHIP RECORD / '+p.era+'</div><h3>'+p.name+'</h3><div class="empty">'+p.role+'</div>'+ (rs.length?rs.map(x=>{const o=people[x[0]===id?x[1]:x[0]];return '<div class="rel"><b>'+label[x[2]]+'</b>　'+o.name+'　—　'+x[3]+'</div>'}).join(""):'<div class="empty" style="margin-top:8px">直接の関係記録はまだ登録されていません。</div>');apply();box.scrollIntoView({behavior:"smooth",block:"center"})}
+document.querySelectorAll(".filter").forEach(b=>b.onclick=()=>{filter=b.dataset.f;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));selected=null;render()});
+document.getElementById("search").oninput=render;render();
 </script>
 </body>
 </html>
