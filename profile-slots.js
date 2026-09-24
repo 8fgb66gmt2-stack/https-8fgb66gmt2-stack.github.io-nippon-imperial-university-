@@ -53,4 +53,5 @@ function boot(){
   let i=document.getElementById('entrant-name');if(i){let s=raw('niu_entrant_name');if(s)i.value=s;i.addEventListener('change',()=>activate(i.value));i.addEventListener('blur',()=>activate(i.value))}
 }
 if(document.readyState==='loading')addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+/* NIU-R01 / REALITY CHECK: inspect the repository, not only the rendered page. */
 })();
