@@ -1,85 +1,36 @@
-<!doctype html>
-<html lang="ja">
-<head>
-<script src="profile-slots.js"></script>
-
-<script src="profile-slots.js?v=16"></script>
-<script src="player-storage.js"></script>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
-<title>現実照合記録 01｜日ノ本帝國國立帝國大學</title>
+<!doctype html><html lang="ja"><head>
+<script src="profile-slots.js?v=16"></script><script src="player-storage.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>資料照合記録｜日ノ本帝國國立帝國大學</title>
 <style>
-body{margin:0;background:#161211;color:#eadfce;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;line-height:2}
-main{width:min(920px,92vw);margin:6vh auto;padding:44px;background:#1d1716;border:1px solid #a98545;box-shadow:0 0 0 7px #161211,0 0 0 8px #751723}
-.meta{font-size:10px;letter-spacing:.28em;color:#a98545;border-bottom:1px solid #574631;padding-bottom:14px}
-h1{font-size:clamp(26px,5vw,44px);letter-spacing:.14em;color:#dbc48e;margin:14px 0}
-.kicker{font-size:11px;color:#b8a998}
-.file{margin-top:30px;padding:26px;background:#241c1a;border-left:3px solid #751723}
-.clue{margin:24px 0;padding:20px;border:1px solid #5c4934;background:#211918}
-.clue strong{color:#dbc48e}
-ol{padding-left:1.4em}.links{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}.links a{color:#eadfce;border:1px solid #80643a;padding:8px 13px;text-decoration:none;font-size:11px}.links a:hover{background:#751723}
-.answer{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.answer input{flex:1;min-width:210px;padding:12px;background:#0f0c0c;color:#f3e8d7;border:1px solid #80643a;font:inherit}.answer button{padding:12px 22px;background:#751723;color:white;border:1px solid #a98545;font:inherit;cursor:pointer}
-.result{display:none;margin-top:24px;padding:22px;border:1px solid #a98545;background:#0e0d0d}.result.show{display:block}.result strong{color:#dbc48e}.wrong{color:#d59b9b;display:none;margin-top:10px;font-size:11px}.wrong.show{display:block}
-.small{font-size:10px;color:#a99a8b}.next{display:none;margin-top:22px}.next.show{display:block}.next a{display:inline-block;border:1px solid #a98545;color:#dbc48e;padding:10px 18px;text-decoration:none}
-</style>
-</head>
-<body>
-<main>
-<div class="meta">N.I.U. / REALITY CHECK / DOCUMENT R-01</div>
-<h1>現実照合記録 01</h1>
-<div class="kicker">この頁だけは、帝國大學の資料だけでは解けない。</div>
-
-<section class="file">
-<p>資料室員より、閲覧者へ。</p>
-<p>神代聖について調べる前に、ひとつだけ確認してほしい。</p>
-<p><strong>この大学の外側にも、神代聖とよく似た「モデル」が存在する。</strong></p>
-
-<div class="clue">
-<strong>現実世界で、次の三つを検索せよ。</strong>
-<ol>
-<li>「罪と罰」を書いた19世紀ロシアの作家</li>
-<li>「カラマーゾフの兄弟」を書いた作家</li>
-<li>1821年生・1881年没とされる作家</li>
-</ol>
-<p class="small">三つの検索結果が、同じ人物を指していることを確認してから答えを入力すること。</p>
+body{margin:0;background:#e9dfca;color:#241e1b;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;line-height:2}
+main{width:min(850px,90vw);margin:7vh auto;padding:42px;background:#eee5d2;border:1px solid #8f7244;box-shadow:8px 8px 0 #6e1720}
+header{border-bottom:1px solid #92784d;padding-bottom:16px}.stamp{font-size:10px;letter-spacing:.35em;color:#6e1720}h1{font-size:30px;font-weight:normal;letter-spacing:.18em;margin:8px 0}.date{font-size:11px;color:#746858}
+.paper{margin-top:30px;padding:28px;background:#f5eddb;border:1px solid #b09a73}.red{color:#6e1720}.note{margin:25px 0;padding:18px;border-left:3px solid #6e1720;background:#e6dac0}.source{font-size:11px}.answer{display:flex;gap:8px;margin-top:28px}.answer input{flex:1;padding:12px;background:#fffaf0;border:1px solid #92784d;font:inherit;letter-spacing:.08em}.answer button{padding:12px 20px;background:#6e1720;color:#fff;font:inherit;border:0}.result{display:none;margin-top:25px;padding:22px;background:#241b19;color:#eee2cf;border:1px solid #a9874f}.result.show{display:block}.wrong{display:none;color:#6e1720;font-size:11px;margin-top:10px}.wrong.show{display:block}code{font-family:monospace}
+</style></head><body><main>
+<header><div class="stamp">帝國大學資料室　／　照合票 R-01</div><h1>外部典拠照合願</h1><div class="date">閲覧者名：<span id="player">未登録</span></div></header>
+<section class="paper">
+<p>本票は、学内資料だけでは典拠を確定できない項目について、外部公開資料との照合を求めるものである。</p>
+<div class="note"><p class="red"><strong>照合対象</strong></p>
+<p>① 『罪と罰』の著者である。</p>
+<p>② 『カラマーゾフの兄弟』の著者である。</p>
+<p>③ 1821年生、1881年没として典拠化されている。</p>
 </div>
-
-<div class="links">
-<a href="https://kotobank.jp/word/%E3%81%A9%E3%81%99%E3%81%A8%E3%81%88%E3%81%B5%E3%81%99%E3%81%8D%E3%83%BC-3161508" target="_blank" rel="noopener">現実照合：コトバンク</a>
-<a href="https://ndlsearch.ndl.go.jp/search?cs=bib&from=0&q-author=%22%E3%83%89%E3%82%B9%E3%83%88%E3%82%A8%E3%83%95%E3%82%B9%E3%82%AD%E3%83%BC%22" target="_blank" rel="noopener">現実照合：国立国会図書館</a>
-</div>
-
-<p>答えは、作家名を<strong>日本語表記</strong>で入力せよ。</p>
-<div class="answer">
-<input id="answer" autocomplete="off" placeholder="作家名を入力">
-<button id="check">照合する</button>
-</div>
-<div id="wrong" class="wrong">照合不一致。帝國大學の資料ではなく、現実世界の資料をもう一度確認してください。</div>
-
-<div id="result" class="result">
-<strong>現実照合：成立。</strong>
-<p>一致した人物――ドストエフスキー。</p>
-<p>君が今見つけたのは「ゲーム内の設定」ではない。現実世界に存在する文学史上の人物だ。</p>
-<p>神代聖の「モデル」という情報は、ここではまだ答えではない。</p>
-<p>むしろ問題は、<strong>なぜ帝國大學が現実の人物を「別の人生を生きた人物」として記録しているのか</strong>である。</p>
-<p>次の記録では、GitHubに保存されている<strong>大学の実際のファイル</strong>を調査せよ。<br><br>GitHubで <code>NIU-R01</code> を検索し、表示されたファイルの「記録する側ではなく、保存される側を見よ。」という注記を探せ。</p>
-<div class="next" id="next"><a href="arg-hub.html">ARG総合記録室へ戻る</a></div>
-</div>
+<p>この三条件を、<strong>現実の図書館・書誌データベース</strong>で照合せよ。</p>
+<p>人物名そのものを答える必要はない。</p>
+<p class="red"><strong>典拠番号を探せ。</strong></p>
+<p class="source">照合先として国立国会図書館サーチ等の公開書誌データベースを使用できる。検索語は自分で組み立てること。</p>
+<div class="answer"><input id="answer" inputmode="numeric" autocomplete="off" placeholder="7桁の典拠番号"><button id="check">照合</button></div>
+<div id="wrong" class="wrong">照合不成立。人物名ではなく、外部書誌に登録された「典拠番号」を確認せよ。</div>
+<div id="result" class="result"><strong>照合成立。</strong><p>典拠番号 <code>00438157</code> を確認した。</p><p>ここから先は、この大学のページを読むだけでは進めない。</p><p><strong>GitHubのリポジトリで、いま見つけた番号を検索せよ。</strong></p><p>ページではなく、保存されている記録を調べること。</p></div>
 </section>
-<p class="small">この記録は、外部サイトの公開情報を照合することを前提としてゐる。外部サイトの内容が変更された場合、照合結果も変更される可能性がある。</p>
 </main>
 <script>
-const input=document.getElementById('answer'),btn=document.getElementById('check'),wrong=document.getElementById('wrong'),result=document.getElementById('result'),next=document.getElementById('next');
-function check(){
- const v=input.value.trim().replace(/[　\s]/g,'');
- if(v==='ドストエフスキー'||v==='ドストエフスキイ'||v.toLowerCase()==='dostoevsky'){
-   localStorage.setItem('reality01_unlocked','unlocked');
-   localStorage.setItem('achievement_21','unlocked');
-   wrong.classList.remove('show'); result.classList.add('show'); next.classList.add('show');
- }else wrong.classList.add('show');
-}
-btn.addEventListener('click',check);input.addEventListener('keydown',e=>{if(e.key==='Enter')check()});
-if(localStorage.getItem('reality01_unlocked')==='unlocked'){result.classList.add('show');next.classList.add('show')}
-</script>
-</body></html>
+(function(){
+const p=(window.NIUProfiles&&NIUProfiles.current())||localStorage.getItem('niu_entrant_name')||'未登録';
+document.getElementById('player').textContent=p||'未登録';
+const i=document.getElementById('answer'),b=document.getElementById('check'),w=document.getElementById('wrong'),r=document.getElementById('result');
+function check(){const v=i.value.trim().replace(/\s/g,'');if(v==='00438157'){localStorage.setItem('reality01_unlocked','unlocked');localStorage.setItem('achievement_21','unlocked');w.classList.remove('show');r.classList.add('show')}else w.classList.add('show')}
+b.onclick=check;i.onkeydown=e=>{if(e.key==='Enter')check()};if(localStorage.getItem('reality01_unlocked')==='unlocked')r.classList.add('show');
+})();
+</script></body></html>
