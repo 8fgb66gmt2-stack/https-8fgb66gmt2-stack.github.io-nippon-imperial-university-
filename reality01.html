@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<script src="profile-slots.js?v=16"></script>
+<script src="player-storage.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>現実照合記録 01｜日ノ本帝國國立帝國大學</title>
+<style>
+body{margin:0;background:#161211;color:#eadfce;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;line-height:2}
+main{width:min(920px,92vw);margin:6vh auto;padding:44px;background:#1d1716;border:1px solid #a98545;box-shadow:0 0 0 7px #161211,0 0 0 8px #751723}
+.meta{font-size:10px;letter-spacing:.28em;color:#a98545;border-bottom:1px solid #574631;padding-bottom:14px}
+h1{font-size:clamp(26px,5vw,44px);letter-spacing:.14em;color:#dbc48e;margin:14px 0}
+.kicker{font-size:11px;color:#b8a998}
+.file{margin-top:30px;padding:26px;background:#241c1a;border-left:3px solid #751723}
+.clue{margin:24px 0;padding:20px;border:1px solid #5c4934;background:#211918}
+.clue strong{color:#dbc48e}
+ol{padding-left:1.4em}.links{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}.links a{color:#eadfce;border:1px solid #80643a;padding:8px 13px;text-decoration:none;font-size:11px}.links a:hover{background:#751723}
+.answer{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.answer input{flex:1;min-width:210px;padding:12px;background:#0f0c0c;color:#f3e8d7;border:1px solid #80643a;font:inherit}.answer button{padding:12px 22px;background:#751723;color:white;border:1px solid #a98545;font:inherit;cursor:pointer}
+.result{display:none;margin-top:24px;padding:22px;border:1px solid #a98545;background:#0e0d0d}.result.show{display:block}.result strong{color:#dbc48e}.wrong{color:#d59b9b;display:none;margin-top:10px;font-size:11px}.wrong.show{display:block}
+.small{font-size:10px;color:#a99a8b}.next{display:none;margin-top:22px}.next.show{display:block}.next a{display:inline-block;border:1px solid #a98545;color:#dbc48e;padding:10px 18px;text-decoration:none}
+</style>
+</head>
+<body>
+<main>
+<div class="meta">N.I.U. / REALITY CHECK / DOCUMENT R-01</div>
+<h1>現実照合記録 01</h1>
+<div class="kicker">この頁だけは、帝國大學の資料だけでは解けない。</div>
+
+<section class="file">
+<p>資料室員より、閲覧者へ。</p>
+<p>神代聖について調べる前に、ひとつだけ確認してほしい。</p>
+<p><strong>この大学の外側にも、神代聖とよく似た「モデル」が存在する。</strong></p>
+
+<div class="clue">
+<strong>現実世界で、次の三つを検索せよ。</strong>
+<ol>
+<li>「罪と罰」を書いた19世紀ロシアの作家</li>
+<li>「カラマーゾフの兄弟」を書いた作家</li>
+<li>1821年生・1881年没とされる作家</li>
+</ol>
+<p class="small">三つの検索結果が、同じ人物を指していることを確認してから答えを入力すること。</p>
+</div>
+
+<div class="links">
+<a href="https://kotobank.jp/word/%E3%81%A9%E3%81%99%E3%81%A8%E3%81%88%E3%81%B5%E3%81%99%E3%81%8D%E3%83%BC-3161508" target="_blank" rel="noopener">現実照合：コトバンク</a>
+<a href="https://ndlsearch.ndl.go.jp/search?cs=bib&from=0&q-author=%22%E3%83%89%E3%82%B9%E3%83%88%E3%82%A8%E3%83%95%E3%82%B9%E3%82%AD%E3%83%BC%22" target="_blank" rel="noopener">現実照合：国立国会図書館</a>
+</div>
+
+<p>答えは、作家名を<strong>日本語表記</strong>で入力せよ。</p>
+<div class="answer">
+<input id="answer" autocomplete="off" placeholder="作家名を入力">
+<button id="check">照合する</button>
+</div>
+<div id="wrong" class="wrong">照合不一致。帝國大學の資料ではなく、現実世界の資料をもう一度確認してください。</div>
+
+<div id="result" class="result">
+<strong>現実照合：成立。</strong>
+<p>一致した人物――ドストエフスキー。</p>
+<p>君が今見つけたのは「ゲーム内の設定」ではない。現実世界に存在する文学史上の人物だ。</p>
+<p>神代聖の「モデル」という情報は、ここではまだ答えではない。</p>
+<p>むしろ問題は、<strong>なぜ帝國大學が現実の人物を「別の人生を生きた人物」として記録しているのか</strong>である。</p>
+<p>次の記録では、GitHubに保存されている<strong>大学の実際のファイル</strong>を調査せよ。</p>
+<div class="next" id="next"><a href="arg-hub.html">ARG総合記録室へ戻る</a></div>
+</div>
+</section>
+<p class="small">この記録は、外部サイトの公開情報を照合することを前提としてゐる。外部サイトの内容が変更された場合、照合結果も変更される可能性がある。</p>
+</main>
+<script>
+const input=document.getElementById('answer'),btn=document.getElementById('check'),wrong=document.getElementById('wrong'),result=document.getElementById('result'),next=document.getElementById('next');
+function check(){
+ const v=input.value.trim().replace(/[　s]/g,'');
+ if(v==='ドストエフスキー'||v==='ドストエフスキイ'||v.toLowerCase()==='dostoevsky'){
+   localStorage.setItem('reality01_unlocked','unlocked');
+   localStorage.setItem('achievement_21','unlocked');
+   wrong.classList.remove('show'); result.classList.add('show'); next.classList.add('show');
+ }else wrong.classList.add('show');
+}
+btn.addEventListener('click',check);input.addEventListener('keydown',e=>{if(e.key==='Enter')check()});
+if(localStorage.getItem('reality01_unlocked')==='unlocked'){result.classList.add('show');next.classList.add('show')}
+</script>
+</body></html>
