@@ -112,7 +112,7 @@ a{color:inherit}.wrap{width:min(1180px,92vw);margin:auto}.top{padding:24px 0 16p
 <div class="footer">
 N.I.U. CONFIDENTIAL ARCHIVE / DOCUMENT 16<br>
 この頁は公開目録に登録されていない。閲覧者が読んだ時点で、閲覧記録が一件追加される。<br>
-<a href="https://8fgb66gmt2-stack.github.io/-web-Shikicho/archive.html">← 四季廳附属資料室へ戻る</a><br>
+<a id="return-shiki" href="https://8fgb66gmt2-stack.github.io/-web-Shikicho/archive.html">← 四季廳附属資料室へ戻る</a><br>
 <a href="index.html">← 帝國大學首頁へ戻る</a>
 </div>
 </div>
@@ -169,5 +169,6 @@ document.querySelectorAll(".node").forEach(n=>n.onclick=()=>select(n.dataset.id)
 document.querySelectorAll(".filter").forEach(b=>b.onclick=()=>{filter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));render()});
 search.oninput=render;render();
 </script>
+<script>document.getElementById("return-shiki")?.addEventListener("click",()=>{try{localStorage.setItem("shikiArchive16Visited","1")}catch(e){}});</script>
 </body>
 </html>
