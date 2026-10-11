@@ -6770,5 +6770,149 @@ body.taisho-nocturne:after{content:"";position:fixed;inset:0;pointer-events:none
 <a href="https://8fgb66gmt2-stack.github.io/-teikokukunaicho-offical-web-site/" target="_blank" rel="noopener" style="padding:20px;border:1px solid #c7b58f;background:#fffdf7;text-decoration:none;color:#681d22;text-align:center"><small style="display:block;font-size:9px;letter-spacing:.15em;color:#b18a43">IMPERIAL HOUSEHOLD</small><strong style="display:block;margin:7px 0;font-size:18px">帝國宮内廳</strong><span style="font-size:10px;color:#746b5d">皇室行政・宮中祭祀・帝室記録</span></a>
 <a href="https://8fgb66gmt2-stack.github.io/https-8fgb66gmt2-stack.github.io-nippon-imperial-university-/" target="_blank" rel="noopener" style="padding:20px;border:1px solid #c7b58f;background:#fffdf7;text-decoration:none;color:#681d22;text-align:center"><small style="display:block;font-size:9px;letter-spacing:.15em;color:#b18a43">NIPPON IMPERIAL UNIVERSITY</small><strong style="display:block;margin:7px 0;font-size:18px">帝國大學</strong><span style="font-size:10px;color:#746b5d">學問・文化・研究記録</span></a>
 </div></section>
+
+<style id="niu-refined-visual-system">
+/* 帝國大學・玲瓏浪漫改修 — 學術の威厳と紙面の美 */
+:root{
+ --ink:#211a1a;--ink-soft:#655653;--paper:#f4ecde;--paper-light:#fffaf1;
+ --paper-dark:#e5d6bf;--red:#741725;--red-dark:#430c14;
+ --gold:#a78343;--gold-light:#ddc58e;--line:rgba(91,57,42,.25);
+ --shadow:0 16px 42px rgba(40,25,20,.11);
+}
+html{scroll-padding-top:24px}
+body{
+ background:
+  radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.9),transparent 46%),
+  repeating-linear-gradient(90deg,transparent 0 119px,rgba(120,23,34,.018) 120px,transparent 121px),
+  var(--paper);
+ color:var(--ink);
+}
+body:before{opacity:.035;background-size:7px 7px}
+::selection{background:#741725;color:#fff8ec}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #b28b49;outline-offset:4px}
+.site-header{
+ background:linear-gradient(120deg,#211718 0%,#3a2021 55%,#281a1a 100%);
+ border-bottom:5px double var(--gold);
+ box-shadow:0 10px 28px rgba(30,18,15,.18)
+}
+.header-top{padding-top:34px;padding-bottom:28px}
+.university-name{gap:22px}
+.university-mark{
+ width:72px;height:72px;position:relative;flex:none;
+ border:1px solid var(--gold-light);outline:1px solid rgba(221,197,142,.48);
+ outline-offset:4px;background:radial-gradient(circle,#4a2928,#28191a);
+ box-shadow:inset 0 0 0 5px rgba(221,197,142,.06);
+}
+.university-mark:before,.university-mark:after{
+ content:"";position:absolute;border:1px solid rgba(221,197,142,.58);border-radius:50%;inset:6px
+}
+.university-mark:after{inset:12px;border-style:dotted;opacity:.8}
+.university-text h1{letter-spacing:.18em;text-shadow:0 1px rgba(255,255,255,.08)}
+.university-text p{letter-spacing:.22em;line-height:1.9}
+.header-meta{line-height:2;letter-spacing:.08em}
+.main-nav{border-top:1px solid rgba(221,197,142,.25);background:rgba(10,7,8,.12)}
+.main-nav-inner{gap:2px}
+.main-nav a{padding:14px 18px;letter-spacing:.14em}
+.main-nav a:after{height:2px;background:var(--gold-light)}
+.hero{
+ min-height:680px;
+ background:
+  linear-gradient(90deg,rgba(25,14,15,.92) 0%,rgba(39,20,21,.76) 47%,rgba(42,22,21,.3) 100%),
+  var(--hero-image,url("images/university-main.jpg")) center/cover no-repeat;
+}
+.hero:after{
+ content:"";position:absolute;inset:18px;border:1px solid rgba(221,197,142,.32);
+ box-shadow:inset 0 0 0 5px rgba(255,255,255,.018);pointer-events:none
+}
+.hero-content{width:min(1120px,88%);padding:78px 0}
+.hero-kicker{letter-spacing:.42em;color:#e1c78e}
+.hero h2{font-size:clamp(44px,6.7vw,86px);line-height:1.32;letter-spacing:.17em}
+.hero-subtitle{font-size:12px;letter-spacing:.32em}
+.hero-description{font-size:13px;line-height:2.5;max-width:620px}
+.hero-button{position:relative;padding:14px 34px;letter-spacing:.2em;background:rgba(40,17,19,.12)}
+.hero-button:after{content:"↗";margin-left:16px;color:var(--gold-light)}
+.hero-button:hover{border-color:#e6cf9a;box-shadow:0 5px 18px rgba(0,0,0,.16)}
+.section{max-width:1240px;padding:100px 30px}
+.section-heading{margin-bottom:56px}
+.section-kicker{letter-spacing:.42em;font-size:10px}
+.section-title{letter-spacing:.17em;line-height:1.6}
+.section-rule{width:120px;position:relative}
+.section-rule:before,.section-rule:after{content:"";position:absolute;top:-3px;width:5px;height:5px;border:1px solid var(--gold);transform:rotate(45deg);background:var(--paper)}
+.section-rule:before{left:22px}.section-rule:after{right:22px}
+.section-description{line-height:2.5;font-size:12px}
+.intro-grid,.faculty-grid,.people-grid,.study-room-grid,.campus-grid,.stars-grid,.ic-grid,.fun-grid,.arg2-grid{gap:20px}
+.intro-card,.faculty-card,.person-card,.library-card,.star-card,.ic-grid>* ,.fun-grid>* ,.arg2-card{
+ border-color:rgba(151,116,64,.42);
+ box-shadow:0 8px 24px rgba(50,31,22,.055);
+ transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease
+}
+.intro-card{padding:39px 31px;background:linear-gradient(145deg,rgba(255,253,247,.9),rgba(231,218,196,.66))}
+.intro-card:after{content:"";position:absolute;left:12px;right:12px;bottom:12px;height:1px;background:linear-gradient(90deg,transparent,rgba(167,131,67,.48),transparent)}
+.intro-card:hover,.faculty-card:hover,.person-card:hover,.library-card:hover,.star-card:hover,.arg2-card:hover{
+ transform:translateY(-4px);border-color:var(--gold);box-shadow:0 16px 34px rgba(50,31,22,.12)
+}
+.intro-card h3{letter-spacing:.16em}
+.gramophone-section,.cultural-section,.study-room-section-title,.library,.news{scroll-margin-top:24px}
+.faculty-card,.person-card,.library-card,.star-card,.arg2-card{overflow:hidden}
+.faculty-number{letter-spacing:.18em}
+.person-card-body{line-height:2}
+.library-card{background:linear-gradient(145deg,#fffaf1,#eee1cc)}
+.library-search{border-color:rgba(167,131,67,.55)}
+.library-result{line-height:2}
+.campus-image{overflow:hidden}
+.campus-image img{transition:transform .6s ease}
+.campus-grid a:hover .campus-image img{transform:scale(1.035)}
+.news-list{border-top:1px solid var(--gold)}
+.news-item{padding:20px 8px;border-bottom:1px solid rgba(167,131,67,.32);transition:padding .2s,background .2s}
+.news-item:hover{padding-left:15px;background:rgba(255,253,247,.48)}
+.news-date{letter-spacing:.08em}
+.news-title{line-height:1.9}
+.footer-inner{padding-top:48px;padding-bottom:30px}
+.footer-title{letter-spacing:.18em}
+.footer-bottom{border-top-color:rgba(221,197,142,.28);line-height:2}
+#topButton,#imageManagerButton,#archiveRecoveryButton{
+ box-shadow:0 7px 20px rgba(30,18,15,.16);
+ transition:transform .2s,background .2s,box-shadow .2s
+}
+#topButton:hover,#imageManagerButton:hover,#archiveRecoveryButton:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(30,18,15,.23)}
+#archiveRecoveryButton{border-color:var(--gold-light)!important;letter-spacing:.14em}
+.thirteen-stars-section{position:relative}
+.thirteen-stars-section:before{content:"❦　✦　❦";display:block;text-align:center;color:var(--gold);letter-spacing:.45em;font-size:12px;margin-bottom:18px}
+.hy akki-entry{border-color:var(--gold)}
+.hyakki-entry .section-title{color:var(--red-dark)}
+#imperial-government-network{border-color:var(--gold)!important;box-shadow:0 14px 36px rgba(50,30,10,.1)!important}
+#imperial-government-network a{transition:transform .22s,box-shadow .22s,border-color .22s!important}
+#imperial-government-network a:hover{transform:translateY(-3px);border-color:var(--gold)!important;box-shadow:0 8px 20px rgba(50,30,10,.09)}
+@media(max-width:760px){
+ .header-top{padding:26px 19px 22px;align-items:flex-start;gap:18px;flex-direction:column}
+ .university-name{gap:16px}
+ .university-mark{width:57px;height:57px;font-size:23px}
+ .university-text h1{font-size:clamp(18px,5vw,25px);letter-spacing:.075em;line-height:1.6}
+ .university-text p{font-size:8px;letter-spacing:.07em}
+ .header-meta{text-align:left;font-size:9px}
+ .main-nav-inner{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .main-nav a{text-align:center;padding:12px 6px;font-size:10px;letter-spacing:.06em;border-bottom:1px solid rgba(221,197,142,.12)}
+ .hero{min-height:580px}
+ .hero:after{inset:9px}
+ .hero-content{width:84%;padding:58px 0}
+ .hero h2{font-size:clamp(37px,10vw,58px);letter-spacing:.1em}
+ .hero-subtitle{font-size:10px;letter-spacing:.16em;line-height:2}
+ .hero-description{font-size:12px;line-height:2.25}
+ .section{padding:65px 20px}
+ .section-heading{margin-bottom:38px}
+ .section-title{font-size:clamp(25px,7vw,35px);letter-spacing:.1em}
+ .section-description{line-height:2.2}
+ .intro-grid,.faculty-grid,.people-grid,.study-room-grid,.campus-grid,.stars-grid,.ic-grid,.fun-grid,.arg2-grid{gap:14px}
+ .intro-card{padding:31px 23px}
+ #imperial-government-network{margin:38px 14px 25px!important;padding:25px 16px!important}
+ #imperial-government-network>div:last-child{grid-template-columns:1fr!important}
+ #archiveRecoveryButton{left:10px!important;bottom:70px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
+</style>
+
 </body>
 </html>
